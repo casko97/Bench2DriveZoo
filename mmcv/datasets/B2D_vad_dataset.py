@@ -883,12 +883,21 @@ class B2D_VAD_Dataset(Custom3DDataset):
             for key in all_metric_dict.keys():
                 all_metric_dict[key] += results[i]['metric_results'][key]
         
+        # Some splits contain no valid examples for a class. Keep the
+        # evaluation results and mark only those metrics as undefined.
+        def safe_divide(numerator, denominator):
+            return numerator / denominator if denominator else float('nan')
+
         for cls in motion_cls_names:
-            result_dict['EPA_'+cls] = (all_metric_dict['hit_'+cls] - \
-                 alpha * all_metric_dict['fp_'+cls]) / all_metric_dict['gt_'+cls]
-            result_dict['ADE_'+cls] = all_metric_dict['ADE_'+cls] / all_metric_dict['cnt_ade_'+cls]
-            result_dict['FDE_'+cls] = all_metric_dict['FDE_'+cls] / all_metric_dict['cnt_fde_'+cls]
-            result_dict['MR_'+cls] = all_metric_dict['MR_'+cls] / all_metric_dict['cnt_fde_'+cls]
+            result_dict['EPA_'+cls] = safe_divide(
+                all_metric_dict['hit_'+cls] - alpha * all_metric_dict['fp_'+cls],
+                all_metric_dict['gt_'+cls])
+            result_dict['ADE_'+cls] = safe_divide(
+                all_metric_dict['ADE_'+cls], all_metric_dict['cnt_ade_'+cls])
+            result_dict['FDE_'+cls] = safe_divide(
+                all_metric_dict['FDE_'+cls], all_metric_dict['cnt_fde_'+cls])
+            result_dict['MR_'+cls] = safe_divide(
+                all_metric_dict['MR_'+cls], all_metric_dict['cnt_fde_'+cls])
         
         print('\n')
         print('-------------- Motion Prediction --------------')
@@ -911,9 +920,19 @@ class B2D_VAD_Dataset(Custom3DDataset):
                 for k in res['metric_results'].keys():
                     metric_dict[k] += res['metric_results'][k]
         
-        for k in metric_dict:
-            metric_dict[k] = metric_dict[k] / num_valid
-            print("{}:{}".format(k, metric_dict[k]))
+        if metric_dict is None:
+            # No sample had a valid ego future, so planning metrics are
+            # undefined for this split.
+            metric_dict = {
+                key: float('nan')
+                for key in results[0]['metric_results']
+                if key.startswith('plan_')
+            } if results else {}
+        else:
+            for k in metric_dict:
+                metric_dict[k] = safe_divide(metric_dict[k], num_valid)
+        for k, value in metric_dict.items():
+            print("{}:{}".format(k, value))
 
         result_files, tmp_dir = self.format_results(results, jsonfile_prefix)
 
