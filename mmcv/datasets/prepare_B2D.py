@@ -45,6 +45,21 @@ lefthand_ego_to_lidar = np.array([[ 0, 1, 0, 0],
 left2right = np.eye(4)
 left2right[1,1] = -1
 
+def sensor_to_ego(anno, sensor_name, direct_key, world_key):
+    """Return a sensor-to-ego transform across supported B2D schemas.
+
+    Base and mini releases store the direct transform.  Bench2Drive v0.0.4
+    stores only world-to-sensor, so compose it with ego world-to-ego instead.
+    """
+    sensor = anno['sensors'][sensor_name]
+    if direct_key in sensor:
+        return np.array(sensor[direct_key])
+    if world_key in sensor:
+        world2ego = np.array(anno['bounding_boxes'][0]['world2ego'])
+        return world2ego @ np.linalg.inv(np.array(sensor[world_key]))
+    raise KeyError(
+        '{} is missing both {} and {}'.format(sensor_name, direct_key, world_key))
+
 def apply_trans(vec,world2ego):
     vec = np.concatenate((vec,np.array([1])))
     t = world2ego @ vec
@@ -331,13 +346,22 @@ def preprocess(folder_list,idx,tmp_dir,train_or_val):
             sensor_infos = {}
             for cam in CAMERAS:
                 sensor_infos[cam] = {}
-                sensor_infos[cam]['cam2ego'] = left2right @ np.array(anno['sensors'][cam]['cam2ego']) @ stand_to_ue4_rotate 
+                cam2ego = sensor_to_ego(anno, cam, 'cam2ego', 'world2cam')
+                sensor_infos[cam]['cam2ego'] = left2right @ cam2ego @ stand_to_ue4_rotate
                 sensor_infos[cam]['intrinsic'] = np.array(anno['sensors'][cam]['intrinsic'])
                 sensor_infos[cam]['world2cam'] = np.linalg.inv(stand_to_ue4_rotate) @ np.array(anno['sensors'][cam]['world2cam']) @left2right
                 sensor_infos[cam]['data_path'] = join(folder_name,'camera',CAMERA_TO_FOLDER_MAP[cam],ann_name.split('.')[0]+'.jpg')
-                cam_gray_depth[cam] = cv2.imread(join(data_root,sensor_infos[cam]['data_path']).replace('rgb_','depth_').replace('.jpg','.png'))[:,:,0]
+                if FILTER_INVISINLE:
+                    depth_path = join(data_root, sensor_infos[cam]['data_path'])
+                    depth_path = depth_path.replace('rgb_', 'depth_').replace('.jpg', '.png')
+                    depth_image = cv2.imread(depth_path)
+                    if depth_image is None:
+                        raise FileNotFoundError(
+                            'Depth image required by FILTER_INVISINLE is missing: {}'.format(depth_path))
+                    cam_gray_depth[cam] = depth_image[:, :, 0]
             sensor_infos['LIDAR_TOP'] = {}
-            sensor_infos['LIDAR_TOP']['lidar2ego'] = left2right @ np.array(anno['sensors']['LIDAR_TOP']['lidar2ego']) @ left2right @ lidar_to_righthand_ego
+            lidar2ego = sensor_to_ego(anno, 'LIDAR_TOP', 'lidar2ego', 'world2lidar')
+            sensor_infos['LIDAR_TOP']['lidar2ego'] = left2right @ lidar2ego @ left2right @ lidar_to_righthand_ego
             world2lidar = lefthand_ego_to_lidar @ np.array(anno['sensors']['LIDAR_TOP']['world2lidar']) @ left2right
             sensor_infos['LIDAR_TOP']['world2lidar'] = world2lidar
             frame_data['sensors'] = sensor_infos
