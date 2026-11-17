@@ -75,6 +75,7 @@ sudo rm /swap-b2d-temp
 * Extract the route archives and prepare their info files: `cd mmcv/datasets && python prepare_B2Dv004.py --extract --workers 6`.
   Extracted routes are placed in `data/bench2drive/v0.0.4`; generated info files are written to `data/infos/v0.0.4`.
   The standard v0.0.4 release has no depth images, so its depth-based occlusion filter is disabled by default.
+* `prepare_B2Dv004.py` reuses `data/infos/b2d_map_infos.pkl` by default because map geometry does not depend on the v0.0.4 route split. It creates `data/infos/v0.0.4/b2d_map_infos.pkl` as a symbolic link, avoiding a second parse of the map archives. Maps therefore need to be processed separatly before running this.
 * The preparer reuses an existing manifest to keep the split stable. Use `--regenerate-split` only when deliberately replacing it, for example after completing a partial download.
 
 ## Open-loop eval

@@ -29,6 +29,7 @@ REPO_ROOT = SCRIPT_DIR.parent.parent
 DEFAULT_ARCHIVE_DIR = REPO_ROOT / 'Bench2Drive-V0.0.4'
 DEFAULT_DATA_ROOT = REPO_ROOT / 'data' / 'bench2drive'
 DEFAULT_OUT_DIR = REPO_ROOT / 'data' / 'infos' / 'v0.0.4'
+DEFAULT_BASE_MAP_INFOS = REPO_ROOT / 'data' / 'infos' / 'b2d_map_infos.pkl'
 DEFAULT_MANIFEST = (REPO_ROOT / 'data' / 'splits' /
                     'bench2drive_v0.0.4_train_val_test_split.json')
 VERSION_DIR = 'v0.0.4'
@@ -133,6 +134,8 @@ def main():
     parser.add_argument('--map', help='Process only this map through the base preparer.')
     parser.add_argument('--maps-only', action='store_true',
                         help='Process maps only through the base preparer.')
+    parser.add_argument('--build-map-infos', action='store_true',
+                        help='Build a separate v0.0.4 map-info file instead of reusing the base file.')
     parser.add_argument('--use-depth-occlusion-filter', action='store_true',
                         help='Enable depth-based box visibility filtering; requires the separate depth release.')
     args = parser.parse_args()
@@ -175,16 +178,27 @@ def main():
     # The standard v0.0.4 release does not include depth images.
     base.FILTER_INVISINLE = args.use_depth_occlusion_filter
     args.out_dir.mkdir(parents=True, exist_ok=True)
+    map_infos_path = args.out_dir / 'b2d_map_infos.pkl'
+    if not args.build_map_infos and DEFAULT_BASE_MAP_INFOS.is_file():
+        if not map_infos_path.exists():
+            map_infos_path.symlink_to(
+                os.path.relpath(DEFAULT_BASE_MAP_INFOS, map_infos_path.parent))
+        print('Reusing base map infos:', DEFAULT_BASE_MAP_INFOS)
+        reuse_map_infos = True
+    else:
+        reuse_map_infos = False
     if args.maps_only or args.map:
-        base.gengrate_map(base.MAP_ROOT, args.map)
+        if not reuse_map_infos:
+            base.gengrate_map(base.MAP_ROOT, args.map)
         return
 
     for split in ('train', 'val', 'test'):
         print(f'Processing {split} data...')
         base.process_list = []
         base.generate_infos(manifest[split], args.workers, split, args.tmp_dir)
-    print('Processing map data...')
-    base.gengrate_map(base.MAP_ROOT)
+    if not reuse_map_infos:
+        print('Processing map data...')
+        base.gengrate_map(base.MAP_ROOT)
     print('Finished.')
 
 
