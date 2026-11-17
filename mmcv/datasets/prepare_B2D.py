@@ -197,6 +197,54 @@ def generate_map_infos(map_workers):
         for future in tqdm(as_completed(futures), total=len(futures), desc="Processing maps"):
             pass
 
+
+def gengrate_map(map_root, map_name=None):
+    """Build the combined map-info pickle, optionally for one map.
+
+    This keeps the v0.0.4 per-map parser while preserving the fork's
+    low-memory, resumable map-preparation entry point.  Each parsed town is
+    materialized to its existing per-map pickle before being merged.
+    """
+    global MAP_ROOT
+    previous_map_root = MAP_ROOT
+    MAP_ROOT = map_root
+    try:
+        map_files = sorted(file_name for file_name in os.listdir(MAP_ROOT)
+                           if file_name.endswith('.npz'))
+        if map_name:
+            requested_name = os.path.basename(map_name)
+            map_files = [file_name for file_name in map_files
+                         if file_name == requested_name
+                         or file_name.split('_')[0] == requested_name]
+        if not map_files:
+            raise FileNotFoundError(
+                'No matching .npz map files found in {} for {!r}'.format(
+                    MAP_ROOT, map_name))
+
+        os.makedirs(OUT_DIR, exist_ok=True)
+        per_map_dir = join(OUT_DIR, 'b2d_infos_map')
+        os.makedirs(per_map_dir, exist_ok=True)
+        map_infos = {}
+        for file_name in tqdm(map_files, desc='Generating map infos', unit='map'):
+            town_name = file_name.split('_')[0]
+            preprocess_map(file_name)
+            with open(join(per_map_dir, town_name + '.pkl'), 'rb') as map_file:
+                map_infos[town_name] = pickle.load(map_file)
+
+        output_path = join(OUT_DIR, 'b2d_map_infos.pkl')
+        if map_name and os.path.exists(output_path):
+            with open(output_path, 'rb') as existing_file:
+                existing_map_infos = pickle.load(existing_file)
+            existing_map_infos.update(map_infos)
+            map_infos = existing_map_infos
+
+        output_tmp_path = output_path + '.tmp'
+        with open(output_tmp_path, 'wb') as output_file:
+            pickle.dump(map_infos, output_file)
+        os.replace(output_tmp_path, output_path)
+    finally:
+        MAP_ROOT = previous_map_root
+
 def preprocess(folder_name, split):
     route_data = []
     folder_path = join(DATA_ROOT, folder_name)
@@ -399,10 +447,15 @@ if __name__ == "__main__":
     argparser = argparse.ArgumentParser(description=__doc__)
     argparser.add_argument('--info_workers', type=int, default=4, help='num of workers to prepare infos')
     argparser.add_argument('--map_workers', type=int, default=4, help='num of workers to prepare maps')
+    argparser.add_argument('--map', help='process only this map (filename or town, e.g. Town11_HD_map.npz or Town11)')
+    argparser.add_argument('--maps-only', action='store_true', help='process maps only; skip route info generation')
     args = argparser.parse_args()    
     info_workers = args.info_workers
     map_workers = args.map_workers
     os.makedirs(OUT_DIR, exist_ok=True)
+    if args.maps_only or args.map:
+        gengrate_map(MAP_ROOT, args.map)
+        raise SystemExit(0)
     process_list = []
     with open('./data/splits/bench2drive_train_val_split_v04.json','r') as f:
         train_val_split = json.load(f)
