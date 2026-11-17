@@ -120,8 +120,8 @@ def main():
     parser.add_argument('--out-dir', type=Path, default=DEFAULT_OUT_DIR)
     parser.add_argument('--split-manifest', type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument('--seed', type=int, default=20261117)
-    parser.add_argument('--train-ratio', type=float, default=0.8)
-    parser.add_argument('--val-ratio', type=float, default=0.1)
+    parser.add_argument('--train-ratio', type=float, default=0.6)
+    parser.add_argument('--val-ratio', type=float, default=0.2)
     parser.add_argument('--workers', type=int, default=4)
     parser.add_argument('--tmp-dir', default='tmp_data')
     parser.add_argument('--extract', action='store_true',

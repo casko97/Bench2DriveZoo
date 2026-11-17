@@ -70,9 +70,9 @@ sudo rm /swap-b2d-temp
 
 #### v0.0.4
 * Download v0.0.4: `hf download rethinklab/Bench2Drive-V0.0.4 --repo-type dataset --local-dir Bench2Drive-V0.0.4`
-* Once the intended archive set has downloaded, create a deterministic 80/10/10 route split: `cd mmcv/datasets && python prepare_B2Dv004.py --write-split-only`.
+* Once the intended archive set has downloaded, create a deterministic 60/20/20 route split: `cd mmcv/datasets && python prepare_B2Dv004.py --write-split-only`.
   This writes `data/splits/bench2drive_v0.0.4_train_val_test_split.json`, using seed `20261117`.
-* Extract the route archives and prepare their info files: `cd mmcv/datasets && python prepare_B2Dv004.py --extract --workers 4`.
+* Extract the route archives and prepare their info files: `cd mmcv/datasets && python prepare_B2Dv004.py --extract --workers 6`.
   Extracted routes are placed in `data/bench2drive/v0.0.4`; generated info files are written to `data/infos/v0.0.4`.
 * The preparer reuses an existing manifest to keep the split stable. Use `--regenerate-split` only when deliberately replacing it, for example after completing a partial download.
 
