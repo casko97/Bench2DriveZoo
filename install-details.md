@@ -74,6 +74,7 @@ sudo rm /swap-b2d-temp
   This writes `data/splits/bench2drive_v0.0.4_train_val_test_split.json`, using seed `20261117`.
 * Extract the route archives and prepare their info files: `cd mmcv/datasets && python prepare_B2Dv004.py --extract --workers 6`.
   Extracted routes are placed in `data/bench2drive/v0.0.4`; generated info files are written to `data/infos/v0.0.4`.
+  The standard v0.0.4 release has no depth images, so its depth-based occlusion filter is disabled by default.
 * The preparer reuses an existing manifest to keep the split stable. Use `--regenerate-split` only when deliberately replacing it, for example after completing a partial download.
 
 ## Open-loop eval
