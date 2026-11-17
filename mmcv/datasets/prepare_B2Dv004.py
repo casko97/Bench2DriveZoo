@@ -133,6 +133,8 @@ def main():
     parser.add_argument('--map', help='Process only this map through the base preparer.')
     parser.add_argument('--maps-only', action='store_true',
                         help='Process maps only through the base preparer.')
+    parser.add_argument('--use-depth-occlusion-filter', action='store_true',
+                        help='Enable depth-based box visibility filtering; requires the separate depth release.')
     args = parser.parse_args()
 
     extracted_dir = args.data_root / VERSION_DIR
@@ -170,6 +172,8 @@ def main():
     base.DATAROOT = str(args.data_root)
     base.OUT_DIR = str(args.out_dir)
     base.MAP_ROOT = str(args.data_root / 'maps')
+    # The standard v0.0.4 release does not include depth images.
+    base.FILTER_INVISINLE = args.use_depth_occlusion_filter
     args.out_dir.mkdir(parents=True, exist_ok=True)
     if args.maps_only or args.map:
         base.gengrate_map(base.MAP_ROOT, args.map)
