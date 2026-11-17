@@ -8,6 +8,8 @@ from vis_utils import calculate_cube_vertices,calculate_occlusion_stats,edges,DI
 import cv2
 import multiprocessing
 import argparse
+import time
+import gc
 # All data in the Bench2Drive dataset are in the left-handed coordinate system.
 # This code converts all coordinate systems (world coordinate system, vehicle coordinate system,
 # camera coordinate system, and lidar coordinate system) to the right-handed coordinate system
@@ -144,20 +146,67 @@ def get_action(index):
 	return throttle, steer, brake
 
 
-def gengrate_map(map_root):
+def gengrate_map(map_root, map_name=None):
+    def log(message):
+        print(message, flush=True)
+
+    map_files = sorted(file_name for file_name in os.listdir(map_root)
+                       if file_name.endswith('.npz'))
+    if map_name:
+        requested_name = os.path.basename(map_name)
+        map_files = [file_name for file_name in map_files
+                     if file_name == requested_name
+                     or file_name.split('_')[0] == requested_name]
+    if not map_files:
+        raise FileNotFoundError('No matching .npz map files found in {} for {!r}'.format(
+            map_root, map_name))
+
+    os.makedirs(OUT_DIR, exist_ok=True)
+    output_path = join(OUT_DIR, 'b2d_map_infos.pkl')
+    cache_dir = join(OUT_DIR, '.b2d_map_infos_cache')
+    os.makedirs(cache_dir, exist_ok=True)
     map_infos = {}
-    for file_name in os.listdir(map_root):
-        if '.npz' in file_name:
-            map_info = dict(np.load(join(map_root,file_name), allow_pickle=True)['arr'])
-            town_name = file_name.split('_')[0]
-            map_infos[town_name] = {} 
+
+    for file_name in tqdm(map_files, desc='Generating map infos', unit='map'):
+        map_path = join(map_root, file_name)
+        cache_path = join(cache_dir, file_name + '.pkl')
+        source_stat = os.stat(map_path)
+        source_signature = (source_stat.st_size, source_stat.st_mtime_ns)
+        town_name = file_name.split('_')[0]
+        town_info = None
+        if os.path.exists(cache_path):
+            try:
+                with open(cache_path, 'rb') as cache_file:
+                    cached_signature, cached_town, cached_info = pickle.load(cache_file)
+                if cached_signature == source_signature and cached_town == town_name:
+                    town_info = cached_info
+                    tqdm.write('{}: restored from checkpoint'.format(town_name))
+            except (OSError, EOFError, pickle.PickleError, ValueError):
+                pass
+
+        if town_info is None:
+            try:
+                log('{}: loading archive {}...'.format(town_name, map_path))
+                with np.load(map_path, allow_pickle=True) as map_archive:
+                    map_info = dict(map_archive['arr'])
+                log('{}: archive loaded; {} roads to process.'.format(
+                    town_name, len(map_info)))
+            except Exception as exc:
+                raise RuntimeError(
+                    'Could not read map file {}. It may be incomplete or corrupted; '
+                    'check or download the file again.'.format(map_path)
+                ) from exc
+            town_info = {}
             lane_points = []
             lane_types = []
             lane_sample_points = []
             trigger_volumes_points = []
             trigger_volumes_types = []
             trigger_volumes_sample_points = []
-            for road_id, road in map_info.items():
+            started_at = time.monotonic()
+            last_progress_at = started_at
+            total_roads = len(map_info)
+            for road_index, (road_id, road) in enumerate(map_info.items(), start=1):
                 for lane_id, lane in road.items():
                     if lane_id == 'Trigger_Volumes':
                         for single_trigger_volume in lane:
@@ -180,14 +229,54 @@ def gengrate_map(map_root):
                             devide_points.append(lane_lenth-1)
                             lane_sample_points_tmp = points[devide_points]
                             lane_sample_points.append(lane_sample_points_tmp)
-            map_infos[town_name]['lane_points'] = lane_points
-            map_infos[town_name]['lane_sample_points'] = lane_sample_points
-            map_infos[town_name]['lane_types'] = lane_types
-            map_infos[town_name]['trigger_volumes_points'] = trigger_volumes_points
-            map_infos[town_name]['trigger_volumes_sample_points'] = trigger_volumes_sample_points
-            map_infos[town_name]['trigger_volumes_types'] = trigger_volumes_types
-    with open(join(OUT_DIR,'b2d_map_infos.pkl'),'wb') as f:
-        pickle.dump(map_infos,f)
+                now = time.monotonic()
+                if now - last_progress_at >= 30 or road_index == total_roads:
+                    log(
+                        '{}: road {}/{} (id {}); {} lanes, {} trigger volumes; '
+                        '{:.0f}s elapsed.'.format(
+                            town_name, road_index, total_roads, road_id,
+                            len(lane_points), len(trigger_volumes_points),
+                            now - started_at))
+                    last_progress_at = now
+            town_info['lane_points'] = lane_points
+            town_info['lane_sample_points'] = lane_sample_points
+            town_info['lane_types'] = lane_types
+            town_info['trigger_volumes_points'] = trigger_volumes_points
+            town_info['trigger_volumes_sample_points'] = trigger_volumes_sample_points
+            town_info['trigger_volumes_types'] = trigger_volumes_types
+            tqdm.write('{}: {} lanes, {} trigger volumes'.format(
+                town_name, len(lane_points), len(trigger_volumes_points)))
+            # `map_info` is the fully unpickled archive and can be much larger
+            # than the derived town info. Free it before serializing the
+            # checkpoint, otherwise both structures are resident at once.
+            del map_info
+            gc.collect()
+            cache_tmp_path = cache_path + '.tmp'
+            log('{}: writing checkpoint {}...'.format(town_name, cache_path))
+            with open(cache_tmp_path, 'wb') as cache_file:
+                pickle.dump((source_signature, town_name, town_info), cache_file)
+            os.replace(cache_tmp_path, cache_path)
+            log('{}: checkpoint written.'.format(town_name))
+        map_infos[town_name] = town_info
+
+    # A selected map is merged only after parsing and checkpointing it. Loading
+    # the existing output before `np.load` raises peak memory substantially for
+    # large maps such as Town11.
+    if map_name and os.path.exists(output_path):
+        log('Loading existing map infos from {} for final merge...'.format(output_path))
+        with open(output_path, 'rb') as f:
+            existing_map_infos = pickle.load(f)
+        log('Loaded existing map infos for {} towns.'.format(len(existing_map_infos)))
+        existing_map_infos.update(map_infos)
+        map_infos = existing_map_infos
+
+    output_tmp_path = output_path + '.tmp'
+    log('Writing combined map infos for {} towns to {}...'.format(
+        len(map_infos), output_path))
+    with open(output_tmp_path, 'wb') as f:
+        pickle.dump(map_infos, f)
+    os.replace(output_tmp_path, output_path)
+    log('Combined map infos written.')
 
 def preprocess(folder_list,idx,tmp_dir,train_or_val):
 
@@ -381,9 +470,17 @@ if __name__ == "__main__":
     argparser = argparse.ArgumentParser(description=__doc__)
     argparser.add_argument('--workers',type=int, default= 4, help='num of workers to prepare dataset')
     argparser.add_argument('--tmp_dir', default="tmp_data", )
+    argparser.add_argument('--map', help='process only this map (filename or town, e.g. Town11_HD_map.npz or Town11)')
+    argparser.add_argument('--maps-only', action='store_true', help='process maps only; skip route info generation')
     args = argparser.parse_args()    
     workers = args.workers
     process_list = []
+    if args.maps_only or args.map:
+        print('processing map data{}...'.format(' for ' + args.map if args.map else ''))
+        gengrate_map(MAP_ROOT, args.map)
+        print('finish!')
+        raise SystemExit(0)
+
     with open('../../data/splits/bench2drive_base_train_val_split.json','r') as f:
         train_val_split = json.load(f)
         

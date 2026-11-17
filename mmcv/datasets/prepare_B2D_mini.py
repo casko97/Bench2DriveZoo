@@ -145,16 +145,25 @@ def get_action(index):
 	return throttle, steer, brake
 
 
-def gengrate_map(map_root):
+def gengrate_map(map_root, map_name=None):
     map_infos = {}
     map_files = sorted(file_name for file_name in os.listdir(map_root)
                        if file_name.endswith('.npz'))
+    if map_name:
+        requested_name = os.path.basename(map_name)
+        map_files = [file_name for file_name in map_files
+                     if file_name == requested_name
+                     or file_name.split('_')[0] == requested_name]
     if not map_files:
         raise FileNotFoundError('No .npz map files found in {}'.format(map_root))
 
     os.makedirs(OUT_DIR, exist_ok=True)
     cache_dir = join(OUT_DIR, '.b2d_map_infos_cache')
     os.makedirs(cache_dir, exist_ok=True)
+    output_path = join(OUT_DIR, 'b2d_map_infos.pkl')
+    if map_name and os.path.exists(output_path):
+        with open(output_path, 'rb') as f:
+            map_infos = pickle.load(f)
 
     for file_name in tqdm(map_files, desc='Generating map infos', unit='map'):
         map_path = join(map_root, file_name)
@@ -229,7 +238,6 @@ def gengrate_map(map_root):
             pickle.dump((source_signature, town_name, map_infos[town_name]), cache_file)
         os.replace(cache_tmp_path, cache_path)
 
-    output_path = join(OUT_DIR, 'b2d_map_infos.pkl')
     output_tmp_path = output_path + '.tmp'
     with open(output_tmp_path, 'wb') as f:
         pickle.dump(map_infos, f)
@@ -429,8 +437,15 @@ if __name__ == "__main__":
     argparser = argparse.ArgumentParser(description=__doc__)
     argparser.add_argument('--workers',type=int, default= 4, help='num of workers to prepare dataset')
     argparser.add_argument('--tmp_dir', default="tmp_data", )
+    argparser.add_argument('--map', help='process only this map (filename or town, e.g. Town11_HD_map.npz or Town11)')
+    argparser.add_argument('--maps-only', action='store_true', help='process maps only; skip route info generation')
     args = argparser.parse_args()    
     workers = args.workers
+    if args.maps_only or args.map:
+        print('processing map data{}...'.format(' for ' + args.map if args.map else ''))
+        gengrate_map(MAP_ROOT, args.map)
+        print('finish!')
+        raise SystemExit(0)
     process_list = []
     # The mini dataset has no predefined split. Use the final route for
     # validation and all preceding routes for training.
