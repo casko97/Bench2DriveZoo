@@ -140,10 +140,7 @@ evaluator on all 220 routes by default:
 ./scripts/run_closed_loop_vad_v004.sh
 ```
 
-Save to log:
-```
-./scripts/run_closed_loop_vad_v004.sh --one-scenario 2>&1 | tee closed_loop.log
-```
+The launcher displays console output and appends it to `run.log` in the run's artifact directory once that directory has been determined. Resumed runs append to the same log when using the same artifact directory.
 
 Each fresh run gets a timestamped JSON checkpoint and artifact directory under `/home/casko/phd-code/Bench2DriveZoo/outputs/closed_loop` by default.
 
@@ -159,15 +156,66 @@ From the Bench2DriveZoo repository root, run:
 
 * `--one-scenario` selects the one-route XML and disables development splitting.
 * The evaluator launches CARLA automatically with offscreen rendering; no separate CARLA window is needed.
-* To save terminal output, append `2>&1 | tee closed_loop.log` to the launch command.
+* Ctrl+C requests a graceful stop. If cleanup does not finish within 15 seconds, the launcher force-stops the evaluator and its child processes. Press Ctrl+C a second time to force immediately. Statistics still held in memory may be lost during a forced stop.
+* Console output is also saved to `run.log` in the artifact directory.
 * Every 30 seconds, CPU and memory load for the host, GPU utilization and memory, and timing measurements are printed and appended to `telemetry.jsonl`
+* Image pipeline timings include individual transforms, including transforms nested inside augmentation. Nested timings are included in their parent timings and should not be added together. GPU utilization is an instantaneous sample.
+* Model timings separately report feature extraction, the prediction head, bounding-box decoding, and the enclosing prediction/output stage. They synchronize CUDA at stage boundaries, which can affect runtime; nested timings are included in the enclosing model timing. The prediction/output stage also includes result construction and GPU-to-CPU copies.
+* Benchmark events, including recorded collisions and blocked-vehicle events, are appended to `live_events.jsonl` as they occur. Ongoing events may be updated; the final checkpoint remains the authoritative result.
+* The launcher stops a route after three consecutive simulation frames with collision callbacks against the same actor, starting with a collision recorded by the benchmark. CARLA may not emit callbacks every frame of physical contact. Set `SUSTAINED_COLLISION_FRAMES=0` to disable this early stop for the standard benchmark protocol, or set it to another positive frame count. The stop reason is written to `live_events.jsonl`; partial route statistics are saved through the normal evaluator cleanup.
 * The launcher uses the VAD agent and checkpoint configured above. 
+* The launcher saves front and overhead images by default. Set `SAVE_VIEWS=all` to save all seven views, choose a comma-separated list such as `SAVE_VIEWS=rgb_front,rgb_front_left`, or use `SAVE_VIEWS=` to save no images. Model camera inputs are unchanged.
+* Set `SAVE_JPEG_ROUNDTRIP=0` to skip the quality-20 JPEG encode/decode step for saved camera images. The output files remain losslessly compressed PNGs; the default `1` preserves the existing JPEG artifacts. This setting does not affect model inputs or the BEV image.
 
 Image sequences and per-frame data are saved in the printed artifact directory:
-- PNGs from six cameras: front, front-left, front-right, back, back-left, and back-right.
-- A BEV visualization as bev/*.png.
+- By default, front-camera PNGs and an overhead BEV visualization as bev/*.png. Other camera views can be selected using `SAVE_VIEWS`.
 - Per-frame metadata as meta/*.json, plus metric_info.json.
 After evaluation finishes, the launcher creates a looping GIF for each camera and BEV PNG sequence (for example, `rgb_front.gif` and `bev.gif` beside their frame directories). It uses `ffmpeg`, scales GIFs to at most 960 pixels wide, and encodes them at 10 fps. `ffmpeg` must be available on `PATH`; otherwise the launcher reports that GIF creation was skipped. The numbered PNG frames remain available. The checkpoint JSON contains route scores and metrics. No MP4 is created.
+
+#### Launcher configuration
+
+From the repository root, start a one-route evaluation with:
+
+```bash
+./scripts/run_closed_loop_vad_v004.sh --one-scenario
+```
+
+The launcher accepts the following command-line options. Options are processed in order, so a later option can override an earlier one.
+
+| Option | Behavior |
+| --- | --- |
+| `--one-scenario` | Select `one_scenario_town07.xml` and set the split to `all`. |
+| `--routes PATH` | Select a routes XML; overrides `ROUTES`. `--routes=PATH` also works. |
+| `--split SPLIT` | Select `train`, `val`, `test`, or `all`; overrides `SPLIT`. `--split=SPLIT` also works. |
+| `--checkpoint PATH` | Resume an existing checkpoint JSON; overrides `CHECKPOINT_ENDPOINT`. `--checkpoint=PATH` also works. |
+
+Environment variables can be set before the command, for example:
+
+```bash
+SAVE_JPEG_ROUNDTRIP=0 SAVE_VIEWS=rgb_front,bev ./scripts/run_closed_loop_vad_v004.sh --one-scenario
+```
+
+| Variable | Default | Behavior |
+| --- | --- | --- |
+| `BENCH2DRIVE_ROOT` | `../Bench2Drive` relative to this repository | Bench2Drive checkout; relative route, checkpoint, and artifact paths are resolved here. |
+| `B2D_ZOO_VENV` | `b2d_zoo.venv` in this repository | Python environment activated by the launcher. |
+| `CARLA_ROOT` | `../Carla` relative to this repository | CARLA installation. |
+| `GPU_RANK` | `0` | Physical GPU selected for the evaluator and CARLA. |
+| `ROUTES` | `leaderboard/data/bench2drive_0.0.4_val.xml` | Routes XML. |
+| `SPLIT` | `all` | `all` uses all selected routes; `train`, `val`, and `test` select deterministic local 60/20/20 subsets. These are not the upstream dataset splits. |
+| `CHECKPOINT_ENDPOINT` | unset | Existing checkpoint JSON to resume; without it, a fresh timestamped checkpoint is created under `outputs/closed_loop`. Resume with the same routes, split, and custom artifact path as the original run. |
+| `SAVE_PATH` | A directory named after the checkpoint beside its JSON | Directory for run artifacts and telemetry. |
+| `SAVE_VIEWS` | `rgb_front,bev` | Comma-separated saved views: `rgb_front`, `rgb_front_left`, `rgb_front_right`, `rgb_back`, `rgb_back_left`, `rgb_back_right`, `bev`; use `all` for all views or an empty value for none. Images are saved every ten steps. This does not select model inputs. |
+| `SAVE_JPEG_ROUNDTRIP` | `1` | Set to `0` to skip the quality-20 JPEG encode/decode for saved camera images. Outputs remain PNGs; model inputs and BEV are unaffected. |
+| `PLANNER_TYPE` | `only_traj` | Planner setting exported to the evaluator and agent. |
+| `TEAM_AGENT` | `leaderboard/team_code/vad_b2d_agent.py` | Agent path relative to the Bench2Drive checkout. |
+| `TEAM_CONFIG` | `Bench2DriveZoo/adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py+Bench2DriveZoo/ckpts/vad_b2d_base/vad_b2d_base.pth` | Agent configuration and checkpoint, separated by `+`. The launcher also checks that the default VAD checkpoint exists. |
+| `SUSTAINED_COLLISION_FRAMES` | `3` | Stop a route after this many consecutive collision callback frames for the same actor, starting with a benchmark-recorded collision. Set `0` to disable this early stop. |
+| `RECORD_PATH` | unset | Passed to the evaluator's CARLA recording option. |
+| `TMPDIR` | `/tmp` | Directory for temporary split route XML files. |
+| `PYTHONPATH` | existing value, if any | The launcher appends the CARLA and Bench2Drive paths. |
+
+The launcher fixes the CARLA and traffic-manager ports to `30000` and `50000`, enables telemetry, and uses one repetition. Console output is shown in the terminal and appended to `run.log` under `SAVE_PATH` once the artifact path has been determined. Telemetry and live events are also written there; if `ffmpeg` is available, GIFs are generated after evaluation. Changes to environment variables apply when a new run starts.
 
 #### More options
 

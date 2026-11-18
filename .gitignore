@@ -140,6 +140,7 @@ dmypy.json
 
 # output & ckpts
 output/
+/outputs/closed_loop/
 test/
 ckpts/
 ckpts
