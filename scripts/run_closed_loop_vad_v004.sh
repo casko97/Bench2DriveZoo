@@ -3,7 +3,8 @@
 #
 # Optional overrides:
 #   BENCH2DRIVE_ROOT, B2D_ZOO_VENV, CARLA_ROOT, GPU_RANK, ROUTES,
-#   CHECKPOINT_ENDPOINT, SAVE_PATH, PLANNER_TYPE, TEAM_AGENT, TEAM_CONFIG,
+#   CHECKPOINT_ENDPOINT, SAVE_PATH, SAVE_VIEWS, SAVE_JPEG_ROUNDTRIP, PLANNER_TYPE, TEAM_AGENT, TEAM_CONFIG,
+#   SUSTAINED_COLLISION_FRAMES (default 3, 0 disables early stopping),
 #   SPLIT (train, val, test, all). An existing checkpoint JSON resumes
 #   automatically; otherwise a timestamped fresh checkpoint is created.
 set -euo pipefail
@@ -115,6 +116,10 @@ save_path="${SAVE_PATH:-$(dirname "${checkpoint_endpoint}")/${run_id}}"
 if [[ "${save_path}" != /* ]]; then
     save_path="${bench2drive_root}/${save_path}"
 fi
+mkdir -p "${save_path}"
+exec > >(tee -a "${save_path}/run.log") 2>&1
+printf '\n[launcher] Starting run at %s\n' "$(date --iso-8601=seconds)"
+printf 'Console log: %s/run.log\n' "${save_path}"
 printf 'Checkpoint: %s\n' "${checkpoint_endpoint}"
 printf 'Run artifacts: %s\n' "${save_path}"
 planner_type="${PLANNER_TYPE:-only_traj}"
@@ -159,9 +164,24 @@ export IS_BENCH2DRIVE=True
 export PLANNER_TYPE="${planner_type}"
 export SAVE_PATH="${save_path}"
 export ROUTES="${selected_routes}"
+export SAVE_VIEWS="${SAVE_VIEWS-rgb_front,bev}"
+printf 'Saved image views: %s\n' "${SAVE_VIEWS:-none}"
+export SAVE_JPEG_ROUNDTRIP="${SAVE_JPEG_ROUNDTRIP:-1}"
+if [[ "${SAVE_JPEG_ROUNDTRIP}" != 0 && "${SAVE_JPEG_ROUNDTRIP}" != 1 ]]; then
+    printf 'SAVE_JPEG_ROUNDTRIP must be 0 or 1.\n' >&2
+    exit 2
+fi
+printf 'JPEG round trip for saved camera images: %s\n' "${SAVE_JPEG_ROUNDTRIP}"
 export B2D_TELEMETRY=1
 export GPU_RANK="${gpu_rank}"
+export SUSTAINED_COLLISION_FRAMES="${SUSTAINED_COLLISION_FRAMES:-3}"
+if ! [[ "${SUSTAINED_COLLISION_FRAMES}" =~ ^[0-9]+$ ]]; then
+    printf 'SUSTAINED_COLLISION_FRAMES must be a non-negative integer.\n' >&2
+    exit 2
+fi
+printf 'Sustained collision stop threshold: %s consecutive frames (0 disables).\n' "${SUSTAINED_COLLISION_FRAMES}"
 printf 'Telemetry: %s/telemetry.jsonl (30-second samples; GPU inference timing synchronizes CUDA)\n' "${save_path}"
+printf 'Live benchmark events: %s/live_events.jsonl\n' "${save_path}"
 
 resume_args=()
 if [[ "${resume_enabled}" == true ]]; then
@@ -180,7 +200,7 @@ printf 'Evaluator output follows; periodic messages indicate elapsed time, not s
 ) &
 heartbeat_pid=$!
 
-if CUDA_VISIBLE_DEVICES="${gpu_rank}" python -u "${zoo_root}/scripts/run_evaluator_with_progress.py" "${LEADERBOARD_ROOT}/leaderboard/leaderboard_evaluator.py" \
+if CUDA_VISIBLE_DEVICES="${gpu_rank}" python -u "${zoo_root}/scripts/supervise_evaluator.py" python -u "${zoo_root}/scripts/run_evaluator_with_progress.py" "${LEADERBOARD_ROOT}/leaderboard/leaderboard_evaluator.py" \
     --routes="${selected_routes}" \
     --repetitions="${REPETITIONS}" \
     --track="${CHALLENGE_TRACK_CODENAME}" \
