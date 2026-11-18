@@ -1,4 +1,5 @@
 import os
+import shutil
 from os.path import join
 import gzip, json, pickle
 import numpy as np
@@ -439,6 +440,16 @@ if __name__ == "__main__":
     argparser.add_argument('--tmp_dir', default="tmp_data", )
     argparser.add_argument('--map', help='process only this map (filename or town, e.g. Town11_HD_map.npz or Town11)')
     argparser.add_argument('--maps-only', action='store_true', help='process maps only; skip route info generation')
+    argparser.add_argument(
+        '--shared-split',
+        action='store_true',
+        help='use every mini route for both train and val; val metadata hard-links train metadata',
+    )
+    argparser.add_argument(
+        '--skip-map',
+        action='store_true',
+        help='reuse an existing data/infos/b2d_map_infos.pkl instead of regenerating maps',
+    )
     args = argparser.parse_args()    
     workers = args.workers
     if args.maps_only or args.map:
@@ -447,8 +458,8 @@ if __name__ == "__main__":
         print('finish!')
         raise SystemExit(0)
     process_list = []
-    # The mini dataset has no predefined split. Use the final route for
-    # validation and all preceding routes for training.
+    # The mini dataset has no predefined split. By default, use the final
+    # route for validation and all preceding routes for training.
     all_folder = sorted(
         join(SPLIT, foldername)
         for foldername in os.listdir(join(DATAROOT, SPLIT))
@@ -459,16 +470,36 @@ if __name__ == "__main__":
             'The mini dataset needs at least two route folders to create '
             'non-empty training and validation splits.'
         )
-    train_list = all_folder[:-1]
-    val_list = all_folder[-1:]
+    if args.shared_split:
+        train_list = all_folder
+        val_list = all_folder
+    else:
+        train_list = all_folder[:-1]
+        val_list = all_folder[-1:]
 
     print('train routes:', train_list)
     print('val routes:', val_list)
     print('processing train data...')
     generate_infos(train_list,workers,'train',args.tmp_dir)
-    process_list = []
-    print('processing val data...')
-    generate_infos(val_list,workers,'val',args.tmp_dir)
-    print('processing map data...')
-    gengrate_map(MAP_ROOT)
+    if args.shared_split:
+        train_infos = join(OUT_DIR, 'b2d_infos_train.pkl')
+        val_infos = join(OUT_DIR, 'b2d_infos_val.pkl')
+        if os.path.lexists(val_infos):
+            os.unlink(val_infos)
+        os.link(train_infos, val_infos)
+        print('validation metadata hard-linked to shared training metadata.')
+    else:
+        process_list = []
+        print('processing val data...')
+        generate_infos(val_list,workers,'val',args.tmp_dir)
+    if args.skip_map:
+        map_infos = join(OUT_DIR, 'b2d_map_infos.pkl')
+        if not os.path.isfile(map_infos):
+            raise FileNotFoundError(
+                '--skip-map requires an existing {}'.format(map_infos)
+            )
+        print('reusing existing map data:', map_infos)
+    else:
+        print('processing map data...')
+        gengrate_map(MAP_ROOT)
     print('finish!')

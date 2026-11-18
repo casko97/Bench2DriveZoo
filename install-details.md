@@ -69,7 +69,9 @@ sudo rm /swap-b2d-temp
 #### mini
 * Run download script (mini split): `./download_scripts/download_mini.sh`
 * Unpack dataset into `data/bench2drive/mini` (use `tar -xvf`)
-* Prepare dataset: `cd mmcv/datasets && python prepare_B2D_mini.py --workers 4` (see [repo](https://github.com/Thinklab-SJTU/Bench2DriveZoo/blob/uniad/vad/docs/DATA_PREP.md))
+* Prepare dataset: `cd mmcv/datasets && python prepare_B2D_mini.py python prepare_B2D_mini.py --workers 4 --shared-split --skip-map` (see [repo](https://github.com/Thinklab-SJTU/Bench2DriveZoo/blob/uniad/vad/docs/DATA_PREP.md)). 
+* This uses all ten mini routes as both train and validation.
+* It reuses `data/infos/b2d_map_infos.pkl`. Maps therefore need to be processed separately before running this
 
 #### v0.0.4
 * Download v0.0.4: `hf download rethinklab/Bench2Drive-V0.0.4 --repo-type dataset --local-dir Bench2Drive-V0.0.4`
