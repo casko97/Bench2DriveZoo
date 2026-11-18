@@ -33,6 +33,38 @@ def measure(name, synchronize=None):
             _counts[name] += 1
 
 
+def instrument_pipeline(pipeline, prefix='image_pipeline'):
+    """Time individual Compose transforms, including nested augmentation pipelines."""
+    if not _enabled:
+        return
+
+    def wrap(transform, name):
+        def timed(data):
+            with measure(name):
+                return transform(data)
+        return timed
+
+    for index, transform in enumerate(pipeline.transforms):
+        name = '{}.{}_{}'.format(prefix, index, type(transform).__name__)
+        nested = getattr(transform, 'transforms', None)
+        if nested is not None and isinstance(getattr(nested, 'transforms', None), list):
+            instrument_pipeline(nested, name)
+        pipeline.transforms[index] = wrap(transform, name)
+
+
+def instrument_method(instance, method, name, synchronize=None):
+    """Time a method on one instance without altering other model users."""
+    if not _enabled:
+        return
+    original = getattr(instance, method)
+
+    def timed(*args, **kwargs):
+        with measure(name, synchronize=synchronize):
+            return original(*args, **kwargs)
+
+    setattr(instance, method, timed)
+
+
 def _cpu_sample():
     with open('/proc/stat') as f:
         fields = [int(v) for v in f.readline().split()[1:]]

@@ -29,6 +29,11 @@ from pyquaternion import Quaternion
 
 SAVE_PATH = os.environ.get('SAVE_PATH', None)
 IS_BENCH2DRIVE = os.environ.get('IS_BENCH2DRIVE', None)
+CAMERA_SAVE_VIEWS = {
+    'rgb_front': 'CAM_FRONT', 'rgb_front_left': 'CAM_FRONT_LEFT',
+    'rgb_front_right': 'CAM_FRONT_RIGHT', 'rgb_back': 'CAM_BACK',
+    'rgb_back_left': 'CAM_BACK_LEFT', 'rgb_back_right': 'CAM_BACK_RIGHT',
+}
 
 
 def get_entry_point():
@@ -71,16 +76,32 @@ class VadAgent(autonomous_agent.AutonomousAgent):
         checkpoint = load_checkpoint(self.model, self.ckpt_path, map_location='cpu', strict=True)
         self.model.cuda()
         self.model.eval()
+        eval_telemetry.instrument_method(self.model, 'extract_feat', 'model_feature_extraction', torch.cuda.synchronize)
+        eval_telemetry.instrument_method(self.model, 'simple_test_pts', 'model_prediction_and_outputs', torch.cuda.synchronize)
+        eval_telemetry.instrument_method(self.model.pts_bbox_head, 'forward', 'model_prediction_head', torch.cuda.synchronize)
+        eval_telemetry.instrument_method(self.model.pts_bbox_head, 'get_bboxes', 'model_bbox_decode', torch.cuda.synchronize)
         self.inference_only_pipeline = []
         for inference_only_pipeline in cfg.inference_only_pipeline:
             if inference_only_pipeline["type"] not in ['LoadMultiViewImageFromFilesInCeph','LoadMultiViewImageFromFiles']:
                 self.inference_only_pipeline.append(inference_only_pipeline)
         self.inference_only_pipeline = Compose(self.inference_only_pipeline)
+        eval_telemetry.instrument_pipeline(self.inference_only_pipeline)
 
         self.takeover = False
         self.stop_time = 0
         self.takeover_time = 0
         self.save_path = None
+        selected_views = os.environ.get('SAVE_VIEWS', 'all').strip()
+        self.save_views = set(CAMERA_SAVE_VIEWS) | {'bev'} if selected_views == 'all' else {
+            view.strip() for view in selected_views.split(',') if view.strip()
+        }
+        unknown_views = self.save_views - (set(CAMERA_SAVE_VIEWS) | {'bev'})
+        if unknown_views:
+            raise ValueError('Unknown SAVE_VIEWS: {}'.format(', '.join(sorted(unknown_views))))
+        jpeg_roundtrip = os.environ.get('SAVE_JPEG_ROUNDTRIP', '1')
+        if jpeg_roundtrip not in ('0', '1'):
+            raise ValueError('SAVE_JPEG_ROUNDTRIP must be 0 or 1')
+        self.save_jpeg_roundtrip = jpeg_roundtrip == '1'
         self._im_transform = T.Compose([T.ToTensor(), T.Normalize(mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225])])
         self.lat_ref, self.lon_ref = 42.0, 2.0
 
@@ -96,14 +117,9 @@ class VadAgent(autonomous_agent.AutonomousAgent):
             string += self.save_name
             self.save_path = pathlib.Path(os.environ['SAVE_PATH']) / string
             self.save_path.mkdir(parents=True, exist_ok=False)
-            (self.save_path / 'rgb_front').mkdir()
-            (self.save_path / 'rgb_front_right').mkdir()
-            (self.save_path / 'rgb_front_left').mkdir()
-            (self.save_path / 'rgb_back').mkdir()
-            (self.save_path / 'rgb_back_right').mkdir()
-            (self.save_path / 'rgb_back_left').mkdir()
+            for view in self.save_views:
+                (self.save_path / view).mkdir()
             (self.save_path / 'meta').mkdir()
-            (self.save_path / 'bev').mkdir()
    
         self.lidar2img = {
         'CAM_FRONT':np.array([[ 1.14251841e+03,  8.00000000e+02,  0.00000000e+00, -9.52000000e+02],
@@ -275,14 +291,13 @@ class VadAgent(autonomous_agent.AutonomousAgent):
 
     def tick(self, input_data):
         self.step += 1
-        encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 20]
         imgs = {}
         for cam in ['CAM_FRONT','CAM_FRONT_LEFT','CAM_FRONT_RIGHT','CAM_BACK','CAM_BACK_LEFT','CAM_BACK_RIGHT']:
-            img = cv2.cvtColor(input_data[cam][1][:, :, :3], cv2.COLOR_BGR2RGB)
-            _, img = cv2.imencode('.jpg', img, encode_param)
-            img = cv2.imdecode(img, cv2.IMREAD_COLOR)
+            img = cv2.cvtColor(input_data[cam][1], cv2.COLOR_BGRA2RGB)
             imgs[cam] = img
-        bev = cv2.cvtColor(input_data['bev'][1][:, :, :3], cv2.COLOR_BGR2RGB)
+        bev = None
+        if self.save_path is not None and 'bev' in self.save_views and self.step % 10 == 0:
+            bev = cv2.cvtColor(input_data['bev'][1], cv2.COLOR_BGRA2RGB)
         gps = input_data['GPS'][1][:2]
         speed = input_data['SPEED'][1]['speed']
         compass = input_data['IMU'][1][-1]
@@ -380,17 +395,19 @@ class VadAgent(autonomous_agent.AutonomousAgent):
         lidar2global = ego2world @ self.lidar2ego
         results['l2g_r_mat'] = lidar2global[0:3,0:3]
         results['l2g_t'] = lidar2global[0:3,3]
-        stacked_imgs = np.stack(results['img'],axis=-1)
-        results['img_shape'] = stacked_imgs.shape
-        results['ori_shape'] = stacked_imgs.shape
-        results['pad_shape'] = stacked_imgs.shape
-        results = self.inference_only_pipeline(results)
+        image_shape = results['img'][0].shape + (len(results['img']),)
+        results['img_shape'] = image_shape
+        results['ori_shape'] = image_shape
+        results['pad_shape'] = image_shape
+        with eval_telemetry.measure('image_pipeline'):
+            results = self.inference_only_pipeline(results)
         self.device="cuda"
-        input_data_batch = mm_collate_to_batch_form([results], samples_per_gpu=1)
-        for key, data in input_data_batch.items():
-            if key != 'img_metas':
-                if torch.is_tensor(data[0]):
-                    data[0] = data[0].to(self.device)
+        with eval_telemetry.measure('collate_and_device_transfer'):
+            input_data_batch = mm_collate_to_batch_form([results], samples_per_gpu=1)
+            for key, data in input_data_batch.items():
+                if key != 'img_metas':
+                    if torch.is_tensor(data[0]):
+                        data[0] = data[0].to(self.device)
         with eval_telemetry.measure('model_inference', synchronize=torch.cuda.synchronize if os.environ.get('B2D_TELEMETRY') == '1' else None):
             output_data_batch = self.model(input_data_batch, return_loss=False, rescale=True)
         all_out_truck_d1 = output_data_batch[0]['pts_bbox']['ego_fut_preds'].cpu().numpy()
@@ -418,7 +435,7 @@ class VadAgent(autonomous_agent.AutonomousAgent):
 
         metric_info = self.get_metric_info()
         self.metric_info[self.step] = metric_info
-        if SAVE_PATH is not None and self.step % 1 == 0:
+        if SAVE_PATH is not None and self.step % 10 == 0:
             with eval_telemetry.measure('save_artifacts'):
                 self.save(tick_data)
         self.prev_control = control
@@ -432,13 +449,16 @@ class VadAgent(autonomous_agent.AutonomousAgent):
     def save(self, tick_data):
         frame = self.step // 10
 
-        Image.fromarray(tick_data['imgs']['CAM_FRONT']).save(self.save_path / 'rgb_front' / ('%04d.png' % frame))
-        Image.fromarray(tick_data['imgs']['CAM_FRONT_LEFT']).save(self.save_path / 'rgb_front_left' / ('%04d.png' % frame))
-        Image.fromarray(tick_data['imgs']['CAM_FRONT_RIGHT']).save(self.save_path / 'rgb_front_right' / ('%04d.png' % frame))
-        Image.fromarray(tick_data['imgs']['CAM_BACK']).save(self.save_path / 'rgb_back' / ('%04d.png' % frame))
-        Image.fromarray(tick_data['imgs']['CAM_BACK_LEFT']).save(self.save_path / 'rgb_back_left' / ('%04d.png' % frame))
-        Image.fromarray(tick_data['imgs']['CAM_BACK_RIGHT']).save(self.save_path / 'rgb_back_right' / ('%04d.png' % frame))
-        Image.fromarray(tick_data['bev']).save(self.save_path / 'bev' / ('%04d.png' % frame))
+        for view, camera in CAMERA_SAVE_VIEWS.items():
+            if view in self.save_views:
+                image = tick_data['imgs'][camera]
+                if self.save_jpeg_roundtrip:
+                    _, encoded = cv2.imencode('.jpg', image,
+                                              [int(cv2.IMWRITE_JPEG_QUALITY), 20])
+                    image = cv2.imdecode(encoded, cv2.IMREAD_COLOR)
+                Image.fromarray(image).save(self.save_path / view / ('%04d.png' % frame))
+        if 'bev' in self.save_views:
+            Image.fromarray(tick_data['bev']).save(self.save_path / 'bev' / ('%04d.png' % frame))
 
         outfile = open(self.save_path / 'meta' / ('%04d.json' % frame), 'w')
         json.dump(self.pid_metadata, outfile, indent=4)
@@ -450,6 +470,9 @@ class VadAgent(autonomous_agent.AutonomousAgent):
         outfile.close()
 
     def destroy(self):
+        if getattr(self, 'save_path', None) is not None and hasattr(self, 'metric_info'):
+            with open(self.save_path / 'metric_info.json', 'w') as outfile:
+                json.dump(self.metric_info, outfile, indent=4)
         del self.model
         torch.cuda.empty_cache()
 
