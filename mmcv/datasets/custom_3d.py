@@ -91,7 +91,7 @@ class Custom3DDataset(Dataset):
                 self.map_infos = {map_name.replace('.pkl',''): None for map_name in os.listdir(map_file)}
                 self.map_path = map_file
             else:
-                with open(self.map_file,'rb') as f: 
+                with open(map_file,'rb') as f: 
                     self.map_infos = pickle.load(f)
         else:
             self.map_infos = None

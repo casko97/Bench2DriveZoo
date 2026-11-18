@@ -16,6 +16,7 @@ from PIL import Image
 from torchvision import transforms as T
 from Bench2DriveZoo.team_code.pid_controller import PIDController
 from Bench2DriveZoo.team_code.planner import RoutePlanner
+from Bench2DriveZoo.team_code import eval_telemetry
 from leaderboard.autoagents import autonomous_agent
 from mmcv import Config
 from mmcv.models import build_model
@@ -315,7 +316,8 @@ class VadAgent(autonomous_agent.AutonomousAgent):
     def run_step(self, input_data, timestamp):
         if not self.initialized:
             self._init()
-        tick_data = self.tick(input_data)
+        with eval_telemetry.measure('agent_sensor_preprocessing'):
+            tick_data = self.tick(input_data)
         results = {}
         results['lidar2img'] = []
         results['lidar2cam'] = []
@@ -389,7 +391,8 @@ class VadAgent(autonomous_agent.AutonomousAgent):
             if key != 'img_metas':
                 if torch.is_tensor(data[0]):
                     data[0] = data[0].to(self.device)
-        output_data_batch = self.model(input_data_batch, return_loss=False, rescale=True)
+        with eval_telemetry.measure('model_inference', synchronize=torch.cuda.synchronize if os.environ.get('B2D_TELEMETRY') == '1' else None):
+            output_data_batch = self.model(input_data_batch, return_loss=False, rescale=True)
         all_out_truck_d1 = output_data_batch[0]['pts_bbox']['ego_fut_preds'].cpu().numpy()
         all_out_truck =  np.cumsum(all_out_truck_d1,axis=1)
         out_truck = all_out_truck[command]
@@ -416,7 +419,8 @@ class VadAgent(autonomous_agent.AutonomousAgent):
         metric_info = self.get_metric_info()
         self.metric_info[self.step] = metric_info
         if SAVE_PATH is not None and self.step % 1 == 0:
-            self.save(tick_data)
+            with eval_telemetry.measure('save_artifacts'):
+                self.save(tick_data)
         self.prev_control = control
         
         if len(self.prev_control_cache)==10:

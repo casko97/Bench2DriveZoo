@@ -85,7 +85,6 @@ sudo rm /swap-b2d-temp
 
 ## Open-loop eval
 
-
 **Run openloop eval (v0.0.4):** Use `--split val` for the official 44-route validation set; `--split train` selects all non-validation routes. Add `--max-samples N` to evaluate only the first N samples, for example `--split val --max-samples 2` for a bounded smoke run.
 ```
 ./adzoo/vad/dist_test.sh \
@@ -94,5 +93,107 @@ sudo rm /swap-b2d-temp
   1 --split val
   ```
 
+**Run open-loop eval (mini):** After preparing mini with `--shared-split`, use the mini image root and generated validation metadata. This evaluates all ten mini routes.
+```
+./adzoo/vad/dist_test.sh \
+  ./adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py \
+  ./ckpts/vad_b2d_base/vad_b2d_base.pth \
+  1 --split val --cfg-options \
+  data.val.ann_file=data/infos/b2d_infos_val.pkl \
+  data.val.use_separated_clip_data=False
+```
+
 ## Closed-loop eval
+
+This setup uses the separate 220-route v0.0.4 CARLA suite in `Bench2Drive/leaderboard/data/bench2drive_0.0.4_val.xml`. The launcher `train`, `val`, and `test` selections are deterministic local 60/20/20 development slices of that XML; `--split all` runs the complete 220-route suite. These closed-loop selections are independent of the upstream open-loop 1,056/44 route split.
+
+### Setup one-time Bench2Drive links
+
+The Bench2Drive evaluator must be able to import this checkout as
+`Bench2DriveZoo` and load the VAD team agent. From the parent directory
+containing both repositories, create these links:
+
+```bash
+cd /home/casko/phd-code/Bench2Drive
+mkdir -p leaderboard/team_code
+ln -s /home/casko/phd-code/Bench2DriveZoo Bench2DriveZoo
+ln -s /home/casko/phd-code/Bench2DriveZoo/team_code/vad_b2d_agent.py leaderboard/team_code/vad_b2d_agent.py
+ln -s /home/casko/phd-code/Bench2DriveZoo/team_code/pid_controller.py leaderboard/team_code/pid_controller.py
+ln -s /home/casko/phd-code/Bench2DriveZoo/team_code/planner.py leaderboard/team_code/planner.py
+```
+
+The VAD agent, its configuration, and its checkpoint are then resolved as:
+
+```text
+leaderboard/team_code/vad_b2d_agent.py
+Bench2DriveZoo/adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py
+Bench2DriveZoo/ckpts/vad_b2d_base/vad_b2d_base.pth
+```
+
+### Run VAD on v0.0.4
+
+The dedicated launcher activates `b2d_zoo.venv`, exports
+`CARLA_ROOT=/home/casko/phd-code/Carla`, and invokes the official Bench2Drive
+evaluator on all 220 routes by default:
+
+```bash
+./scripts/run_closed_loop_vad_v004.sh
+```
+
+Save to log:
+```
+./scripts/run_closed_loop_vad_v004.sh --one-scenario 2>&1 | tee closed_loop.log
+```
+
+Each fresh run gets a timestamped JSON checkpoint and artifact directory under `/home/casko/phd-code/Bench2DriveZoo/outputs/closed_loop` by default.
+
+#### One-scenario smoke test
+
+[`one_scenario_town07.xml`](./one_scenario_town07.xml) contains official route `24948` on `Town07`, with a signalized right turn in daylight and dry weather. It was extracted from `Bench2Drive/leaderboard/data/bench2drive_0.0.4_val.xml`, preserving the route and scenario parameters. The previous Town02 and Town12 routes remain available in `one_scenario_town02.xml` and `one_scenario.xml`.
+
+From the Bench2DriveZoo repository root, run:
+
+```bash
+./scripts/run_closed_loop_vad_v004.sh --one-scenario
+```
+
+* `--one-scenario` selects the one-route XML and disables development splitting.
+* The evaluator launches CARLA automatically with offscreen rendering; no separate CARLA window is needed.
+* To save terminal output, append `2>&1 | tee closed_loop.log` to the launch command.
+* Every 30 seconds, CPU and memory load for the host, GPU utilization and memory, and timing measurements are printed and appended to `telemetry.jsonl`
+* The launcher uses the VAD agent and checkpoint configured above. 
+
+Image sequences and per-frame data are saved in the printed artifact directory:
+- PNGs from six cameras: front, front-left, front-right, back, back-left, and back-right.
+- A BEV visualization as bev/*.png.
+- Per-frame metadata as meta/*.json, plus metric_info.json.
+After evaluation finishes, the launcher creates a looping GIF for each camera and BEV PNG sequence (for example, `rgb_front.gif` and `bev.gif` beside their frame directories). It uses `ffmpeg`, scales GIFs to at most 960 pixels wide, and encodes them at 10 fps. `ffmpeg` must be available on `PATH`; otherwise the launcher reports that GIF creation was skipped. The numbered PNG frames remain available. The checkpoint JSON contains route scores and metrics. No MP4 is created.
+
+#### More options
+
+* To resume from an existing checkpoint, pass its path with `--checkpoint` (or
+set `CHECKPOINT_ENDPOINT`). The launcher detects the existing JSON and resumes
+automatically. For example:
+
+    ```bash
+    # Uses the launcher's default route XML and the full 220-route suite.
+    # For a checkpoint from custom routes, pass the same ROUTES and SPLIT values used before.
+    # If the original run used a custom SAVE_PATH, pass that same SAVE_PATH again.
+    ./scripts/run_closed_loop_vad_v004.sh \
+    --checkpoint /home/casko/phd-code/Bench2DriveZoo/outputs/closed_loop/eval_vad_v0.0.4_all_YYYYMMDD_HHMMSS_NNNNNNNNN.json
+    ```
+
+* To point the launcher at a different compatible CARLA XML:
+
+    ```bash
+    ./scripts/run_closed_loop_vad_v004.sh \
+      --routes leaderboard/data/routes_devtest.xml --split all
+    ```
+
+* Use `--split train`, `--split val`, or `--split test` for deterministic local
+development slices. The same option can be set with the `SPLIT` environment
+variable. *(These are not the upstream open-loop dataset splits.)*
+
+* Change `GPU_RANK` to select a different physical GPU.
+
 
