@@ -14,6 +14,24 @@ from leaderboard.envs.sensor_interface import SensorInterface
 from srunner.scenariomanager.scenarioatomics.atomic_criteria import CollisionTest, Criterion, RouteCompletionTest
 from srunner.scenariomanager.traffic_events import TrafficEvent
 
+# Bench2Drive hardcodes GNSS/IMU noise magnitudes in AgentWrapper. CARLA 0.9.15
+# exposes a per-sensor `noise_seed` blueprint attribute, so set it as sensors
+# are created without modifying the adjacent Bench2Drive checkout.
+sensor_noise_seed = int(os.environ.get('CARLA_SENSOR_NOISE_SEED', '0'))
+original_preprocess_sensor_spec = AgentWrapper._preprocess_sensor_spec
+
+
+def preprocess_sensor_spec_with_noise_seed(self, sensor_spec):
+    type_, id_, transform, attributes = original_preprocess_sensor_spec(self, sensor_spec)
+    if type_ == 'sensor.other.gnss':
+        attributes['noise_seed'] = str(sensor_noise_seed)
+    elif type_ == 'sensor.other.imu':
+        attributes['noise_seed'] = str(sensor_noise_seed + 1)
+    return type_, id_, transform, attributes
+
+
+AgentWrapper._preprocess_sensor_spec = preprocess_sensor_spec_with_noise_seed
+
 original_criterion_init = Criterion.__init__
 original_set_dict = TrafficEvent.set_dict
 

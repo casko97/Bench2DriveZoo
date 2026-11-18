@@ -4,6 +4,8 @@
 # Optional overrides:
 #   BENCH2DRIVE_ROOT, B2D_ZOO_VENV, CARLA_ROOT, GPU_RANK, ROUTES,
 #   CHECKPOINT_ENDPOINT, SAVE_PATH, SAVE_VIEWS, SAVE_JPEG_ROUNDTRIP, PLANNER_TYPE, TEAM_AGENT, TEAM_CONFIG,
+#   TRAFFIC_MANAGER_SEED (default 0; passed to Bench2Drive's evaluator),
+#   CARLA_SENSOR_NOISE_SEED (default 0; used for GNSS and IMU noise),
 #   SUSTAINED_COLLISION_FRAMES (default 1, 0 disables early stopping),
 #   SPLIT (train, val, test, all). An existing checkpoint JSON resumes
 #   automatically; otherwise a timestamped fresh checkpoint is created.
@@ -16,6 +18,8 @@ carla_root="${CARLA_ROOT:-"${zoo_root}/../Carla"}"
 output_root="${zoo_root}/outputs/closed_loop"
 
 gpu_rank="${GPU_RANK:-0}"
+traffic_manager_seed="${TRAFFIC_MANAGER_SEED:-0}"
+sensor_noise_seed="${CARLA_SENSOR_NOISE_SEED:-0}"
 split="${SPLIT:-all}"
 routes="${ROUTES:-leaderboard/data/bench2drive_0.0.4_val.xml}"
 checkpoint_input="${CHECKPOINT_ENDPOINT:-}"
@@ -72,6 +76,14 @@ case "${split}" in
     train|val|test|all) ;;
     *) echo "Invalid split '${split}'; choose train, val, test, or all" >&2; exit 2 ;;
 esac
+if ! [[ "${traffic_manager_seed}" =~ ^-?[0-9]+$ ]]; then
+    printf 'TRAFFIC_MANAGER_SEED must be an integer.\n' >&2
+    exit 2
+fi
+if ! [[ "${sensor_noise_seed}" =~ ^-?[0-9]+$ ]]; then
+    printf 'CARLA_SENSOR_NOISE_SEED must be an integer.\n' >&2
+    exit 2
+fi
 
 resolve_from_bench2drive_root() {
     if [[ "$1" = /* ]]; then
@@ -173,6 +185,7 @@ if [[ "${SAVE_JPEG_ROUNDTRIP}" != 0 && "${SAVE_JPEG_ROUNDTRIP}" != 1 ]]; then
 fi
 printf 'JPEG round trip for saved camera images: %s\n' "${SAVE_JPEG_ROUNDTRIP}"
 export B2D_TELEMETRY=1
+export CARLA_SENSOR_NOISE_SEED="${sensor_noise_seed}"
 export GPU_RANK="${gpu_rank}"
 export SUSTAINED_COLLISION_FRAMES="${SUSTAINED_COLLISION_FRAMES:-1}"
 if ! [[ "${SUSTAINED_COLLISION_FRAMES}" =~ ^[0-9]+$ ]]; then
@@ -189,6 +202,8 @@ if [[ "${resume_enabled}" == true ]]; then
 fi
 
 printf 'Routes: %s (split: %s)\n' "${selected_routes}" "${split}"
+printf 'Traffic Manager seed: %s\n' "${traffic_manager_seed}"
+printf 'CARLA GNSS/IMU noise seed: %s (IMU uses seed + 1)\n' "${sensor_noise_seed}"
 printf 'Starting evaluator on GPU %s. It launches CARLA offscreen and waits 30 seconds before connecting.\n' "${gpu_rank}"
 printf 'Evaluator output follows; periodic messages indicate elapsed time, not simulation progress.\n'
 (
@@ -212,6 +227,7 @@ if CUDA_VISIBLE_DEVICES="${gpu_rank}" python -u "${zoo_root}/scripts/supervise_e
     "${resume_args[@]}" \
     --port="${PORT}" \
     --traffic-manager-port="${TM_PORT}" \
+    --traffic-manager-seed="${traffic_manager_seed}" \
     --gpu-rank="${gpu_rank}"; then
     printf '[launcher] Evaluator finished successfully.\n'
 else
