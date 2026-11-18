@@ -33,7 +33,7 @@ def set_dict_with_events(self, dictionary):
 Criterion.__init__ = criterion_init_with_events
 TrafficEvent.set_dict = set_dict_with_events
 
-collision_stop = SustainedCollisionStop(int(os.environ.get('SUSTAINED_COLLISION_FRAMES', '3')))
+collision_stop = SustainedCollisionStop(int(os.environ.get('SUSTAINED_COLLISION_FRAMES', '1')))
 original_collision_callback = CollisionTest._count_collisions
 original_load_scenario = ScenarioManager.load_scenario
 def collision_callback_with_stop(self, event):

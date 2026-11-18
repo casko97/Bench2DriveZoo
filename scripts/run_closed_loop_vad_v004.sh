@@ -4,7 +4,7 @@
 # Optional overrides:
 #   BENCH2DRIVE_ROOT, B2D_ZOO_VENV, CARLA_ROOT, GPU_RANK, ROUTES,
 #   CHECKPOINT_ENDPOINT, SAVE_PATH, SAVE_VIEWS, SAVE_JPEG_ROUNDTRIP, PLANNER_TYPE, TEAM_AGENT, TEAM_CONFIG,
-#   SUSTAINED_COLLISION_FRAMES (default 3, 0 disables early stopping),
+#   SUSTAINED_COLLISION_FRAMES (default 1, 0 disables early stopping),
 #   SPLIT (train, val, test, all). An existing checkpoint JSON resumes
 #   automatically; otherwise a timestamped fresh checkpoint is created.
 set -euo pipefail
@@ -174,7 +174,7 @@ fi
 printf 'JPEG round trip for saved camera images: %s\n' "${SAVE_JPEG_ROUNDTRIP}"
 export B2D_TELEMETRY=1
 export GPU_RANK="${gpu_rank}"
-export SUSTAINED_COLLISION_FRAMES="${SUSTAINED_COLLISION_FRAMES:-3}"
+export SUSTAINED_COLLISION_FRAMES="${SUSTAINED_COLLISION_FRAMES:-1}"
 if ! [[ "${SUSTAINED_COLLISION_FRAMES}" =~ ^[0-9]+$ ]]; then
     printf 'SUSTAINED_COLLISION_FRAMES must be a non-negative integer.\n' >&2
     exit 2

@@ -1,6 +1,14 @@
 from team_code.collision_stop import SustainedCollisionStop
 
 
+def test_single_frame_stops_on_first_accepted_collision():
+    stop = SustainedCollisionStop(1)
+    stop.observe(10, 100, accepted=False)
+    assert stop.take_stop() is None
+    stop.observe(10, 101, accepted=True)
+    assert stop.take_stop() == {'actor_id': 10, 'frame': 101, 'consecutive_frames': 1}
+
+
 def test_sustained_collision_requires_distinct_consecutive_frames():
     stop = SustainedCollisionStop(3)
     stop.observe(10, 100, accepted=True)

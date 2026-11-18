@@ -159,10 +159,8 @@ From the Bench2DriveZoo repository root, run:
 * Ctrl+C requests a graceful stop. If cleanup does not finish within 15 seconds, the launcher force-stops the evaluator and its child processes. Press Ctrl+C a second time to force immediately. Statistics still held in memory may be lost during a forced stop.
 * Console output is also saved to `run.log` in the artifact directory.
 * Every 30 seconds, CPU and memory load for the host, GPU utilization and memory, and timing measurements are printed and appended to `telemetry.jsonl`
-* Image pipeline timings include individual transforms, including transforms nested inside augmentation. Nested timings are included in their parent timings and should not be added together. GPU utilization is an instantaneous sample.
-* Model timings separately report feature extraction, the prediction head, bounding-box decoding, and the enclosing prediction/output stage. They synchronize CUDA at stage boundaries, which can affect runtime; nested timings are included in the enclosing model timing. The prediction/output stage also includes result construction and GPU-to-CPU copies.
 * Benchmark events, including recorded collisions and blocked-vehicle events, are appended to `live_events.jsonl` as they occur. Ongoing events may be updated; the final checkpoint remains the authoritative result.
-* The launcher stops a route after three consecutive simulation frames with collision callbacks against the same actor, starting with a collision recorded by the benchmark. CARLA may not emit callbacks every frame of physical contact. Set `SUSTAINED_COLLISION_FRAMES=0` to disable this early stop for the standard benchmark protocol, or set it to another positive frame count. The stop reason is written to `live_events.jsonl`; partial route statistics are saved through the normal evaluator cleanup.
+* By default, the launcher stops a route after the first collision recorded by the benchmark. Set `SUSTAINED_COLLISION_FRAMES=0` to disable this early stop for the standard benchmark protocol, or set it to a higher count of consecutive simulation frames with collision callbacks against the same actor. CARLA may not emit callbacks every frame of physical contact. The stop reason is written to `live_events.jsonl`; partial route statistics are saved through the normal evaluator cleanup.
 * The launcher uses the VAD agent and checkpoint configured above. 
 * The launcher saves front and overhead images by default. Set `SAVE_VIEWS=all` to save all seven views, choose a comma-separated list such as `SAVE_VIEWS=rgb_front,rgb_front_left`, or use `SAVE_VIEWS=` to save no images. Model camera inputs are unchanged.
 * Set `SAVE_JPEG_ROUNDTRIP=0` to skip the quality-20 JPEG encode/decode step for saved camera images. The output files remain losslessly compressed PNGs; the default `1` preserves the existing JPEG artifacts. This setting does not affect model inputs or the BEV image.
@@ -210,7 +208,7 @@ SAVE_JPEG_ROUNDTRIP=0 SAVE_VIEWS=rgb_front,bev ./scripts/run_closed_loop_vad_v00
 | `PLANNER_TYPE` | `only_traj` | Planner setting exported to the evaluator and agent. |
 | `TEAM_AGENT` | `leaderboard/team_code/vad_b2d_agent.py` | Agent path relative to the Bench2Drive checkout. |
 | `TEAM_CONFIG` | `Bench2DriveZoo/adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py+Bench2DriveZoo/ckpts/vad_b2d_base/vad_b2d_base.pth` | Agent configuration and checkpoint, separated by `+`. The launcher also checks that the default VAD checkpoint exists. |
-| `SUSTAINED_COLLISION_FRAMES` | `3` | Stop a route after this many consecutive collision callback frames for the same actor, starting with a benchmark-recorded collision. Set `0` to disable this early stop. |
+| `SUSTAINED_COLLISION_FRAMES` | `1` | Stop a route after this many consecutive collision callback frames for the same actor, starting with a benchmark-recorded collision. Set `0` to disable this early stop. |
 | `RECORD_PATH` | unset | Passed to the evaluator's CARLA recording option. |
 | `TMPDIR` | `/tmp` | Directory for temporary split route XML files. |
 | `PYTHONPATH` | existing value, if any | The launcher appends the CARLA and Bench2Drive paths. |
