@@ -21,9 +21,11 @@ Done in separate folder `/home/casko/phd-code/Carla` (globally, no venv)
 6. Install repo: `export MAX_JOBS=4 && uv pip install -v --no-build-isolation -e .`
 
 Make sure the environment knows where Carla is:
-* `export CARLA_ROOT=YOUR_CARLA_PATH`
-* Important!!! Otherwise, the python environment can not find carla package
-`echo "$CARLA_ROOT/PythonAPI/carla/dist/carla-0.9.15-py3.7-linux-x86_64.egg" >> YOUR_CONDA_PATH/envs/YOUR_CONDA_ENV_NAME/lib/python3.8/site-packages/carla.pth` # python 3.8 also works well, please set YOUR_CONDA_PATH and YOUR_CONDA_ENV_NAME
+* `export CARLA_ROOT=/home/casko/phd-code/Carla`
+* `echo "$CARLA_ROOT/PythonAPI/carla/dist/carla-0.9.15-py3.7-linux-x86_64.egg" >> /home/casko/phd-code/Bench2DriveZoo/b2d_zoo.venv/lib/python3.8/site-packages/carla.pth`
+
+*(Last point instead of: "Important!!! Otherwise, the python environment can not find carla package
+`echo "$CARLA_ROOT/PythonAPI/carla/dist/carla-0.9.15-py3.7-linux-x86_64.egg" >> YOUR_CONDA_PATH/envs/YOUR_CONDA_ENV_NAME/lib/python3.8/site-packages/carla.pth` # python 3.8 also works well, please set YOUR_CONDA_PATH and YOUR_CONDA_ENV_NAME")*
 
 Finally, download pretrained weights:
 1. Create directory: `mkdir ckpts`
@@ -80,7 +82,21 @@ sudo rm /swap-b2d-temp
 
 ## Open-loop eval
 
-Run openloop eval: `./adzoo/vad/dist_test.sh ./adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py ./ckpts/vad_b2d_base/vad_b2d_base.pth 1`
+Run openloop eval (mini): 
+```
+./adzoo/vad/dist_test.sh ./adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py ./ckpts/vad_b2d_base/vad_b2d_base.pth 1
+```
+
+Run openloop eval (v0.0.4 test):
+```
+./adzoo/vad/dist_test.sh \
+  ./adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py \
+  ./ckpts/vad_b2d_base/vad_b2d_base.pth \
+  1 \
+  --cfg-options \
+  data.test.ann_file=data/infos/v0.0.4/b2d_infos_test.pkl \
+  data.test.map_file=data/infos/v0.0.4/b2d_map_infos.pkl
+  ```
 
 ## Closed-loop eval
 
