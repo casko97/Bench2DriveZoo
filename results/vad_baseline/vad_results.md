@@ -7,7 +7,7 @@
 | Model | VAD base |
 | Checkpoint | `ckpts/vad_b2d_base/vad_b2d_base.pth` |
 | Dataset | Bench2Drive v0.0.4, standard depth-free release |
-| Split | Seeded 60/20/20 split, test partition (38 routes) |
+| Split | Seeded 60/20/20 split, test partition (61 routes) |
 | Evaluated frames | 13,587 |
 | Config | `adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py` |
 | Source log | [vad_v004_test.log](vad_v004_test.log) |

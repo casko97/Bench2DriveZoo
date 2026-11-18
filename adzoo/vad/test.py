@@ -4,6 +4,7 @@
 #  Modified by Zhiqi Li
 # ---------------------------------------------
 import argparse
+import copy
 import os
 import torch
 import warnings
@@ -25,6 +26,13 @@ def parse_args():
         description='MMDet test (and eval) a model')
     parser.add_argument('config', help='test config file path')
     parser.add_argument('checkpoint', help='checkpoint file')
+    parser.add_argument(
+        '--split', choices=['train', 'val', 'test', 'all'], default='test',
+        help='dataset split to evaluate (default: test; all evaluates train, '
+        'validation, then test)')
+    parser.add_argument(
+        '--max-samples', type=int, default=None,
+        help='evaluate only the first N samples of each selected split')
     parser.add_argument('--json_dir', help='json parent dir name file') # NOTE: json file parent folder name
     parser.add_argument('--out', help='output result file in pickle format')
     parser.add_argument(
@@ -121,6 +129,14 @@ def main():
     cfg = Config.fromfile(args.config)
     if args.cfg_options is not None:
         cfg.merge_from_dict(args.cfg_options)
+    if args.split == 'all':
+        cfg.data.test = [copy.deepcopy(cfg.data[key])
+                         for key in ('train', 'val', 'test')]
+        for split_cfg in cfg.data.test:
+            split_cfg.test_mode = True
+    else:
+        cfg.data.test = copy.deepcopy(cfg.data[args.split])
+        cfg.data.test.test_mode = True
     # import modules from string list.
     if cfg.get('custom_imports', None):
         from mmcv.utils import import_modules_from_strings
@@ -190,6 +206,13 @@ def main():
 
     # build the dataloader
     dataset = build_dataset(cfg.data.test)
+    if args.max_samples is not None:
+        if args.max_samples <= 0:
+            raise ValueError('--max-samples must be a positive integer')
+        if isinstance(cfg.data.test, list):
+            raise ValueError('--max-samples with --split all is not supported')
+        dataset.data_infos = dataset.data_infos[:args.max_samples]
+        print(f'Limited evaluation to {len(dataset.data_infos)} samples')
     data_loader = build_dataloader(
         dataset,
         samples_per_gpu=samples_per_gpu,

@@ -80,25 +80,18 @@ sudo rm /swap-b2d-temp
 * `prepare_B2Dv004.py` reuses `data/infos/b2d_map_infos.pkl` by default because map geometry does not depend on the v0.0.4 route split. It creates `data/infos/v0.0.4/b2d_map_infos.pkl` as a symbolic link, avoiding a second parse of the map archives. Maps therefore need to be processed separatly before running this.
 * The preparer reuses an existing manifest to keep the split stable. Use `--regenerate-split` only when deliberately replacing it, for example after completing a partial download.
 
+**Dataset splits 60/20/20**. The checked-in v0.0.4 manifest assigns 185 routes to training (60%), 61 to validation (20%), and 61 to testing (20%), for 307 routes total. Route counts are rounded to whole routes, so the realized proportions are approximately 60.3/19.9/19.9. Assignment is deterministic, based on SHA-256 ranking of each route name with seed `20261117`; the manifest is `data/splits/bench2drive_v0.0.4_train_val_test_split.json`. These are route-level splits: all frames from a route belong to the same split.
+
 ## Open-loop eval
 
-Run openloop eval (mini): 
-```
-./adzoo/vad/dist_test.sh ./adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py ./ckpts/vad_b2d_base/vad_b2d_base.pth 1
-```
 
-Run openloop eval (v0.0.4 test):
+**Run openloop eval (v0.0.4):** The default split is `test`; pass `--split train`, `--split val`, or `--split all` to select another split. The `all` option evaluates train, validation, and test in that order. Add `--max-samples N` to evaluate only the first `N` samples of a selected split, for example `--split test --max-samples 2` for a bounded smoke run. 
 ```
 ./adzoo/vad/dist_test.sh \
   ./adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py \
   ./ckpts/vad_b2d_base/vad_b2d_base.pth \
-  1 \
-  --cfg-options \
-  data.test.ann_file=data/infos/v0.0.4/b2d_infos_test.pkl \
-  data.test.map_file=data/infos/v0.0.4/b2d_map_infos.pkl
+  1 --split test
   ```
 
 ## Closed-loop eval
-
-[Instructions here](https://github.com/Thinklab-SJTU/Bench2DriveZoo/blob/uniad/vad/docs/EVAL_IN_CARLA.md)
 
