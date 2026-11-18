@@ -419,12 +419,12 @@ model = dict(
 dataset_type = "B2D_VAD_Dataset"
 data_root = "data/bench2drive"
 info_root = "data/infos/v0.0.4"
-map_root = "data/bench2drive/maps"
-map_file = info_root + "/b2d_map_infos.pkl"
+# Reuse the already-prepared shared map pickle. Route infos are generated as
+# per-clip files by the upstream v0.0.4 preparer.
+map_file = "data/infos/b2d_map_infos.pkl"
 file_client_args = dict(backend="disk")
-ann_file_train=info_root + "/b2d_infos_train.pkl"
-ann_file_val=info_root + "/b2d_infos_val.pkl"
-ann_file_test=info_root + "/b2d_infos_test.pkl"
+ann_file_train=info_root + "/b2d_infos_train_meta.pkl"
+ann_file_val=info_root + "/b2d_infos_val_meta.pkl"
 
 train_pipeline = [
     dict(type='LoadMultiViewImageFromFiles', to_float32=True),
@@ -490,7 +490,6 @@ data = dict(
         pipeline=train_pipeline,
         classes=class_names,
         name_mapping=NameMapping,
-        map_root=map_root,
         map_file=map_file,
         modality=input_modality,
         bev_size=(bev_h_, bev_w_),
@@ -502,6 +501,9 @@ data = dict(
         # we use box_type_3d='LiDAR' in kitti and nuscenes dataset
         # and box_type_3d='Depth' in sunrgbd and scannet dataset.
         box_type_3d='LiDAR',
+        use_separated_map_data=False,
+        use_separated_clip_data=True,
+        cache_lenth=300,
         #custom_eval_version='vad_nusc_detection_cvpr_2019'
         ),
     val=dict(type=dataset_type,
@@ -510,7 +512,6 @@ data = dict(
             pipeline=test_pipeline,
             classes=class_names,
             name_mapping=NameMapping,
-            map_root=map_root,
             map_file=map_file,
             modality=input_modality,
             bev_size=(bev_h_, bev_w_),
@@ -519,25 +520,15 @@ data = dict(
             future_frames=future_frames,
             point_cloud_range=point_cloud_range,
             polyline_points_num=map_fixed_ptsnum_per_gt_line,
-            eval_cfg=eval_cfg
+            eval_cfg=eval_cfg,
+            box_type_3d='LiDAR',
+            use_separated_map_data=False,
+            use_separated_clip_data=True,
+            cache_lenth=-1,
             ),
-    test=dict(type=dataset_type,
-            data_root=data_root,
-            ann_file=ann_file_test,
-            pipeline=test_pipeline,
-            classes=class_names,
-            name_mapping=NameMapping,
-            map_root=map_root,
-            map_file=map_file,
-            modality=input_modality,
-            bev_size=(bev_h_, bev_w_),
-            queue_length=queue_length,
-            past_frames=past_frames,
-            future_frames=future_frames,
-            point_cloud_range=point_cloud_range,
-            polyline_points_num=map_fixed_ptsnum_per_gt_line,
-            eval_cfg=eval_cfg
-            ),
+    # Do not inherit a generic test dataset from the base configuration. The
+    # v0.0.4 protocol exposes only train and validation route splits.
+    test=None,
     shuffler_sampler=dict(type='DistributedGroupSampler'),
     nonshuffler_sampler=dict(type='DistributedSampler')
 )

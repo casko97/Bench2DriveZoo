@@ -27,9 +27,9 @@ def parse_args():
     parser.add_argument('config', help='test config file path')
     parser.add_argument('checkpoint', help='checkpoint file')
     parser.add_argument(
-        '--split', choices=['train', 'val', 'test', 'all'], default='test',
-        help='dataset split to evaluate (default: test; all evaluates train, '
-        'validation, then test)')
+        '--split', choices=['train', 'val', 'all'], default='val',
+        help='dataset split to evaluate (default: val; all evaluates train '
+        'then validation)')
     parser.add_argument(
         '--max-samples', type=int, default=None,
         help='evaluate only the first N samples of each selected split')
@@ -131,7 +131,7 @@ def main():
         cfg.merge_from_dict(args.cfg_options)
     if args.split == 'all':
         cfg.data.test = [copy.deepcopy(cfg.data[key])
-                         for key in ('train', 'val', 'test')]
+                         for key in ('train', 'val')]
         for split_cfg in cfg.data.test:
             split_cfg.test_mode = True
     else:

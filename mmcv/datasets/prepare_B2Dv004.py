@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Prepare Bench2Drive v0.0.4 route archives for the VAD data pipeline.
 
-The official v0.0.4 release does not ship a train/validation/test manifest.
-This script creates one deterministically from the route names, then delegates
-frame conversion to ``prepare_B2D.py``.  Its default paths are relative to this
-file, so it can be called from any working directory.
+The upstream v0.0.4 protocol ships a fixed 44-route validation manifest. All
+other routes are training data. This script preserves that train/validation
+protocol and delegates frame conversion to ``prepare_B2D.py``. Its default
+paths are relative to this file, so it can be called from any working directory.
 
 Typical use::
 
@@ -17,7 +17,6 @@ split.json``.  It records the seed and ratios used, and can be passed back with
 """
 
 import argparse
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -31,7 +30,7 @@ DEFAULT_DATA_ROOT = REPO_ROOT / 'data' / 'bench2drive'
 DEFAULT_OUT_DIR = REPO_ROOT / 'data' / 'infos' / 'v0.0.4'
 DEFAULT_BASE_MAP_INFOS = REPO_ROOT / 'data' / 'infos' / 'b2d_map_infos.pkl'
 DEFAULT_MANIFEST = (REPO_ROOT / 'data' / 'splits' /
-                    'bench2drive_v0.0.4_train_val_test_split.json')
+                    'bench2drive_train_val_split_v04.json')
 VERSION_DIR = 'v0.0.4'
 
 
@@ -48,50 +47,36 @@ def route_names(archive_dir, extracted_dir):
     return []
 
 
-def split_routes(routes, seed, train_ratio, val_ratio):
-    """Create a deterministic route split using a seeded SHA-256 ranking."""
+def load_official_splits(path, routes):
+    """Use the upstream 44-route validation list without modification."""
     if not routes:
         raise ValueError('No route archives or extracted route directories found.')
-    if not 0 < train_ratio < 1 or not 0 < val_ratio < 1 or train_ratio + val_ratio >= 1:
-        raise ValueError('train_ratio and val_ratio must be positive and sum to less than 1.')
+    with path.open(encoding='utf-8') as handle:
+        manifest = json.load(handle)
+    if set(manifest) != {'val'} or not isinstance(manifest['val'], list):
+        raise ValueError(
+            f'{path} is not the upstream v0.0.4 validation manifest.')
 
-    ranked = sorted(
-        routes,
-        key=lambda route: hashlib.sha256(f'{seed}:{route}'.encode('utf-8')).hexdigest(),
-    )
-    count = len(ranked)
-    train_end = int(count * train_ratio)
-    val_end = train_end + int(count * val_ratio)
-    # Keep every split non-empty when there are at least three routes.
-    if count >= 3:
-        train_end = max(1, train_end)
-        val_end = max(train_end + 1, val_end)
-        val_end = min(count - 1, val_end)
+    validation_routes = manifest['val']
+    if len(validation_routes) != 44 or len(set(validation_routes)) != 44:
+        raise ValueError(
+            f'{path} must contain the 44 unique upstream validation routes.')
+    available_routes = set(routes)
+    missing = sorted(set(validation_routes) - available_routes)
+    if missing:
+        preview = ', '.join(missing[:5])
+        suffix = ' ...' if len(missing) > 5 else ''
+        raise FileNotFoundError(
+            f'{len(missing)} official validation routes are missing from the '
+            f'download: {preview}{suffix}. Download the complete release '
+            'before preparing the upstream-aligned split.')
+
+    validation_set = set(validation_routes)
     return {
-        'train': [f'{VERSION_DIR}/{route}' for route in ranked[:train_end]],
-        'val': [f'{VERSION_DIR}/{route}' for route in ranked[train_end:val_end]],
-        'test': [f'{VERSION_DIR}/{route}' for route in ranked[val_end:]],
+        'train': [f'{VERSION_DIR}/{route}' for route in routes
+                  if route not in validation_set],
+        'val': [f'{VERSION_DIR}/{route}' for route in validation_routes],
     }
-
-
-def write_manifest(path, routes, seed, train_ratio, val_ratio):
-    splits = split_routes(routes, seed, train_ratio, val_ratio)
-    manifest = {
-        'dataset': 'Bench2Drive-V0.0.4',
-        'seed': seed,
-        'split_method': 'SHA-256 ranking of seed and route name',
-        'ratios': {
-            'train': train_ratio,
-            'val': val_ratio,
-            'test': 1 - train_ratio - val_ratio,
-        },
-        **splits,
-    }
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open('w', encoding='utf-8') as handle:
-        json.dump(manifest, handle, indent=2)
-        handle.write('\n')
-    return manifest
 
 
 def extract_archives(archive_dir, destination, routes):
@@ -120,17 +105,11 @@ def main():
                         help='Parent of the v0.0.4 route directory.')
     parser.add_argument('--out-dir', type=Path, default=DEFAULT_OUT_DIR)
     parser.add_argument('--split-manifest', type=Path, default=DEFAULT_MANIFEST)
-    parser.add_argument('--seed', type=int, default=20261117)
-    parser.add_argument('--train-ratio', type=float, default=0.6)
-    parser.add_argument('--val-ratio', type=float, default=0.2)
     parser.add_argument('--workers', type=int, default=4)
-    parser.add_argument('--tmp-dir', default='tmp_data')
     parser.add_argument('--extract', action='store_true',
                         help='Extract downloaded .tar.gz routes before preparing.')
     parser.add_argument('--write-split-only', action='store_true',
-                        help='Create the manifest and exit without extracting or preparing.')
-    parser.add_argument('--regenerate-split', action='store_true',
-                        help='Replace an existing manifest using the current route set and options.')
+                        help='Verify the upstream split and exit without extracting or preparing.')
     parser.add_argument('--map', help='Process only this map through the base preparer.')
     parser.add_argument('--maps-only', action='store_true',
                         help='Process maps only through the base preparer.')
@@ -141,28 +120,23 @@ def main():
     args = parser.parse_args()
 
     extracted_dir = args.data_root / VERSION_DIR
-    if args.split_manifest.is_file() and not args.regenerate_split:
-        with args.split_manifest.open(encoding='utf-8') as handle:
-            manifest = json.load(handle)
-        if not all(split in manifest for split in ('train', 'val', 'test')):
-            raise ValueError(f'Invalid split manifest: {args.split_manifest}')
-        print('Using existing split manifest:', args.split_manifest)
-    else:
-        routes = route_names(args.archive_dir, extracted_dir)
-        manifest = write_manifest(args.split_manifest, routes, args.seed,
-                                  args.train_ratio, args.val_ratio)
-        print('Wrote split manifest:', args.split_manifest)
-    print('Routes: train={}, val={}, test={}'.format(
-        len(manifest['train']), len(manifest['val']), len(manifest['test'])))
+    if not args.split_manifest.is_file():
+        raise FileNotFoundError(
+            f'Upstream v0.0.4 split manifest is missing: {args.split_manifest}')
+    routes = route_names(args.archive_dir, extracted_dir)
+    manifest = load_official_splits(args.split_manifest, routes)
+    print('Using upstream split manifest:', args.split_manifest)
+    print('Routes: train={}, val={}'.format(
+        len(manifest['train']), len(manifest['val'])))
     if args.write_split_only:
         return
 
     if args.extract:
         extract_archives(args.archive_dir, extracted_dir,
-                         [path.split('/', 1)[1] for split in ('train', 'val', 'test')
+                         [path.split('/', 1)[1] for split in ('train', 'val')
                           for path in manifest[split]])
 
-    missing = [route for split in ('train', 'val', 'test') for route in manifest[split]
+    missing = [route for split in ('train', 'val') for route in manifest[split]
                if not (args.data_root / route / 'anno').is_dir()]
     if missing:
         raise FileNotFoundError(
@@ -172,31 +146,25 @@ def main():
     # Reuse the established frame conversion code while keeping all v0.0.4
     # products separate from base and mini artifacts.
     import prepare_B2D as base
-    base.DATAROOT = str(args.data_root)
+    base.DATA_ROOT = str(args.data_root)
     base.OUT_DIR = str(args.out_dir)
     base.MAP_ROOT = str(args.data_root / 'maps')
     # The standard v0.0.4 release does not include depth images.
     base.FILTER_INVISINLE = args.use_depth_occlusion_filter
     args.out_dir.mkdir(parents=True, exist_ok=True)
-    map_infos_path = args.out_dir / 'b2d_map_infos.pkl'
-    if not args.build_map_infos and DEFAULT_BASE_MAP_INFOS.is_file():
-        if not map_infos_path.exists():
-            map_infos_path.symlink_to(
-                os.path.relpath(DEFAULT_BASE_MAP_INFOS, map_infos_path.parent))
-        print('Reusing base map infos:', DEFAULT_BASE_MAP_INFOS)
-        reuse_map_infos = True
-    else:
-        reuse_map_infos = False
+    if not DEFAULT_BASE_MAP_INFOS.is_file():
+        raise FileNotFoundError(
+            f'Shared map infos are missing: {DEFAULT_BASE_MAP_INFOS}.')
+    print('Reusing shared map infos:', DEFAULT_BASE_MAP_INFOS)
     if args.maps_only or args.map:
-        if not reuse_map_infos:
+        if args.build_map_infos:
             base.gengrate_map(base.MAP_ROOT, args.map)
         return
 
-    for split in ('train', 'val', 'test'):
+    for split in ('train', 'val'):
         print(f'Processing {split} data...')
-        base.process_list = []
-        base.generate_infos(manifest[split], args.workers, split, args.tmp_dir)
-    if not reuse_map_infos:
+        base.generate_infos(manifest[split], args.workers, split)
+    if args.build_map_infos:
         print('Processing map data...')
         base.gengrate_map(base.MAP_ROOT)
     print('Finished.')
