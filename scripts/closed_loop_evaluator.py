@@ -18,6 +18,7 @@ feedback_mode = len(sys.argv) > 1 and sys.argv[1] == '--feedback-pipeline'
 if feedback_mode:
     del sys.argv[1]
     from Bench2DriveZoo.feedback_pipeline.carla_triggers import adapter_from_environment
+    from Bench2DriveZoo.feedback_pipeline.carla_windows import CarlaWindowCapture, config_from_environment, control_dict
     from srunner.scenariomanager.carla_data_provider import CarlaDataProvider
     from srunner.scenariomanager.timer import GameTime
 
@@ -80,6 +81,9 @@ TrafficEvent.set_dict = set_dict_with_events
 
 collision_stop = SustainedCollisionStop(int(os.environ.get('SUSTAINED_COLLISION_FRAMES', '1')))
 feedback_triggers = adapter_from_environment() if feedback_mode else None
+window_capture = None
+window_config = (config_from_environment() if feedback_triggers is not None and
+                 os.environ.get('FEEDBACK_CAPTURE_WINDOWS', '1') == '1' else None)
 original_collision_callback = CollisionTest._count_collisions
 original_load_scenario = ScenarioManager.load_scenario
 def collision_callback_with_stop(self, event):
@@ -91,16 +95,51 @@ def collision_callback_with_stop(self, event):
 
 
 def load_scenario_with_stop_reset(self, *args, **kwargs):
+    global window_capture
     collision_stop.reset()
     result = original_load_scenario(self, *args, **kwargs)
     if feedback_triggers is not None:
         feedback_triggers.reset({'route_index': self.route_index,
                                  'repetition': self.repetition_number})
+        if window_config is not None:
+            agent = self._agent_wrapper._agent
+            if not hasattr(agent, 'pid_metadata') and agent.__class__.__name__ != 'VadAgent':
+                raise RuntimeError('Feedback window recording currently supports VadAgent only')
+            window_capture = CarlaWindowCapture(os.path.join(os.environ['SAVE_PATH'], 'feedback_data'),
+                agent, self.scenario, self.route_index, self.repetition_number,
+                CarlaDataProvider.get_world(), self.ego_vehicles[0], window_config, feedback_triggers.monitor)
+            feedback_triggers.on_trigger = window_capture.trigger
+            original_run_step = agent.run_step
+
+            def run_step_with_capture(input_data, timestamp):
+                previous = [control_dict(control) for control in getattr(agent, 'prev_control_cache', [])]
+                result = original_run_step(input_data, timestamp)
+                window_capture.capture(input_data, previous)
+                return result
+
+            agent.run_step = run_step_with_capture
     return result
 
 
 CollisionTest._count_collisions = collision_callback_with_stop
 ScenarioManager.load_scenario = load_scenario_with_stop_reset
+
+original_stop_scenario = ScenarioManager.stop_scenario
+
+
+def stop_scenario_with_window_flush(self, *args, **kwargs):
+    global window_capture
+    try:
+        return original_stop_scenario(self, *args, **kwargs)
+    finally:
+        if window_capture is not None:
+            with feedback_triggers.lock:
+                feedback_triggers.on_trigger = None
+            window_capture.close()
+            window_capture = None
+
+
+ScenarioManager.stop_scenario = stop_scenario_with_window_flush
 
 def instrument(cls, method, label):
     original = getattr(cls, method)

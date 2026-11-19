@@ -8,6 +8,8 @@
 #   CARLA_SENSOR_NOISE_SEED (default 0; used for GNSS and IMU noise),
 #   FEEDBACK_TRIGGERS (default 1; 0 disables collision/route-lane logging),
 #   FEEDBACK_TRIGGER_CONFIG (default feedback_pipeline/trigger_config.json),
+#   FEEDBACK_CAPTURE_WINDOWS (default 1), FEEDBACK_WINDOW_CONFIG (window settings JSON),
+#   FEEDBACK_ROUND_ID (default: launch run ID),
 #   SUSTAINED_COLLISION_FRAMES (default 1, 0 disables early stopping),
 #   SPLIT (train, val, test, all). An existing checkpoint JSON resumes
 #   automatically; otherwise a timestamped fresh checkpoint is created.
@@ -31,8 +33,12 @@ if [[ "${launcher_mode}" == feedback ]]; then
     evaluator_wrapper="${zoo_root}/scripts/run_feedback_evaluator.py"
 fi
 feedback_trigger_config="${FEEDBACK_TRIGGER_CONFIG:-${zoo_root}/feedback_pipeline/trigger_config.json}"
+feedback_window_config="${FEEDBACK_WINDOW_CONFIG:-${zoo_root}/feedback_pipeline/window_config.json}"
 if [[ "${feedback_trigger_config}" != /* ]]; then
     feedback_trigger_config="${PWD}/${feedback_trigger_config}"
+fi
+if [[ "${feedback_window_config}" != /* ]]; then
+    feedback_window_config="${PWD}/${feedback_window_config}"
 fi
 
 gpu_rank="${GPU_RANK:-0}"
@@ -195,6 +201,10 @@ export PLANNER_TYPE="${planner_type}"
 export SAVE_PATH="${save_path}"
 if [[ "${launcher_mode}" == feedback ]]; then
     export FEEDBACK_TRIGGERS="${FEEDBACK_TRIGGERS:-1}"
+    export FEEDBACK_CAPTURE_WINDOWS="${FEEDBACK_CAPTURE_WINDOWS:-1}"
+    export FEEDBACK_WINDOW_CONFIG="${feedback_window_config}"
+    export FEEDBACK_ROUND_ID="${FEEDBACK_ROUND_ID:-${run_id}}"
+    export TRAFFIC_MANAGER_SEED="${traffic_manager_seed}"
 fi
 export ROUTES="${selected_routes}"
 export SAVE_VIEWS="${SAVE_VIEWS-rgb_front,bev}"
@@ -220,6 +230,9 @@ if [[ "${launcher_mode}" == feedback && "${FEEDBACK_TRIGGERS:-0}" == 1 ]]; then
     export FEEDBACK_TRIGGER_CONFIG="${feedback_trigger_config}"
     printf 'Feedback triggers: %s/feedback_triggers.jsonl\n' "${save_path}"
     printf 'Feedback trigger config: %s\n' "${FEEDBACK_TRIGGER_CONFIG}"
+    if [[ "${FEEDBACK_CAPTURE_WINDOWS}" == 1 ]]; then
+        printf 'Feedback window data: %s/feedback_data (config: %s)\n' "${save_path}" "${FEEDBACK_WINDOW_CONFIG}"
+    fi
 fi
 
 resume_args=()

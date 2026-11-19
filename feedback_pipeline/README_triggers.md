@@ -46,5 +46,3 @@ FEEDBACK_TRIGGER_CONFIG=/path/to/my-trigger-config.json \
 ```
 
 `FEEDBACK_TRIGGER_CONFIG` is optional; it selects an alternative file rather than overriding individual fields. A relative path is resolved from the directory where the launcher is invoked. Monitoring defaults to enabled in the feedback launcher; set `FEEDBACK_TRIGGERS=0` to disable it. Output defaults to `outputs/feedback_closed_loop`, separate from the default evaluation launcher.
-
-These JSONL records are the stage 3 monitoring output; integration with the SQLite record store and capture of synchronized event windows are future stages. Events can arrive after the matching frame's agent tick, so consumers must use the recorded benchmark frame rather than assume log order is frame order.

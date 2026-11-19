@@ -15,6 +15,7 @@ class CarlaTriggerAdapter:
         self.monitor = TriggerMonitor(cooldown, collision_policy, route_lanes_policy, global_mode)
         self.route = None
         self.lock = threading.RLock()
+        self.on_trigger = None
 
     def reset(self, route):
         with self.lock:
@@ -27,6 +28,8 @@ class CarlaTriggerAdapter:
             with open(self.path, 'a', encoding='utf-8') as handle:
                 handle.write(json.dumps(event, allow_nan=False, sort_keys=True) + '\n')
             print('[feedback trigger] {} frame={}'.format(event['type'], event['frame']), flush=True)
+            if self.on_trigger is not None:
+                self.on_trigger(event)
 
     def benchmark_event(self, event, change, frame, simulation_time):
         event_type = event.get_type().name

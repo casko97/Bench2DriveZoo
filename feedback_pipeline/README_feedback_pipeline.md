@@ -80,8 +80,8 @@ Run the component tests from the repository root:
 ./b2d_zoo.venv/bin/python -m pytest -q tests/test_feedback_store.py
 ```
 
-## Triggers
+## Feedback Pipeline
 
-The feedback pipeline's separate closed-loop launcher emits trigger events by default without changing vehicle control or route stopping behavior.
+The feedback pipeline's separate closed-loop launcher emits trigger events by default without changing vehicle control or route stopping behavior.See the [trigger README](README_triggers.md) and [event-window recording README](README_windows.md) for details.
 
-See [specific trigger readme](README_triggers.md) for details.
+The feedback launcher also captures [event windows](README_windows.md) in the SQLite store when window recording is enabled. Events can arrive after the matching frame's agent tick, so consumers must use the recorded benchmark frame rather than assume log order is frame order.
