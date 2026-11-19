@@ -22,6 +22,7 @@ Configure each trigger reason in [`trigger_config.json`](trigger_config.json), l
 
 ```json
 {
+  "global": {"mode": "multiple"},
   "collision": {"mode": "multiple", "cooldown_seconds": 2.0},
   "outside_route_lanes_infraction": {"mode": "once", "cooldown_seconds": 2.0}
 }
@@ -29,12 +30,13 @@ Configure each trigger reason in [`trigger_config.json`](trigger_config.json), l
 
 | Field | Default | Meaning | Benchmark limitations and impact |
 | --- | --- | --- | --- |
+| `global.mode` | `multiple` | `once` emits at most one trigger in total per route and repetition, across all reasons; `multiple` leaves the per-reason policies in control. | `once` keeps the first eligible event processed. Asynchronous callbacks mean this is not necessarily the earliest event by recorded frame. |
 | `collision.mode` | `multiple` | `once` emits at most one collision trigger per route; `multiple` permits more. Static, vehicle and pedestrian collisions share this policy. | Bench2Drive filters collisions using conditions including proximity and ego speed; filtered contacts cannot trigger. The launcher stops after the first accepted collision by default, so observing later collisions also requires `SUSTAINED_COLLISION_FRAMES=0`. This changes the launcher's early stop, not the benchmark criteria. |
 | `collision.cooldown_seconds` | `2` | Non-negative finite simulation-time cooldown per other actor in multiple mode. | Even at `0`, only benchmark-accepted collisions can trigger; the benchmark's own filtering still applies. |
 | `outside_route_lanes_infraction.mode` | `once` | `once` emits the first populated lane event update; `multiple` permits later updates. | Bench2Drive maintains one cumulative event per route. Multiple triggers are updates to that event, **not necessarily separate departures**, and updates may continue after returning to the lane. The update frame may be later than the actual departure; distinct departures cannot be reliably inferred from this event alone. |
 | `outside_route_lanes_infraction.cooldown_seconds` | `2` | Non-negative finite simulation-time cooldown between lane-event updates in multiple mode. | A cooldown of `0` can emit every populated update to the cumulative event, including updates that are not new departures. |
 
-A cooldown of `0` disables our additional suppression. Cooldown has no practical effect after the first event in `once` mode. Policies reset between routes and repetitions. Both reasons and their two fields are required; unknown fields, invalid modes, and negative or non-finite cooldowns are rejected. Previous per-reason cooldown and mode environment variables are no longer read.
+A cooldown of `0` disables our additional suppression. Cooldown has no practical effect after the first event in a per-reason `once` mode. Global `once` takes precedence over per-reason modes: after one trigger has been emitted, all later reasons are suppressed until the next route or repetition. It affects feedback triggers only; benchmark events and route behavior remain unchanged. Both reasons and their two fields are required; the global setting is optional for older config files and defaults to `multiple`. Unknown fields, invalid modes, and negative or non-finite cooldowns are rejected. Previous per-reason cooldown and mode environment variables are no longer read.
 
 Example:
 

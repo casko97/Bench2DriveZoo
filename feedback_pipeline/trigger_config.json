@@ -1,4 +1,7 @@
 {
+  "global": {
+    "mode": "multiple"
+  },
   "collision": {
     "mode": "multiple",
     "cooldown_seconds": 2.0

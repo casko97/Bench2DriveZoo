@@ -55,6 +55,26 @@ def test_independent_cooldowns_and_zero_lane_cooldown():
     assert monitor.collision(4, 6, 10, {}) is not None
 
 
+@pytest.mark.parametrize('first', ['collision', 'lane'])
+def test_global_once_limits_all_reasons_and_resets(first):
+    monitor = TriggerMonitor(global_mode='once', route_lanes_policy=TriggerPolicy('multiple', 0))
+    collision = lambda: monitor.collision(1, 1, 10, {})
+    lane = lambda: monitor.route_lanes_infraction(2, 2, {})
+    initial, later = (collision, lane) if first == 'collision' else (lane, collision)
+    assert initial() is not None
+    assert later() is None
+    assert initial() is None
+    monitor.reset()
+    assert later() is not None
+
+
+def test_global_multiple_retains_per_reason_limits():
+    monitor = TriggerMonitor(global_mode='multiple', collision_policy=TriggerPolicy('once', 0))
+    assert monitor.collision(1, 1, 10, {}) is not None
+    assert monitor.route_lanes_infraction(2, 2, {}) is not None
+    assert monitor.collision(3, 3, 11, {}) is None
+
+
 @pytest.mark.parametrize('value', [-1, float('nan'), float('inf')])
 def test_invalid_cooldown_rejected(value):
     with pytest.raises(ValueError):
@@ -64,6 +84,8 @@ def test_invalid_cooldown_rejected(value):
 def test_invalid_mode_rejected():
     with pytest.raises(ValueError, match='once or multiple'):
         TriggerPolicy('unlimited', 1)
+    with pytest.raises(ValueError, match='Global trigger mode'):
+        TriggerMonitor(global_mode='unlimited')
 
 
 def test_adapter_logs_source_timing_and_separate_routes(tmp_path):
@@ -118,18 +140,51 @@ def test_adapter_is_opt_in(tmp_path, monkeypatch):
     adapter = adapter_from_environment()
     assert adapter.monitor.policies['collision'] == TriggerPolicy('multiple', 2)
     assert adapter.monitor.policies['outside_route_lanes_infraction'] == TriggerPolicy('once', 2)
+    assert adapter.monitor.global_mode == 'multiple'
 
 
 def test_per_reason_config_file(tmp_path, monkeypatch):
     monkeypatch.setenv('FEEDBACK_TRIGGERS', '1')
     monkeypatch.setenv('SAVE_PATH', str(tmp_path))
     config = tmp_path / 'config.json'
-    config.write_text(json.dumps({'collision': {'mode': 'once', 'cooldown_seconds': 0.5},
+    config.write_text(json.dumps({'global': {'mode': 'once'},
+        'collision': {'mode': 'once', 'cooldown_seconds': 0.5},
         'outside_route_lanes_infraction': {'mode': 'multiple', 'cooldown_seconds': 3}}))
     monkeypatch.setenv('FEEDBACK_TRIGGER_CONFIG', str(config))
     monitor = adapter_from_environment().monitor
     assert monitor.policies['collision'] == TriggerPolicy('once', 0.5)
     assert monitor.policies['outside_route_lanes_infraction'] == TriggerPolicy('multiple', 3)
+    assert monitor.global_mode == 'once'
+
+
+def test_global_once_from_config_limits_adapter_output_per_route(tmp_path, monkeypatch):
+    config = tmp_path / 'config.json'
+    config.write_text(json.dumps({'global': {'mode': 'once'},
+        'collision': {'mode': 'multiple', 'cooldown_seconds': 0},
+        'outside_route_lanes_infraction': {'mode': 'multiple', 'cooldown_seconds': 0}}))
+    monkeypatch.setenv('FEEDBACK_TRIGGERS', '1')
+    monkeypatch.setenv('FEEDBACK_TRIGGER_CONFIG', str(config))
+    monkeypatch.setenv('SAVE_PATH', str(tmp_path))
+    adapter = adapter_from_environment()
+    lane = benchmark_event('OUTSIDE_ROUTE_LANES_INFRACTION', {'distance': 1})
+    actor = SimpleNamespace(id=3, type_id='vehicle.test')
+    collision = benchmark_event('COLLISION_VEHICLE', {'other_actor': actor})
+    adapter.reset({'route_index': 0, 'repetition': 0})
+    adapter.benchmark_event(lane, 'updated', 1, 1)
+    adapter.benchmark_event(collision, 'created', 2, 2)
+    adapter.reset({'route_index': 0, 'repetition': 1})
+    adapter.benchmark_event(collision, 'created', 1, 1)
+    adapter.benchmark_event(lane, 'updated', 2, 2)
+    rows = [json.loads(line) for line in (tmp_path / 'feedback_triggers.jsonl').read_text().splitlines()]
+    assert [(row['type'], row['route']['repetition']) for row in rows] == [
+        ('outside_route_lanes_infraction', 0), ('collision', 1)]
+
+
+def test_legacy_config_defaults_global_mode_to_multiple(tmp_path):
+    path = tmp_path / 'legacy.json'
+    path.write_text(json.dumps({'collision': {'mode': 'multiple', 'cooldown_seconds': 2},
+        'outside_route_lanes_infraction': {'mode': 'once', 'cooldown_seconds': 2}}))
+    assert load_trigger_config(path)['global_mode'] == 'multiple'
 
 
 @pytest.mark.parametrize('change', [
@@ -140,6 +195,9 @@ def test_per_reason_config_file(tmp_path, monkeypatch):
     lambda config: config['collision'].update({'cooldown_seconds': True}),
     lambda config: config['collision'].update({'cooldown_seconds': '2'}),
     lambda config: config['collision'].update({'unexpected': 1}),
+    lambda config: config.update({'global': {'mode': 'typo'}}),
+    lambda config: config.update({'global': {}}),
+    lambda config: config.update({'global': {'mode': 'once', 'extra': 1}}),
 ])
 def test_invalid_config_rejected(tmp_path, change):
     config = {'collision': {'mode': 'once', 'cooldown_seconds': 1},

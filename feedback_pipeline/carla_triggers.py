@@ -9,9 +9,10 @@ from .triggers import TriggerMonitor, TriggerPolicy
 
 
 class CarlaTriggerAdapter:
-    def __init__(self, path, cooldown=2.0, collision_policy=None, route_lanes_policy=None):
+    def __init__(self, path, cooldown=2.0, collision_policy=None, route_lanes_policy=None,
+                 global_mode='multiple'):
         self.path = path
-        self.monitor = TriggerMonitor(cooldown, collision_policy, route_lanes_policy)
+        self.monitor = TriggerMonitor(cooldown, collision_policy, route_lanes_policy, global_mode)
         self.route = None
         self.lock = threading.RLock()
 
@@ -41,20 +42,27 @@ class CarlaTriggerAdapter:
                              'message': event.get_message()}))
 
 def load_trigger_config(path):
-    """Read and validate both reason policies, rejecting typos and invalid values."""
+    """Read global and reason policies; legacy files default to multiple globally."""
     with open(path, 'r', encoding='utf-8') as handle:
         config = json.load(handle)
     reasons = {'collision', 'outside_route_lanes_infraction'}
-    if not isinstance(config, dict) or set(config) != reasons:
-        raise ValueError('Trigger config must contain exactly: {}'.format(', '.join(sorted(reasons))))
+    if not isinstance(config, dict) or not reasons.issubset(config) or set(config) - (reasons | {'global'}):
+        raise ValueError('Trigger config requires both reason policies and optional global')
+    global_values = config.get('global', {'mode': 'multiple'})
+    if not isinstance(global_values, dict) or set(global_values) != {'mode'}:
+        raise ValueError('global must contain only mode')
+    if global_values['mode'] not in ('once', 'multiple'):
+        raise ValueError('Global trigger mode must be once or multiple')
     policies = {}
-    for reason, values in config.items():
+    for reason in reasons:
+        values = config[reason]
         if not isinstance(values, dict) or set(values) != {'mode', 'cooldown_seconds'}:
             raise ValueError('{} must contain mode and cooldown_seconds'.format(reason))
         cooldown = values['cooldown_seconds']
         if isinstance(cooldown, bool) or not isinstance(cooldown, (int, float)):
             raise ValueError('{} cooldown_seconds must be a number'.format(reason))
         policies[reason] = TriggerPolicy(values['mode'], cooldown)
+    policies['global_mode'] = global_values['mode']
     return policies
 
 
@@ -65,4 +73,5 @@ def adapter_from_environment():
     policies = load_trigger_config(os.environ.get('FEEDBACK_TRIGGER_CONFIG', str(default_path)))
     return CarlaTriggerAdapter(os.path.join(os.environ['SAVE_PATH'], 'feedback_triggers.jsonl'),
                                collision_policy=policies['collision'],
-                               route_lanes_policy=policies['outside_route_lanes_infraction'])
+                               route_lanes_policy=policies['outside_route_lanes_infraction'],
+                               global_mode=policies['global_mode'])

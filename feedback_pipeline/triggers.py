@@ -19,7 +19,11 @@ class TriggerPolicy:
 class TriggerMonitor:
     """Apply independent per-reason policies to accepted benchmark events."""
 
-    def __init__(self, cooldown=2.0, collision_policy=None, route_lanes_policy=None):
+    def __init__(self, cooldown=2.0, collision_policy=None, route_lanes_policy=None,
+                 global_mode='multiple'):
+        if global_mode not in ('once', 'multiple'):
+            raise ValueError('Global trigger mode must be once or multiple')
+        self.global_mode = global_mode
         self.policies = {
             'collision': collision_policy or TriggerPolicy('multiple', cooldown),
             'outside_route_lanes_infraction': route_lanes_policy or TriggerPolicy('once', cooldown),
@@ -33,6 +37,8 @@ class TriggerMonitor:
     def _observe(self, key, frame, simulation_time, evidence):
         reason = key[0]
         policy = self.policies[reason]
+        if self.global_mode == 'once' and self._emitted_reasons:
+            return None
         if policy.mode == 'once' and reason in self._emitted_reasons:
             return None
         if simulation_time - self._last_emitted.get(key, float('-inf')) < policy.cooldown:
