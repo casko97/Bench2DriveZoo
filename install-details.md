@@ -243,3 +243,7 @@ variable. *(These are not the upstream open-loop dataset splits.)*
 * Change `GPU_RANK` to select a different physical GPU.
 
 
+## Runtime (2026-11-19)
+On the local GTX 1080 Ti, a feedback-pipeline smoke run with `SAVE_VIEWS=` and `--one-scenario` took approximately 197 seconds of route execution for 10.65 seconds of simulated time (about 0.054× real time). 
+
+It ended early after a collision, so this is not the runtime of a completed route or a benchmark throughput estimate. Telemetry during the run showed roughly 0.9 seconds per simulation step and 9–10 GiB of GPU memory in use. 
