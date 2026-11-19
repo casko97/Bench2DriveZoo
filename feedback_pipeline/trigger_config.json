@@ -1,0 +1,10 @@
+{
+  "collision": {
+    "mode": "multiple",
+    "cooldown_seconds": 2.0
+  },
+  "outside_route_lanes_infraction": {
+    "mode": "once",
+    "cooldown_seconds": 2.0
+  }
+}

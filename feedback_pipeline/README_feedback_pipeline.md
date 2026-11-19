@@ -79,3 +79,9 @@ Run the component tests from the repository root:
 ```bash
 ./b2d_zoo.venv/bin/python -m pytest -q tests/test_feedback_store.py
 ```
+
+## Triggers
+
+The feedback pipeline's separate closed-loop launcher emits trigger events by default without changing vehicle control or route stopping behavior.
+
+See [specific trigger readme](README_triggers.md) for details.
