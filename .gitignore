@@ -162,3 +162,5 @@ pyrightconfig.json
 tmp_ckpts/
 val/
 *.ipynb
+
+/outputs/pdm_lite_eval/

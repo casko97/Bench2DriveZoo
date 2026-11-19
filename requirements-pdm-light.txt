@@ -1,0 +1,3 @@
+# Additional packages installed into the copied b2d_zoo-pdm-light.venv.
+ujson==5.10.0
+rdp==0.8
