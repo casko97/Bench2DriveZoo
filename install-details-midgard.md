@@ -25,7 +25,10 @@ tbd
 3. Setup GCC 11 and its paths:
     * Install: `mamba install -c conda-forge -c nvidia/label/cuda-11.8.0 'gcc_linux-64=11' 'gxx_linux-64=11'`
     * Locate and verify its compiler: `which gcc && which g++ && gcc --version && g++ --version`
-    * Set CC and CXX to those paths before building: `export CC=/usr/bin/gcc && export CXX=/usr/bin/g++`
+    * Set CC and CXX to those paths before building: `export CC=/usr/bin/gcc && export CXX=/usr/bin/g++` 
+        * echo after successful install gives: `/Midgard/home/casko/miniforge3/envs/b2d_zoo.venv/bin/x86_64-conda-linux-gnu-c++`
+        * echo after successful install gives: /`Midgard/home/casko/miniforge3/envs/b2d_zoo.venv/bin/x86_64-conda-linux-gnu-cc`
+
 4. Install CUDA 11.8 compiler and runtime development packages: 
     ```
     mamba install -n b2d_zoo.venv \
@@ -48,9 +51,9 @@ tbd
     * Build tools: `python -m pip install setuptools==75.3.4 wheel==0.45.1 ninja==1.13.2 packaging==26.2`
     * The rest: `python -m pip install -r requirements_midgard.txt "numpy==1.20.0"`
 7. Set variables:
-    * `export CUDA_HOME="$CONDA_PREFIX"`
+    * `export CUDA_HOME="$CONDA_PREFIX"` (echo after successful install gives: empty)
     * `export PATH="$CUDA_HOME/bin:$PATH"`
-    * `export TORCH_CUDA_ARCH_LIST="7.5"`
+    * `export TORCH_CUDA_ARCH_LIST="7.5"` (echo after successful install gives: 7.5)
     * `export MAX_JOBS=4`
     * `export CPATH="$CONDA_PREFIX/lib/python3.8/site-packages/nvidia/cusparse/include${CPATH:+:$CPATH}"`
     * Add the NVIDIA package include directories to the compiler’s search path: 
