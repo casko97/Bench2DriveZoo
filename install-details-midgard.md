@@ -109,7 +109,11 @@ Create directory:
             -O "https://huggingface.co/datasets/rethinklab/Bench2Drive-Map/resolve/main/$file"
         done
     ```
-* Prepare maps: `cd mmcv/datasets && python -c "from prepare_B2D_mini import gengrate_map, MAP_ROOT; gengrate_map(MAP_ROOT)"`. This should create `dataset/maps/infos/b2d_map_infos.pkl`
+* Prepare maps: 
+    ```
+    cd mmcv/datasets && python prepare_B2D_mini.py --maps-only --map-root /local_storage/users/casko/dataset/maps --out-dir /local_storage/users/casko/dataset/infos
+    ``` 
+    This creates `b2d_map_infos.pkl` in the specified output directory. 
 * To process one map at the time, pass: `--map Town11`
 * Use `--maps-only` to process all maps without regenerating
 route infos.
@@ -129,9 +133,10 @@ route infos.
         done
     ```
 * Use the split manifest at `data/splits/bench2drive_train_val_split_v04.json`
-* Extract the route archives and prepare their info files: `cd mmcv/datasets && python prepare_B2Dv004.py --extract --workers 6`.
-  Extracted routes are placed in `data/bench2drive/v0.0.4`; generated per-route info files and metadata are written to `data/infos/v0.0.4/b2d_infos_{train,val}/` and `b2d_infos_{train,val}_meta.pkl`.
-  The standard v0.0.4 release has no depth images, so its depth-based occlusion filter is disabled by default.
+* Extract the route archives and prepare their info files: 
+    ```
+    cd mmcv/datasets && python prepare_B2Dv004.py --extract --workers 6 --archive-dir /local_storage/users/casko/dataset/Bench2Drive-V0.0.4 --data-root /local_storage/users/casko/dataset/B2D-V0.0.4 --out-dir /local_storage/users/casko/dataset/infos
+    ```
 * `prepare_B2Dv004.py` reuses `data/infos/b2d_map_infos.pkl`. Maps therefore need to be processed separately before running this.
 
 ## Open-loop eval

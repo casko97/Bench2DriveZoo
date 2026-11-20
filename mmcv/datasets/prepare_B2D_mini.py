@@ -434,8 +434,11 @@ def generate_infos(folder_list,workers,train_or_val,tmp_dir):
 if __name__ == "__main__":
 
 
-    os.makedirs(OUT_DIR,exist_ok=True)
     argparser = argparse.ArgumentParser(description=__doc__)
+    argparser.add_argument('--map-root', default=MAP_ROOT,
+                           help='directory containing map .npz files (default: %(default)s)')
+    argparser.add_argument('--out-dir', default=OUT_DIR,
+                           help='directory for generated info files and map cache (default: %(default)s)')
     argparser.add_argument('--workers',type=int, default= 4, help='num of workers to prepare dataset')
     argparser.add_argument('--tmp_dir', default="tmp_data", )
     argparser.add_argument('--map', help='process only this map (filename or town, e.g. Town11_HD_map.npz or Town11)')
@@ -448,9 +451,12 @@ if __name__ == "__main__":
     argparser.add_argument(
         '--skip-map',
         action='store_true',
-        help='reuse an existing data/infos/b2d_map_infos.pkl instead of regenerating maps',
+        help='reuse b2d_map_infos.pkl in --out-dir instead of regenerating maps',
     )
-    args = argparser.parse_args()    
+    args = argparser.parse_args()
+    MAP_ROOT = args.map_root
+    OUT_DIR = args.out_dir
+    os.makedirs(OUT_DIR, exist_ok=True)
     workers = args.workers
     if args.maps_only or args.map:
         print('processing map data{}...'.format(' for ' + args.map if args.map else ''))

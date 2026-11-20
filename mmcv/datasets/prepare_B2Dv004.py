@@ -105,6 +105,13 @@ def main():
                         help='Parent of the v0.0.4 route directory.')
     parser.add_argument('--out-dir', type=Path, default=DEFAULT_OUT_DIR)
     parser.add_argument('--split-manifest', type=Path, default=DEFAULT_MANIFEST)
+    parser.add_argument(
+        '--map-infos-pkl',
+        type=Path,
+        default=DEFAULT_BASE_MAP_INFOS,
+        help=('existing map-info pickle to reuse (default: %(default)s); '
+              'required unless --build-map-infos is used'),
+    )
     parser.add_argument('--workers', type=int, default=4)
     parser.add_argument('--extract', action='store_true',
                         help='Extract downloaded .tar.gz routes before preparing.')
@@ -152,10 +159,11 @@ def main():
     # The standard v0.0.4 release does not include depth images.
     base.FILTER_INVISINLE = args.use_depth_occlusion_filter
     args.out_dir.mkdir(parents=True, exist_ok=True)
-    if not DEFAULT_BASE_MAP_INFOS.is_file():
+    if not args.build_map_infos and not args.map_infos_pkl.is_file():
         raise FileNotFoundError(
-            f'Shared map infos are missing: {DEFAULT_BASE_MAP_INFOS}.')
-    print('Reusing shared map infos:', DEFAULT_BASE_MAP_INFOS)
+            f'Shared map infos are missing: {args.map_infos_pkl}.')
+    if not args.build_map_infos:
+        print('Reusing shared map infos:', args.map_infos_pkl)
     if args.maps_only or args.map:
         if args.build_map_infos:
             base.gengrate_map(base.MAP_ROOT, args.map)
