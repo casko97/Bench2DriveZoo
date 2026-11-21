@@ -13,7 +13,8 @@ set -euo pipefail
 # Submit from the repository root. Override these environment variables at
 # submission time to match the paths on the selected compute node.
 REPO_DIR=${REPO_DIR:-${SLURM_SUBMIT_DIR:-$PWD}}
-PYTHON=${PYTHON:-/Midgard/home/casko/miniforge3/envs/b2d_zoo.venv/bin/python}
+CONDA_BASE=${CONDA_BASE:-/Midgard/home/casko/miniforge3}
+CONDA_ENV=${CONDA_ENV:-b2d_zoo.venv}
 DATA_ROOT=${DATA_ROOT:-/local_storage/users/casko/dataset/B2D-V0.0.4}
 INFO_DIR=${INFO_DIR:-/local_storage/users/casko/dataset/infos}
 ANN_FILE=${ANN_FILE:-$INFO_DIR/b2d_infos_val_meta.pkl}
@@ -22,6 +23,11 @@ CHECKPOINT=${CHECKPOINT:-/local_storage/users/casko/cpts/vad_b2d_base.pth}
 WORKERS=${WORKERS:-4}
 
 cd "$REPO_DIR"
+[[ -f "$CONDA_BASE/etc/profile.d/conda.sh" ]] || { echo "Missing Conda initialization: $CONDA_BASE/etc/profile.d/conda.sh" >&2; exit 1; }
+source "$CONDA_BASE/etc/profile.d/conda.sh"
+conda activate "$CONDA_ENV"
+PYTHON=$(command -v python)
+echo "Activated Conda environment: $CONDA_PREFIX (Python: $PYTHON)"
 for file in "$PYTHON" "$ANN_FILE" "$MAP_FILE" "$CHECKPOINT"; do
     [[ -f "$file" ]] || { echo "Missing file: $file" >&2; exit 1; }
 done

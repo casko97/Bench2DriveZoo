@@ -156,8 +156,9 @@ time limit with `sbatch` options as needed.
 * Slurm logs are written in the submission directory. 
 * For a short smoke test, set `MAX_SAMPLES=10` before
 submission. 
-* Set `PYTHON`, `DATA_ROOT`, `INFO_DIR`, `ANN_FILE`, `MAP_FILE`, or
-`WORKERS` or `CHECKPOINT` in the environment to override the defaults in the script. 
+* The script activates the `b2d_zoo.venv` Conda environment before running Python.
+* Set `CONDA_BASE`, `CONDA_ENV`, `DATA_ROOT`, `INFO_DIR`, `ANN_FILE`, `MAP_FILE`,
+`WORKERS`, or `CHECKPOINT` to override the defaults in the script.
 * The dataset root is the parent of `v0.0.4/`, not the version directory itself.
 
 With the preparation command above, the evaluation paths are:
