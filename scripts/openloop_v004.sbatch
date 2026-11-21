@@ -24,8 +24,11 @@ WORKERS=${WORKERS:-4}
 
 cd "$REPO_DIR"
 [[ -f "$CONDA_BASE/etc/profile.d/conda.sh" ]] || { echo "Missing Conda initialization: $CONDA_BASE/etc/profile.d/conda.sh" >&2; exit 1; }
+# Conda activation hooks can reference unset variables.
+set +u
 source "$CONDA_BASE/etc/profile.d/conda.sh"
 conda activate "$CONDA_ENV"
+set -u
 PYTHON=$(command -v python)
 echo "Activated Conda environment: $CONDA_PREFIX (Python: $PYTHON)"
 for file in "$PYTHON" "$ANN_FILE" "$MAP_FILE" "$CHECKPOINT"; do
