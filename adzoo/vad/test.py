@@ -211,8 +211,15 @@ def main():
             raise ValueError('--max-samples must be a positive integer')
         if isinstance(cfg.data.test, list):
             raise ValueError('--max-samples with --split all is not supported')
-        dataset.data_infos = dataset.data_infos[:args.max_samples]
-        print(f'Limited evaluation to {len(dataset.data_infos)} samples')
+        if getattr(dataset, 'use_separated_clip_data', False):
+            # Keep the original route boundaries for temporal lookups, while
+            # limiting the length exposed to the evaluation sampler.
+            total = min(args.max_samples, len(dataset))
+            dataset.data_infos = dict(dataset.data_infos)
+            dataset.data_infos['divide_nums'] = [total]
+        else:
+            dataset.data_infos = dataset.data_infos[:args.max_samples]
+        print(f'Limited evaluation to {len(dataset)} samples')
     data_loader = build_dataloader(
         dataset,
         samples_per_gpu=samples_per_gpu,
