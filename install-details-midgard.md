@@ -141,4 +141,35 @@ route infos.
 
 ## Open-loop eval
 
-tbd, no Carla installation needed
+VAD open-loop eval does not need a running CARLA server. 
+
+Submit from the repository
+root. The script selects arwen and defaults to the checkpoint at
+`/local_storage/users/casko/cpts/vad_b2d_base.pth`:
+
+```bash
+sbatch scripts/openloop_v004.sbatch
+```
+
+* The script requests one GPU, four CPUs and 16 GB RAM; adjust these and the
+time limit with `sbatch` options as needed. 
+* Slurm logs are written in the submission directory. 
+* For a short smoke test, set `MAX_SAMPLES=10` before
+submission. 
+* Set `PYTHON`, `DATA_ROOT`, `INFO_DIR`, `ANN_FILE`, `MAP_FILE`, or
+`WORKERS` or `CHECKPOINT` in the environment to override the defaults in the script. 
+* The dataset root is the parent of `v0.0.4/`, not the version directory itself.
+
+With the preparation command above, the evaluation paths are:
+
+* `/local_storage/users/casko/dataset/B2D-V0.0.4/v0.0.4/`: extracted routes,
+  including camera images for the validation routes.
+* `/local_storage/users/casko/dataset/infos/b2d_infos_val_meta.pkl`: validation
+  metadata, referring to per-route pickles in
+  `/local_storage/users/casko/dataset/infos/b2d_infos_val/`.
+* `/local_storage/users/casko/dataset/infos/b2d_map_infos.pkl`: prepared map data.
+
+* The script checks that this directory exists. 
+* The output metrics are printed to the Slurm log
+* evaluation also writes results under `test/` in the repository. 
+* `--out` is not used because this test entry point does not actually serialize the requested pickle.
