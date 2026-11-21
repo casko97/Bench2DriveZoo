@@ -180,8 +180,6 @@ def single_gpu_test(model, data_loader):
     for i, data in enumerate(data_loader):
         with torch.no_grad():
             result = model(data,return_loss=False, rescale=True)
-            batch_size = len(result['bbox_results'])
-
             # encode mask results
             if isinstance(result, dict):
                 if 'bbox_results' in result.keys():
@@ -196,7 +194,7 @@ def single_gpu_test(model, data_loader):
                 batch_size = len(result)
                 bbox_results.extend(result)
 
-            if isinstance(result[0], tuple):
+            if not isinstance(result, dict) and result and isinstance(result[0], tuple):
                assert False, 'this code is for instance segmentation, which our code will not utilize.'
                result = [(bbox_results, encode_mask_results(mask_results))
                          for bbox_results, mask_results in result]
