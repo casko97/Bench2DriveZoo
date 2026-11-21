@@ -67,7 +67,8 @@ tbd
 7. Set variables:
     * `export CUDA_HOME="$CONDA_PREFIX"` (echo after successful install gives: empty)
     * `export PATH="$CUDA_HOME/bin:$PATH"`
-    * `export TORCH_CUDA_ARCH_LIST="7.5"` (echo after successful install gives: 7.5)
+    * `export TORCH_CUDA_ARCH_LIST="7.5"` (echo after successful install gives: 7.5), 
+    * **`TORCH_CUDA_ARCH_LIST="8.6"`for *Arwen* architectire**
     * `export MAX_JOBS=4`
     * `export CPATH="$CONDA_PREFIX/lib/python3.8/site-packages/nvidia/cusparse/include${CPATH:+:$CPATH}"`
     * Add the NVIDIA package include directories to the compiler’s search path: 
