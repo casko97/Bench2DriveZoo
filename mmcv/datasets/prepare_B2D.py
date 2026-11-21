@@ -33,8 +33,8 @@ stand_to_ue4_rotate = np.array([[ 0, 0, 1, 0],
 
 lidar_to_righthand_ego = np.array([[  0, 1, 0, 0],
                                    [ -1, 0, 0, 0],
-                                   [  0, 0, 1, 0],
-                                   [  0, 0, 0, 1]])
+                                   [ 0, 0, 1, 0],
+                                   [ 0, 0, 0, 1]])
 
 lefthand_ego_to_lidar = np.array([[ 0, 1, 0, 0],
                                   [ 1, 0, 0, 0],
@@ -294,22 +294,23 @@ def preprocess(folder_name, split):
             cam2ego = world2ego @ np.linalg.inv(sensor_infos[cam]['world2cam'])
             sensor_infos[cam]['cam2ego'] = cam2ego
             sensor_infos[cam]['data_path'] = join(folder_name,'camera',CAMERA_TO_FOLDER_MAP[cam],ann_name.split('.')[0]+'.jpg')
-            depth_path = join(
-                DATA_ROOT,
-                sensor_infos[cam]['data_path']
-                    .replace('rgb_', 'depth_')
-                    .replace('.jpg', '.npz')
-            )
             cam_gray_depth[cam] = None
-            if os.path.exists(depth_path):
-                try:
-                    with np.load(depth_path) as data:
-                        key = list(data.keys())[0]
-                        cam_gray_depth[cam] = data[key].astype(np.float32)
-                except Exception as e:
-                    print(f"Depth load failed: {depth_path}", e)
-            else:
-                print(f"[error] Depth does not exist!")
+            if FILTER_INVISINLE:
+                depth_path = join(
+                    DATA_ROOT,
+                    sensor_infos[cam]['data_path']
+                        .replace('rgb_', 'depth_')
+                        .replace('.jpg', '.npz')
+                )
+                if os.path.exists(depth_path):
+                    try:
+                        with np.load(depth_path) as data:
+                            key = list(data.keys())[0]
+                            cam_gray_depth[cam] = data[key].astype(np.float32)
+                    except Exception as e:
+                        print(f"Depth load failed: {depth_path}", e)
+                else:
+                    print(f"[error] Depth does not exist: {depth_path}")
         sensor_infos['LIDAR_TOP'] = {}
         world2lidar = lefthand_ego_to_lidar @ np.array(anno['sensors']['LIDAR_TOP']['world2lidar']) @ left2right
         sensor_infos['LIDAR_TOP']['world2lidar'] = world2lidar
