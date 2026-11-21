@@ -135,7 +135,7 @@ route infos.
 * Use the split manifest at `data/splits/bench2drive_train_val_split_v04.json`
 * Extract the route archives and prepare their info files: 
     ```
-    cd mmcv/datasets && python prepare_B2Dv004.py --extract --workers 6 --archive-dir /local_storage/users/casko/dataset/Bench2Drive-V0.0.4 --data-root /local_storage/users/casko/dataset/B2D-V0.0.4 --out-dir /local_storage/users/casko/dataset/infos
+    cd mmcv/datasets && python prepare_B2Dv004.py --extract --workers 6 --archive-dir /local_storage/users/casko/dataset/Bench2Drive-V0.0.4 --data-root /local_storage/users/casko/dataset/B2D-V0.0.4 --out-dir /local_storage/users/casko/dataset/infos --map-infos-pkl /local_storage/users/casko/dataset/infos/b2d_map_infos.pkl
     ```
 * `prepare_B2Dv004.py` reuses `data/infos/b2d_map_infos.pkl`. Maps therefore need to be processed separately before running this.
 
