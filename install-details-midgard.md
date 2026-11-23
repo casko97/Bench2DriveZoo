@@ -246,3 +246,6 @@ Request one node with two GPUs, 8 CPUs, 32 GiB system RAM, and two hours as a st
     ```bash
     bash scripts/closedloop_vad_one_scenario.sbatch
     ```
+
+**Submit job.**
+Run: `sbatch scripts/closedloop_vad_one_scenario.sbatch`
