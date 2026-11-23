@@ -17,6 +17,7 @@ from torchvision import transforms as T
 from Bench2DriveZoo.team_code.pid_controller import PIDController
 from Bench2DriveZoo.team_code.planner import RoutePlanner
 from Bench2DriveZoo.team_code import eval_telemetry
+from Bench2DriveZoo.team_code.vad_fast_pipeline import enable_single_augmentation, collate_single_vad
 from leaderboard.autoagents import autonomous_agent
 from mmcv import Config
 from mmcv.models import build_model
@@ -24,6 +25,7 @@ from mmcv.utils import (get_dist_info, init_dist, load_checkpoint,
                         wrap_fp16_model)
 from mmcv.datasets.pipelines import Compose
 from mmcv.parallel.collate import collate as  mm_collate_to_batch_form
+from mmcv.parallel.data_container import DataContainer
 from mmcv.core.bbox import get_box_type
 from pyquaternion import Quaternion
 
@@ -85,6 +87,12 @@ class VadAgent(autonomous_agent.AutonomousAgent):
             if inference_only_pipeline["type"] not in ['LoadMultiViewImageFromFilesInCeph','LoadMultiViewImageFromFiles']:
                 self.inference_only_pipeline.append(inference_only_pipeline)
         self.inference_only_pipeline = Compose(self.inference_only_pipeline)
+        # Opt in until the equivalence test has run in the evaluation environment.
+        fast_pipeline = os.environ.get('VAD_FAST_PIPELINE', '0')
+        if fast_pipeline not in ('0', '1'):
+            raise ValueError('VAD_FAST_PIPELINE must be 0 or 1')
+        self.fast_pipeline = fast_pipeline == '1' and enable_single_augmentation(self.inference_only_pipeline)
+        print('VAD fast image pipeline: {}'.format('enabled' if self.fast_pipeline else 'disabled'), flush=True)
         eval_telemetry.instrument_pipeline(self.inference_only_pipeline)
 
         self.takeover = False
@@ -403,7 +411,10 @@ class VadAgent(autonomous_agent.AutonomousAgent):
             results = self.inference_only_pipeline(results)
         self.device="cuda"
         with eval_telemetry.measure('collate_and_device_transfer'):
-            input_data_batch = mm_collate_to_batch_form([results], samples_per_gpu=1)
+            if self.fast_pipeline:
+                input_data_batch = collate_single_vad(results, mm_collate_to_batch_form, DataContainer, torch.Tensor)
+            else:
+                input_data_batch = mm_collate_to_batch_form([results], samples_per_gpu=1)
             for key, data in input_data_batch.items():
                 if key != 'img_metas':
                     if torch.is_tensor(data[0]):
