@@ -3,6 +3,7 @@ import json
 import datetime
 import pathlib
 import time
+import copy
 import cv2
 import carla
 from collections import deque
@@ -12,11 +13,11 @@ from scipy.optimize import fsolve
 import torch
 import carla
 import numpy as np
-from PIL import Image
 from torchvision import transforms as T
 from Bench2DriveZoo.team_code.pid_controller import PIDController
 from Bench2DriveZoo.team_code.planner import RoutePlanner
 from Bench2DriveZoo.team_code import eval_telemetry
+from Bench2DriveZoo.team_code.artifact_writer import ArtifactWriter, write_artifacts
 from Bench2DriveZoo.team_code.vad_fast_pipeline import enable_single_augmentation, collate_single_vad
 from leaderboard.autoagents import autonomous_agent
 from mmcv import Config
@@ -110,6 +111,10 @@ class VadAgent(autonomous_agent.AutonomousAgent):
         if jpeg_roundtrip not in ('0', '1'):
             raise ValueError('SAVE_JPEG_ROUNDTRIP must be 0 or 1')
         self.save_jpeg_roundtrip = jpeg_roundtrip == '1'
+        async_save = os.environ.get('SAVE_ASYNC', '1')
+        if async_save not in ('0', '1'):
+            raise ValueError('SAVE_ASYNC must be 0 or 1')
+        self.artifact_writer = None
         self._im_transform = T.Compose([T.ToTensor(), T.Normalize(mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225])])
         self.lat_ref, self.lon_ref = 42.0, 2.0
 
@@ -128,6 +133,8 @@ class VadAgent(autonomous_agent.AutonomousAgent):
             for view in self.save_views:
                 (self.save_path / view).mkdir()
             (self.save_path / 'meta').mkdir()
+            if async_save == '1':
+                self.artifact_writer = ArtifactWriter(self._write_artifacts)
    
         self.lidar2img = {
         'CAM_FRONT':np.array([[ 1.14251841e+03,  8.00000000e+02,  0.00000000e+00, -9.52000000e+02],
@@ -337,6 +344,8 @@ class VadAgent(autonomous_agent.AutonomousAgent):
     
     @torch.no_grad()
     def run_step(self, input_data, timestamp):
+        if self.artifact_writer is not None:
+            self.artifact_writer.check()
         if not self.initialized:
             self._init()
         with eval_telemetry.measure('agent_sensor_preprocessing'):
@@ -458,34 +467,34 @@ class VadAgent(autonomous_agent.AutonomousAgent):
 
 
     def save(self, tick_data):
-        frame = self.step // 10
-
-        for view, camera in CAMERA_SAVE_VIEWS.items():
-            if view in self.save_views:
-                image = tick_data['imgs'][camera]
-                if self.save_jpeg_roundtrip:
-                    _, encoded = cv2.imencode('.jpg', image,
-                                              [int(cv2.IMWRITE_JPEG_QUALITY), 20])
-                    image = cv2.imdecode(encoded, cv2.IMREAD_COLOR)
-                Image.fromarray(image).save(self.save_path / view / ('%04d.png' % frame))
+        # Camera arrays are newly allocated by tick() each frame and are never
+        # modified afterwards. Retain only selected views while the writer runs.
+        images = {view: tick_data['imgs'][camera] for view, camera in CAMERA_SAVE_VIEWS.items()
+                  if view in self.save_views}
         if 'bev' in self.save_views:
-            Image.fromarray(tick_data['bev']).save(self.save_path / 'bev' / ('%04d.png' % frame))
+            images['bev'] = tick_data['bev']
+        # Metric entries are fresh dictionaries and are never subsequently changed.
+        payload = (self.step // 10, images, copy.deepcopy(self.pid_metadata), self.metric_info.copy())
+        if self.artifact_writer is None:
+            self._write_artifacts(payload)
+        else:
+            self.artifact_writer.submit(payload)
 
-        outfile = open(self.save_path / 'meta' / ('%04d.json' % frame), 'w')
-        json.dump(self.pid_metadata, outfile, indent=4)
-        outfile.close()
-
-        # metric info
-        outfile = open(self.save_path / 'metric_info.json', 'w')
-        json.dump(self.metric_info, outfile, indent=4)
-        outfile.close()
+    def _write_artifacts(self, payload):
+        with eval_telemetry.measure('artifact_write_background' if self.artifact_writer else 'artifact_write_sync'):
+            write_artifacts(self.save_path, self.save_jpeg_roundtrip, payload)
 
     def destroy(self):
-        if getattr(self, 'save_path', None) is not None and hasattr(self, 'metric_info'):
-            with open(self.save_path / 'metric_info.json', 'w') as outfile:
-                json.dump(self.metric_info, outfile, indent=4)
-        del self.model
-        torch.cuda.empty_cache()
+        try:
+            if getattr(self, 'artifact_writer', None) is not None:
+                self.artifact_writer.close()
+            if getattr(self, 'save_path', None) is not None and hasattr(self, 'metric_info'):
+                with open(self.save_path / 'metric_info.json', 'w') as outfile:
+                    json.dump(self.metric_info, outfile, indent=4)
+        finally:
+            if hasattr(self, 'model'):
+                del self.model
+            torch.cuda.empty_cache()
 
     def gps_to_location(self, gps):
         EARTH_RADIUS_EQUA = 6378137.0

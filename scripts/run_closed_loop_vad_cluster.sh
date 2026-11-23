@@ -3,7 +3,7 @@
 #
 # Optional overrides:
 #   BENCH2DRIVE_ROOT, B2D_ZOO_VENV, CARLA_ROOT, GPU_RANK, ROUTES,
-#   CHECKPOINT_ENDPOINT, SAVE_PATH, SAVE_VIEWS, SAVE_JPEG_ROUNDTRIP, PLANNER_TYPE, TEAM_AGENT, TEAM_CONFIG,
+#   CHECKPOINT_ENDPOINT, SAVE_PATH, SAVE_VIEWS, SAVE_JPEG_ROUNDTRIP, SAVE_ASYNC, PLANNER_TYPE, TEAM_AGENT, TEAM_CONFIG,
 #   TRAFFIC_MANAGER_SEED (default 0; passed to Bench2Drive's evaluator),
 #   CARLA_SENSOR_NOISE_SEED (default 0; used for GNSS and IMU noise),
 #   SUSTAINED_COLLISION_FRAMES (default 1, 0 disables early stopping),
@@ -188,6 +188,12 @@ if [[ "${SAVE_JPEG_ROUNDTRIP}" != 0 && "${SAVE_JPEG_ROUNDTRIP}" != 1 ]]; then
     exit 2
 fi
 printf 'JPEG round trip for saved camera images: %s\n' "${SAVE_JPEG_ROUNDTRIP}"
+export SAVE_ASYNC="${SAVE_ASYNC:-1}"
+if [[ "${SAVE_ASYNC}" != 0 && "${SAVE_ASYNC}" != 1 ]]; then
+    printf 'SAVE_ASYNC must be 0 or 1.\n' >&2
+    exit 2
+fi
+printf 'Background artifact writing: %s\n' "${SAVE_ASYNC}"
 export B2D_TELEMETRY=1
 export CARLA_SENSOR_NOISE_SEED="${sensor_noise_seed}"
 export GPU_RANK="${gpu_rank}"
