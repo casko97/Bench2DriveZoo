@@ -69,4 +69,9 @@ PY
 printf 'Allocated CUDA devices: %s; model: %s; CARLA Vulkan adapter: %s\n' "$CUDA_VISIBLE_DEVICES" "$MODEL_CUDA_DEVICE" "$GPU_RANK"
 printf 'Verified CARLA Vulkan adapter %s matches the first allocated CUDA device.\n' "$GPU_RANK"
 nvidia-smi --query-gpu=index,uuid,pci.bus_id,name,memory.total --format=csv || true
-"$REPO_DIR/scripts/run_closed_loop_vad_cluster.sh" --one-scenario
+case "${CLOSED_LOOP_SCENARIOS:-one}" in
+    one) launcher_args=(--one-scenario) ;;
+    all) launcher_args=(--split all) ;;
+    *) echo "CLOSED_LOOP_SCENARIOS must be one or all" >&2; exit 2 ;;
+esac
+"$REPO_DIR/scripts/run_closed_loop_vad_cluster.sh" "${launcher_args[@]}"
