@@ -141,7 +141,6 @@ team_agent="${TEAM_AGENT:-leaderboard/team_code/vad_b2d_agent.py}"
 team_config="${TEAM_CONFIG:-Bench2DriveZoo/adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py+Bench2DriveZoo/ckpts/vad_b2d_base/vad_b2d_base.pth}"
 
 required_paths=(
-    "${venv_dir}/bin/activate"
     "${carla_root}/CarlaUE4.sh"
     "${bench2drive_root}/Bench2DriveZoo"
     "$(resolve_from_bench2drive_root "${team_agent}")"

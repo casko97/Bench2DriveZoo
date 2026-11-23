@@ -235,6 +235,7 @@ Request one node with two GPUs, 8 CPUs, 32 GiB system RAM, and two hours as a st
     export BENCH2DRIVE_ROOT="/Midgard/home/casko/Bench2Drive"
     export CARLA_VULKAN_ADAPTER=0
     export CHECKPOINT=/local_storage/users/casko/cpts/vad_b2d_base.pth
+    export REPO_DIR="/Midgard/home/casko/Bench2DriveZoo"
     ```
 4. Launch one-scenario eval:
     ```bash
