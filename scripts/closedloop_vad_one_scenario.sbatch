@@ -11,6 +11,15 @@
 #SBATCH --error=vad-closed-%j.err
 
 set -euo pipefail
+CONDA_BASE=${CONDA_BASE:-/Midgard/home/casko/miniforge3}
+CONDA_ENV=${CONDA_ENV:-b2d_zoo.venv}
+[[ -f $CONDA_BASE/etc/profile.d/conda.sh ]] || { echo 'Conda initialization not found' >&2; exit 1; }
+# Conda activation loads environment-specific variables such as REPO_DIR and
+# BENCH2DRIVE_ROOT. Activation hooks may reference unset shell variables.
+set +u
+source "$CONDA_BASE/etc/profile.d/conda.sh"
+conda activate "$CONDA_ENV"
+set -u
 REPO_DIR=${REPO_DIR:-${SLURM_SUBMIT_DIR:-$PWD}}
 REPO_DIR=$(cd "$REPO_DIR" && pwd)
 run_stamp=$(date +%Y%m%d_%H%M%S_%N)
@@ -18,25 +27,19 @@ export SAVE_PATH=${SAVE_PATH:-"$REPO_DIR/outputs/closed_loop/cluster_${SLURM_JOB
 mkdir -p "$SAVE_PATH"
 exec > >(tee -a "$SAVE_PATH/cluster.log") 2>&1
 printf 'Cluster log and run artifacts: %s\n' "$SAVE_PATH"
+printf 'Activated Conda environment: %s\n' "$CONDA_PREFIX"
 BENCH2DRIVE_ROOT=${BENCH2DRIVE_ROOT:?Set BENCH2DRIVE_ROOT to the Bench2Drive checkout}
 CARLA_ROOT=${CARLA_ROOT:-/Midgard/home/casko/carla}
-CONDA_BASE=${CONDA_BASE:-/Midgard/home/casko/miniforge3}
-CONDA_ENV=${CONDA_ENV:-b2d_zoo.venv}
 CHECKPOINT=${CHECKPOINT:-/local_storage/users/casko/cpts/vad_b2d_base.pth}
-# Vulkan adapter numbering is not necessarily the same as CUDA or Slurm numbering.
-CARLA_VULKAN_ADAPTER=${CARLA_VULKAN_ADAPTER:?Set CARLA_VULKAN_ADAPTER to the Vulkan index of the allocated CARLA GPU}
-[[ $CARLA_VULKAN_ADAPTER =~ ^[0-9]+$ ]] || { echo 'CARLA_VULKAN_ADAPTER must be a non-negative integer' >&2; exit 2; }
 [[ -n ${SLURM_JOB_ID:-} && -n ${CUDA_VISIBLE_DEVICES:-} ]] || { echo 'Run inside a Slurm GPU allocation with CUDA_VISIBLE_DEVICES set' >&2; exit 1; }
 IFS=, read -r -a allocated_gpus <<< "$CUDA_VISIBLE_DEVICES"
 (( ${#allocated_gpus[@]} == 2 )) || { echo "Expected exactly two allocated CUDA devices; got $CUDA_VISIBLE_DEVICES" >&2; exit 1; }
 [[ ${allocated_gpus[0]} != "${allocated_gpus[1]}" ]] || { echo 'Allocated CUDA devices must be distinct' >&2; exit 1; }
 [[ -f $CHECKPOINT ]] || { echo "Missing checkpoint: $CHECKPOINT" >&2; exit 1; }
-[[ -f $CONDA_BASE/etc/profile.d/conda.sh ]] || { echo 'Conda initialization not found' >&2; exit 1; }
 [[ -e $BENCH2DRIVE_ROOT/Bench2DriveZoo && $REPO_DIR -ef $BENCH2DRIVE_ROOT/Bench2DriveZoo ]] || { echo 'Bench2Drive/Bench2DriveZoo must point to this repository' >&2; exit 1; }
-set +u
-source "$CONDA_BASE/etc/profile.d/conda.sh"
-conda activate "$CONDA_ENV"
-set -u
+# Resolve CUDA ordinal 0 to a Vulkan index by PCI address; CUDA, NVML and
+# Vulkan ordinal numbering may differ. The probe fails closed on ambiguity.
+CARLA_VULKAN_ADAPTER=$(python "$REPO_DIR/scripts/select_carla_gpu.py")
 export BENCH2DRIVE_ROOT CARLA_ROOT
 export B2D_ZOO_VENV="$CONDA_PREFIX"
 export SKIP_VENV_ACTIVATION=1
@@ -64,6 +67,6 @@ if source.count(old) != 1:
 open(sys.argv[2], 'w').write(source.replace(old, ''))
 PY
 printf 'Allocated CUDA devices: %s; model: %s; CARLA Vulkan adapter: %s\n' "$CUDA_VISIBLE_DEVICES" "$MODEL_CUDA_DEVICE" "$GPU_RANK"
-printf 'Confirm Vulkan adapter %s corresponds to allocated GPU %s, distinct from the model GPU.\n' "$GPU_RANK" "${allocated_gpus[0]}"
+printf 'Verified CARLA Vulkan adapter %s matches the first allocated CUDA device.\n' "$GPU_RANK"
 nvidia-smi --query-gpu=index,uuid,pci.bus_id,name,memory.total --format=csv || true
 "$REPO_DIR/scripts/run_closed_loop_vad_cluster.sh" --one-scenario
