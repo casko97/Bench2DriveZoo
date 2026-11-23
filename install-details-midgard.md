@@ -82,7 +82,10 @@ tbd
 8. Install the repo: `python -m pip install -v --no-build-isolation --no-deps -e .`
 
 Make sure the environment knows where Carla is: 
-* tbd
+* `export CARLA_ROOT=/Midgard/home/casko/carla`
+* `echo "$CARLA_ROOT/PythonAPI/carla/dist/carla-0.9.15-py3.7-linux-x86_64.egg" >> /Midgard/home/casko/miniforge3/envs/b2d_zoo.venv/lib/python3.8/site-packages/carla.pth`
+
+
 
 ## Baseline Checkpoint
 
