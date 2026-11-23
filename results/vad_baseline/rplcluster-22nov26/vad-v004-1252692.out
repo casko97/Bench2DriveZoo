@@ -1,0 +1,88 @@
+You have the following GPUs: [2]
+Activated Conda environment: /Midgard/home/casko/miniforge3/envs/b2d_zoo.venv (Python: /Midgard/home/casko/miniforge3/envs/b2d_zoo.venv/bin/python)
+Per-route metadata: /local_storage/users/casko/dataset/infos/b2d_infos_val
+Job 1252692 on arwen
+Dataset: /local_storage/users/casko/dataset/B2D-V0.0.4; annotations: /local_storage/users/casko/dataset/infos/b2d_infos_val_meta.pkl; maps: /local_storage/users/casko/dataset/infos/b2d_map_infos.pkl
+WARNING!!!!, Only can be used for obtain inference speed!!!!
+load checkpoint from path: /local_storage/users/casko/cpts/vad_b2d_base.pth
+[                                                  ] 0/11414, elapsed: 0s, ETA:
+[                               ] 1/11414, 0.2 task/s, elapsed: 6s, ETA: 63665s
+[                               ] 2/11414, 0.3 task/s, elapsed: 6s, ETA: 33684s
+[>>>>>>>                  ] 3289/11414, 3.2 task/s, elapsed: 1033s, ETA:  2552s
+[>>>>>>>>>>>>>>           ] 6838/11414, 3.2 task/s, elapsed: 2141s, ETA:  1433s
+[>>>>>>>>>>>>>>           ] 6839/11414, 3.2 task/s, elapsed: 2141s, ETA:  1432s
+[>>>>>>>>>>>>>>>>         ] 7705/11414, 3.2 task/s, elapsed: 2412s, ETA:  1161s
+[>>>>>>>>>>>>>>>>>>>>>>> ] 11413/11414, 3.2 task/s, elapsed: 3581s, ETA:     0s
+[>>>>>>>>>>>>>>>>>>>>>>>>] 11414/11414, 3.2 task/s, elapsed: 3582s, ETA:     0s
+
+-------------- Motion Prediction --------------
+EPA_car: 0.7954925058239198
+EPA_pedestrian: 0.3222862632084534
+ADE_car: 0.7690437436103821
+ADE_pedestrian: 0.2976795732975006
+FDE_car: 0.8729051351547241
+FDE_pedestrian: 0.3214341402053833
+MR_car: 0.08625825348756391
+MR_pedestrian: 0.014619883040935672
+
+
+-------------- Planning --------------
+gt_car:4.559560803811891
+gt_pedestrian:0.10679511083488709
+cnt_ade_car:4.379842552309923
+cnt_ade_pedestrian:0.03615081831365237
+cnt_fde_car:4.038844002486016
+cnt_fde_pedestrian:0.035425730267246734
+hit_car:3.6841723637870314
+hit_pedestrian:0.034907810234099855
+fp_car:0.10565568676196395
+fp_pedestrian:0.00031075201988812925
+ADE_car:3.3601667881011963
+ADE_pedestrian:0.010761359706521034
+FDE_car:3.518962860107422
+FDE_pedestrian:0.011387038975954056
+MR_car:0.3546716386989849
+MR_pedestrian:0.0005179200331468821
+plan_L2_1s:0.46502517224070306
+plan_L2_2s:0.9288615601779618
+plan_L2_3s:1.4808411772412415
+plan_obj_col_1s:0.0
+plan_obj_col_2s:0.0
+plan_obj_col_3s:0.0
+plan_obj_box_col_1s:0.007199088460741661
+plan_obj_box_col_2s:0.009555624611559975
+plan_obj_box_col_3s:0.011670465032975818
+fut_valid_flag:1.0
+
+Formating bboxes of pts_bbox
+Start to convert detection format...
+[                                                  ] 0/11414, elapsed: 0s, ETA:
+[                              ] 1/11414, 59.8 task/s, elapsed: 0s, ETA:   191s
+[                             ] 2/11414, 112.2 task/s, elapsed: 0s, ETA:   102s
+[                             ] 3/11414, 159.3 task/s, elapsed: 0s, ETA:    72s
+[                            ] 46/11414, 751.7 task/s, elapsed: 0s, ETA:    15s
+[>>>>>>>                   ] 3183/11414, 940.0 task/s, elapsed: 3s, ETA:     9s
+[>>>>>>>>>>>>              ] 5333/11414, 909.7 task/s, elapsed: 6s, ETA:     7s
+[>>>>>>>>>>>>>>>>>>>>>>> ] 11412/11414, 891.2 task/s, elapsed: 13s, ETA:     0s
+[>>>>>>>>>>>>>>>>>>>>>>> ] 11413/11414, 891.2 task/s, elapsed: 13s, ETA:     0s
+[>>>>>>>>>>>>>>>>>>>>>>>>] 11414/11414, 891.2 task/s, elapsed: 13s, ETA:     0s
+Results writes to test/VAD_base_e2e_b2d/Sat_Nov_21_18_59_53_2026/pts_bbox/results_nusc.json
+Evaluating bboxes of pts_bbox
+mAP: 0.4443
+mATE: 0.4359
+mASE: 0.2518
+mAOE: 0.1537
+mAVE: 0.5236
+NDS: 0.5396
+
+Per-class results:
+Object Class	AP	ATE	ASE	AOE	AVE
+car	0.337	0.231	0.071	0.021	1.473
+van	0.059	0.403	0.307	0.017	0.859
+truck	0.000	1.000	1.000	1.000	1.000
+bicycle	0.607	0.297	0.114	0.053	0.646
+traffic_sign	0.457	0.266	0.024	0.031	0.008
+traffic_cone	0.728	0.284	0.268	0.033	0.009
+traffic_light	0.706	0.258	0.172	0.020	0.006
+pedestrian	0.660	0.749	0.059	0.055	0.187
+{'bbox_NuScenes/car_AP_dist_0.5': 0.2408, 'bbox_NuScenes/car_AP_dist_1.0': 0.3335, 'bbox_NuScenes/car_AP_dist_2.0': 0.3758, 'bbox_NuScenes/car_AP_dist_4.0': 0.3988, 'bbox_NuScenes/car_trans_err': 0.2305, 'bbox_NuScenes/car_scale_err': 0.0709, 'bbox_NuScenes/car_orient_err': 0.0213, 'bbox_NuScenes/car_vel_err': 1.4735, 'bbox_NuScenes/mATE': 0.4359, 'bbox_NuScenes/mASE': 0.2518, 'bbox_NuScenes/mAOE': 0.1537, 'bbox_NuScenes/mAVE': 0.5236, 'bbox_NuScenes/van_AP_dist_0.5': 0.0121, 'bbox_NuScenes/van_AP_dist_1.0': 0.0518, 'bbox_NuScenes/van_AP_dist_2.0': 0.0797, 'bbox_NuScenes/van_AP_dist_4.0': 0.0941, 'bbox_NuScenes/van_trans_err': 0.4033, 'bbox_NuScenes/van_scale_err': 0.3074, 'bbox_NuScenes/van_orient_err': 0.0168, 'bbox_NuScenes/van_vel_err': 0.8588, 'bbox_NuScenes/truck_AP_dist_0.5': 0.0, 'bbox_NuScenes/truck_AP_dist_1.0': 0.0, 'bbox_NuScenes/truck_AP_dist_2.0': 0.0, 'bbox_NuScenes/truck_AP_dist_4.0': 0.0, 'bbox_NuScenes/truck_trans_err': 1.0, 'bbox_NuScenes/truck_scale_err': 1.0, 'bbox_NuScenes/truck_orient_err': 1.0, 'bbox_NuScenes/truck_vel_err': 1.0, 'bbox_NuScenes/bicycle_AP_dist_0.5': 0.4029, 'bbox_NuScenes/bicycle_AP_dist_1.0': 0.5878, 'bbox_NuScenes/bicycle_AP_dist_2.0': 0.6957, 'bbox_NuScenes/bicycle_AP_dist_4.0': 0.7419, 'bbox_NuScenes/bicycle_trans_err': 0.297, 'bbox_NuScenes/bicycle_scale_err': 0.1136, 'bbox_NuScenes/bicycle_orient_err': 0.0529, 'bbox_NuScenes/bicycle_vel_err': 0.6465, 'bbox_NuScenes/traffic_sign_AP_dist_0.5': 0.3106, 'bbox_NuScenes/traffic_sign_AP_dist_1.0': 0.4374, 'bbox_NuScenes/traffic_sign_AP_dist_2.0': 0.5207, 'bbox_NuScenes/traffic_sign_AP_dist_4.0': 0.5582, 'bbox_NuScenes/traffic_sign_trans_err': 0.2663, 'bbox_NuScenes/traffic_sign_scale_err': 0.0239, 'bbox_NuScenes/traffic_sign_orient_err': 0.0308, 'bbox_NuScenes/traffic_sign_vel_err': 0.0081, 'bbox_NuScenes/traffic_cone_AP_dist_0.5': 0.4858, 'bbox_NuScenes/traffic_cone_AP_dist_1.0': 0.7277, 'bbox_NuScenes/traffic_cone_AP_dist_2.0': 0.8279, 'bbox_NuScenes/traffic_cone_AP_dist_4.0': 0.8702, 'bbox_NuScenes/traffic_cone_trans_err': 0.2836, 'bbox_NuScenes/traffic_cone_scale_err': 0.2683, 'bbox_NuScenes/traffic_cone_orient_err': 0.0331, 'bbox_NuScenes/traffic_cone_vel_err': 0.0093, 'bbox_NuScenes/traffic_light_AP_dist_0.5': 0.5088, 'bbox_NuScenes/traffic_light_AP_dist_1.0': 0.7272, 'bbox_NuScenes/traffic_light_AP_dist_2.0': 0.7827, 'bbox_NuScenes/traffic_light_AP_dist_4.0': 0.8072, 'bbox_NuScenes/traffic_light_trans_err': 0.2583, 'bbox_NuScenes/traffic_light_scale_err': 0.1718, 'bbox_NuScenes/traffic_light_orient_err': 0.0197, 'bbox_NuScenes/traffic_light_vel_err': 0.0057, 'bbox_NuScenes/pedestrian_AP_dist_0.5': 0.0523, 'bbox_NuScenes/pedestrian_AP_dist_1.0': 0.7297, 'bbox_NuScenes/pedestrian_AP_dist_2.0': 0.9155, 'bbox_NuScenes/pedestrian_AP_dist_4.0': 0.9423, 'bbox_NuScenes/pedestrian_trans_err': 0.7485, 'bbox_NuScenes/pedestrian_scale_err': 0.0587, 'bbox_NuScenes/pedestrian_orient_err': 0.0547, 'bbox_NuScenes/pedestrian_vel_err': 0.1868, 'bbox_NuScenes/NDS': 0.539630348422564, 'bbox_NuScenes/mAP': 0.44433964960166866}
