@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+#SBATCH --job-name=vad-closed-smoke
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --gres=gpu:2
+#SBATCH --mem=32G
+#SBATCH --cpus-per-task=8
+#SBATCH --time=02:00:00
+#SBATCH --constraint=arwen
+#SBATCH --output=vad-closed-%j.out
+#SBATCH --error=vad-closed-%j.err
+
+set -euo pipefail
+REPO_DIR=${REPO_DIR:-${SLURM_SUBMIT_DIR:-$PWD}}
+BENCH2DRIVE_ROOT=${BENCH2DRIVE_ROOT:?Set BENCH2DRIVE_ROOT to the Bench2Drive checkout}
+CARLA_ROOT=${CARLA_ROOT:-/Midgard/home/casko/carla}
+CONDA_BASE=${CONDA_BASE:-/Midgard/home/casko/miniforge3}
+CONDA_ENV=${CONDA_ENV:-b2d_zoo.venv}
+CHECKPOINT=${CHECKPOINT:-/local_storage/users/casko/cpts/vad_b2d_base.pth}
+# Vulkan adapter numbering is not necessarily the same as CUDA or Slurm numbering.
+CARLA_VULKAN_ADAPTER=${CARLA_VULKAN_ADAPTER:?Set CARLA_VULKAN_ADAPTER to the Vulkan index of the allocated CARLA GPU}
+[[ $CARLA_VULKAN_ADAPTER =~ ^[0-9]+$ ]] || { echo 'CARLA_VULKAN_ADAPTER must be a non-negative integer' >&2; exit 2; }
+[[ -n ${SLURM_JOB_ID:-} && -n ${CUDA_VISIBLE_DEVICES:-} ]] || { echo 'Run inside a Slurm GPU allocation with CUDA_VISIBLE_DEVICES set' >&2; exit 1; }
+IFS=, read -r -a allocated_gpus <<< "$CUDA_VISIBLE_DEVICES"
+(( ${#allocated_gpus[@]} == 2 )) || { echo "Expected exactly two allocated CUDA devices; got $CUDA_VISIBLE_DEVICES" >&2; exit 1; }
+[[ ${allocated_gpus[0]} != "${allocated_gpus[1]}" ]] || { echo 'Allocated CUDA devices must be distinct' >&2; exit 1; }
+[[ -f $CHECKPOINT ]] || { echo "Missing checkpoint: $CHECKPOINT" >&2; exit 1; }
+[[ -f $CONDA_BASE/etc/profile.d/conda.sh ]] || { echo 'Conda initialization not found' >&2; exit 1; }
+[[ -e $BENCH2DRIVE_ROOT/Bench2DriveZoo && $REPO_DIR -ef $BENCH2DRIVE_ROOT/Bench2DriveZoo ]] || { echo 'Bench2Drive/Bench2DriveZoo must point to this repository' >&2; exit 1; }
+set +u
+source "$CONDA_BASE/etc/profile.d/conda.sh"
+conda activate "$CONDA_ENV"
+set -u
+export BENCH2DRIVE_ROOT CARLA_ROOT
+export B2D_ZOO_VENV="$CONDA_PREFIX"
+export SKIP_VENV_ACTIVATION=1
+export MODEL_CUDA_DEVICE="${allocated_gpus[1]}"
+export GPU_RANK="$CARLA_VULKAN_ADAPTER"
+export TEAM_AGENT="$REPO_DIR/team_code/vad_b2d_agent.py"
+export TEAM_CONFIG="$REPO_DIR/adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py+$CHECKPOINT"
+export SAVE_VIEWS=${SAVE_VIEWS:-}
+# Remove the upstream evaluator's host-wide graphicsadapter-based kill: it can
+# kill other jobs. The existing supervisor tracks and cleans up descendants.
+evaluator="$BENCH2DRIVE_ROOT/leaderboard/leaderboard/leaderboard_evaluator.py"
+tmp_dir=$(mktemp -d "${TMPDIR:-/tmp}/vad-evaluator.XXXXXX")
+trap 'rm -rf "$tmp_dir"' EXIT
+export EVALUATOR_PATH="$tmp_dir/leaderboard_evaluator.py"
+python - "$evaluator" "$EVALUATOR_PATH" <<'PY'
+import sys
+source = open(sys.argv[1]).read()
+old = '''        if crashed:
+            cmd2 = "ps -ef | grep '-graphicsadapter="+ str(args.gpu_rank) + "' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
+            server = subprocess.Popen(cmd2, shell=True, preexec_fn=os.setsid)
+            atexit.register(os.killpg, server.pid, signal.SIGKILL)
+'''
+if source.count(old) != 1:
+    raise SystemExit('Unexpected evaluator cleanup code; inspect it before running safely')
+open(sys.argv[2], 'w').write(source.replace(old, ''))
+PY
+printf 'Allocated CUDA devices: %s; model: %s; CARLA Vulkan adapter: %s\n' "$CUDA_VISIBLE_DEVICES" "$MODEL_CUDA_DEVICE" "$GPU_RANK"
+printf 'Confirm Vulkan adapter %s corresponds to allocated GPU %s, distinct from the model GPU.\n' "$GPU_RANK" "${allocated_gpus[0]}"
+nvidia-smi --query-gpu=index,uuid,pci.bus_id,name,memory.total --format=csv || true
+"$REPO_DIR/scripts/run_closed_loop_vad_cluster.sh" --one-scenario

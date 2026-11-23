@@ -30,7 +30,14 @@ Accounting for GPU count, Isengard has the lowest total runtime per GPU: about 1
 * `/local_storage/users/casko` Personal storage on the node you’re working on
 
 ## Carla setup
-tbd
+
+Done in separate folder `/Midgard/home/casko/carla`
+
+1. Create folder: `mkdir carla && cd carla`
+2. Download: `wget -4 --server-response --progress=dot:giga --timeout=30 --tries=2 'https://carla-releases.s3.us-east-005.backblazeb2.com/Linux/CARLA_0.9.15.tar.gz'`
+3. Unpack: `tar -xvf CARLA_0.9.15.tar.gz`
+4. `cd Import && wget -4 --server-response --progress=dot:giga --timeout=30 --tries=2 'https://carla-releases.s3.us-east-005.backblazeb2.com/Linux/AdditionalMaps_0.9.15.tar.gz'`
+5. `cd .. && bash ImportAssets.sh`
 
 ## Bench2Drive Repo Setup
 
@@ -178,3 +185,58 @@ With the preparation command above, the evaluation paths are:
 * The output metrics are printed to the Slurm log
 * evaluation also writes results under `test/` in the repository. 
 * `--out` is not used because this test entry point does not actually serialize the requested pickle.
+
+## Closed-loop eval
+
+This setup uses the separate 220-route v0.0.4 CARLA suite in `Bench2Drive/leaderboard/data/bench2drive_0.0.4_val.xml`. The launcher `train`, `val`, and `test` selections are deterministic local 60/20/20 development slices of that XML; `--split all` runs the complete 220-route suite. These closed-loop selections are independent of the upstream open-loop 1,056/44 route split.
+
+### Setup one-time Bench2Drive links
+
+The Bench2Drive evaluator must be able to import this checkout as
+`Bench2DriveZoo` and load the VAD team agent. From the parent directory
+containing both repositories, create these links:
+
+```bash
+cd /Midgard/home/casko/Bench2Drive
+mkdir -p leaderboard/team_code
+ln -s /Midgard/home/casko/Bench2DriveZoo Bench2DriveZoo
+ln -s /Midgard/home/casko/Bench2DriveZoo/team_code/vad_b2d_agent.py leaderboard/team_code/vad_b2d_agent.py
+ln -s /Midgard/home/casko/Bench2DriveZoo/team_code/pid_controller.py leaderboard/team_code/pid_controller.py
+ln -s /Midgard/home/casko/Bench2DriveZoo/team_code/planner.py leaderboard/team_code/planner.py
+```
+
+The VAD agent, its configuration, and its checkpoint are then resolved as:
+
+```text
+leaderboard/team_code/vad_b2d_agent.py
+Bench2DriveZoo/adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py
+Bench2DriveZoo/ckpts/vad_b2d_base/vad_b2d_base.pth
+```
+
+### Run VAD on v0.0.4
+
+`run_closed_loop_vad_cluster.sh` is a separate cluster launcher that reuses the existing evaluator and process supervision helpers.
+* Logs are written to `vad-closed-<jobid>.out` and `.err`, and the evaluator writes a checkpoint JSON and `run.log` under `outputs/closed_loop`.
+* Set `SAVE_VIEWS=rgb_front,bev` for saved images; the smoke test defaults to no saved views.
+
+Request one node with two GPUs, 8 CPUs, 32 GiB system RAM, and two hours as a starting estimate. The two GPUs are allocated on the same node. CARLA needs a Vulkan-capable NVIDIA driver. The first allocated GPU is intended for CARLA, and the second is exposed to VAD using `CUDA_VISIBLE_DEVICES`.
+
+**Smoke test.** For an interactive smoke test, obtain an allocation and inspect GPU mapping.
+
+1. Allocate resources: `salloc --nodes=1 --ntasks=1 --gres=gpu:2 --mem=32G --cpus-per-task=8 --time=02:00:00 --constraint=arwen`
+2. Check the allocation, Run: `python scripts/list_vulkan_adapters.py` and 
+    ```
+    hostname
+    echo "$CUDA_VISIBLE_DEVICES"
+    nvidia-smi --query-gpu=index,uuid,pci.bus_id,name,memory.total --format=csv
+    ```
+3. Set variables: 
+    ```
+    export BENCH2DRIVE_ROOT="/Midgard/home/casko/Bench2Drive"
+    export CARLA_VULKAN_ADAPTER=0
+    export CHECKPOINT=/local_storage/users/casko/cpts/vad_b2d_base.pth
+    ```
+4. Launch one-scenario eval:
+    ```bash
+    bash scripts/closedloop_vad_one_scenario.sbatch
+    ```
