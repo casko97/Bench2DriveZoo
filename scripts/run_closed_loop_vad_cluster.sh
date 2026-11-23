@@ -261,5 +261,6 @@ if command -v ffmpeg >/dev/null 2>&1; then
         printf 'No PNG sequences found under %s; no GIFs created.\n' "${save_path}"
     fi
 else
-    printf 'ffmpeg not found; skipped GIF creation.\n' >&2
+    printf 'ffmpeg not found; creating GIFs with Pillow.\n'
+    python "${zoo_root}/scripts/create_rollout_gifs.py" "${save_path}"
 fi
