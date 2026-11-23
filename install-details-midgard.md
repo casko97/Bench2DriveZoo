@@ -226,9 +226,7 @@ Request one node with two GPUs, 8 CPUs, 32 GiB system RAM, and two hours as a st
 1. Allocate resources: `salloc --nodes=1 --ntasks=1 --gres=gpu:2 --mem=32G --cpus-per-task=8 --time=02:00:00 --constraint=arwen`
 2. Check the allocation, Run: `python scripts/list_vulkan_adapters.py` and 
     ```
-    hostname
-    echo "$CUDA_VISIBLE_DEVICES"
-    nvidia-smi --query-gpu=index,uuid,pci.bus_id,name,memory.total --format=csv
+    x
     ```
 3. Set variables: 
     ```

@@ -12,6 +12,12 @@
 
 set -euo pipefail
 REPO_DIR=${REPO_DIR:-${SLURM_SUBMIT_DIR:-$PWD}}
+REPO_DIR=$(cd "$REPO_DIR" && pwd)
+run_stamp=$(date +%Y%m%d_%H%M%S_%N)
+export SAVE_PATH=${SAVE_PATH:-"$REPO_DIR/outputs/closed_loop/cluster_${SLURM_JOB_ID:-manual}_${run_stamp}"}
+mkdir -p "$SAVE_PATH"
+exec > >(tee -a "$SAVE_PATH/cluster.log") 2>&1
+printf 'Cluster log and run artifacts: %s\n' "$SAVE_PATH"
 BENCH2DRIVE_ROOT=${BENCH2DRIVE_ROOT:?Set BENCH2DRIVE_ROOT to the Bench2Drive checkout}
 CARLA_ROOT=${CARLA_ROOT:-/Midgard/home/casko/carla}
 CONDA_BASE=${CONDA_BASE:-/Midgard/home/casko/miniforge3}
@@ -38,7 +44,7 @@ export MODEL_CUDA_DEVICE="${allocated_gpus[1]}"
 export GPU_RANK="$CARLA_VULKAN_ADAPTER"
 export TEAM_AGENT="$REPO_DIR/team_code/vad_b2d_agent.py"
 export TEAM_CONFIG="$REPO_DIR/adzoo/vad/configs/VAD/VAD_base_e2e_b2d.py+$CHECKPOINT"
-export SAVE_VIEWS=${SAVE_VIEWS:-}
+export SAVE_VIEWS=${SAVE_VIEWS-rgb_front,bev}
 # Remove the upstream evaluator's host-wide graphicsadapter-based kill: it can
 # kill other jobs. The existing supervisor tracks and cleans up descendants.
 evaluator="$BENCH2DRIVE_ROOT/leaderboard/leaderboard/leaderboard_evaluator.py"

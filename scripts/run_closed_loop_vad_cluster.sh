@@ -11,6 +11,8 @@
 #   automatically; otherwise a timestamped fresh checkpoint is created.
 set -euo pipefail
 
+export SAVE_VIEWS="${SAVE_VIEWS-rgb_front,bev}"
+
 zoo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 bench2drive_root="${BENCH2DRIVE_ROOT:-"${zoo_root}/../Bench2Drive"}"
 venv_dir="${B2D_ZOO_VENV:-"${zoo_root}/b2d_zoo.venv"}"
