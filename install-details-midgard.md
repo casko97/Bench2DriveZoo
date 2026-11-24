@@ -268,3 +268,20 @@ sbatch scripts/closedloop_vad_all_scenarios.sbatch
 #### Run log:
 * The evaluator later reported 16 crash, [16/220]: `/outputs/closed_loop/eval_vad_v0.0.4_all_20261123_202451_528929705.json``
 * Resume run: `outputs/closed_loop/cluster_1253618_20261124_094900_400380452/run.log`
+The evaluation results are accumulated in the checkpoint JSON, while logs and
+visual artifacts are normally stored in a separate folder for each submitted
+job. For example, after three runs the layout is roughly:
+
+```text
+outputs/closed_loop/
+├── eval_vad_v0.0.4_all_...json       # First run's progress and results
+├── resume_20261124_094801.json        # Copied from first run, then updated
+├── cluster_<first-job>_<timestamp>/   # First job's logs and scenario artifacts
+├── cluster_<second-job>_<timestamp>/  # Second job's logs and scenario artifacts
+└── cluster_1253636_<timestamp>/       # Third job's logs and scenario artifacts
+```
+
+The launcher creates a job-specific artifact folder unless `SAVE_PATH` is set.
+When resuming, copy the latest checkpoint to a new file and set
+`CHECKPOINT_ENDPOINT` to that copy before submitting the next job. The evaluator
+updates the copy; a repeated route can replace its previous result in the JSON.
