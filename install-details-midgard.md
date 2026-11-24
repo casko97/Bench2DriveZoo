@@ -249,3 +249,22 @@ Request one node with two GPUs, 8 CPUs, 32 GiB system RAM, and two hours as a st
 
 **Submit job.**
 Run: `sbatch scripts/closedloop_vad_one_scenario.sbatch`
+
+Resume run:
+```
+# Use the checkpoint from the failed full-suite run.
+original="$PWD/outputs/closed_loop/eval_vad_v0.0.4_all_20261123_202451_528929705.json"
+test -f "$original" || { echo "Checkpoint not found: $original"; exit 1; }
+
+# Resume from a copy, preserving the original.
+export CHECKPOINT_ENDPOINT="$PWD/outputs/closed_loop/resume_$(date +%Y%m%d_%H%M%S).json"
+cp "$original" "$CHECKPOINT_ENDPOINT"
+
+# Use the full suite, not the isolated route file from the earlier test.
+unset ROUTES SAVE_PATH CARLA_VULKAN_ADAPTER
+
+sbatch scripts/closedloop_vad_all_scenarios.sbatch
+```
+#### Run log:
+* The evaluator later reported 16 crash, [16/220]: `/outputs/closed_loop/eval_vad_v0.0.4_all_20261123_202451_528929705.json``
+* Resume run: `outputs/closed_loop/cluster_1253618_20261124_094900_400380452/run.log`

@@ -1,5 +1,7 @@
 # Carros ignores
 *.gz
+*.err
+*.out
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
