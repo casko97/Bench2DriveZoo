@@ -62,7 +62,7 @@ Done in separate folder `/Midgard/home/casko/carla`
     'nvidia/label/cuda-11.8.0::cuda-cccl=11.8.89'
     ```
 5. Install PyTorch: 
-    ````
+    ```
     python -m pip install \
     torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 \
     --index-url https://download.pytorch.org/whl/cu118
@@ -268,6 +268,9 @@ sbatch scripts/closedloop_vad_all_scenarios.sbatch
 #### Run log:
 * The evaluator later reported 16 crash, [16/220]: `/outputs/closed_loop/eval_vad_v0.0.4_all_20261123_202451_528929705.json``
 * Resume run: `outputs/closed_loop/cluster_1253618_20261124_094900_400380452/run.log`
+
+#### Results and artifacts across resumed runs
+
 The evaluation results are accumulated in the checkpoint JSON, while logs and
 visual artifacts are normally stored in a separate folder for each submitted
 job. For example, after three runs the layout is roughly:
