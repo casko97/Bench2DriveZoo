@@ -268,6 +268,7 @@ sbatch scripts/closedloop_vad_all_scenarios.sbatch
 #### Run log:
 * The evaluator later reported 16 crash, [16/220]: `/outputs/closed_loop/eval_vad_v0.0.4_all_20261123_202451_528929705.json``
 * Resume run: `outputs/closed_loop/cluster_1253618_20261124_094900_400380452/run.log`
+* One more resume: `outputs/closed_loop/cluster_1253636_20261124_135552_200760513/run.log`
 
 #### Results and artifacts across resumed runs
 
