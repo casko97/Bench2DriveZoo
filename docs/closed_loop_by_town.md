@@ -8,6 +8,8 @@ bash scripts/submit_closedloop_vad_by_town.sh
 
 This variant groups routes by their `town` in first-seen town order, preserves source order within each town, and takes up to five routes per batch. For the standard 220-route v0.0.4 XML it creates 50 batches; partially filled batches are never combined across towns. As with the regular batched launcher, Slurm schedules batches in parallel as resources and cluster policies allow, each task requests two GPUs, eight CPUs, 32 GB RAM and four hours, and the submission prints a separate output folder for the queue. `BATCH_SIZE`, `MAX_CONCURRENT`, `BATCH_ROUTES`, and `sbatch` options work as in [closed_loop_batches.md](closed_loop_batches.md).
 
+The town launcher defaults to a throughput-oriented run: up to three batches concurrently, no saved image views, no JPEG round-trip, `VAD_FAST_PIPELINE=1`, and `B2D_TELEMETRY=0`. Override any of these when submitting, for example `MAX_CONCURRENT=1 SAVE_VIEWS=rgb_front,bev B2D_TELEMETRY=1 bash scripts/submit_closedloop_vad_by_town.sh`. With image saving disabled, no GIFs will be produced.
+
 Each batch starts a new CARLA process. **The evaluator reloads the CARLA world before every route**, even when consecutive routes are in the same town; town grouping alone does not eliminate map reloads.
 
 To run or retry only town-grouped batch 3 against the same unchanged source XML:

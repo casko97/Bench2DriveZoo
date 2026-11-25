@@ -194,7 +194,7 @@ if [[ "${SAVE_ASYNC}" != 0 && "${SAVE_ASYNC}" != 1 ]]; then
     exit 2
 fi
 printf 'Background artifact writing: %s\n' "${SAVE_ASYNC}"
-export B2D_TELEMETRY=1
+export B2D_TELEMETRY="${B2D_TELEMETRY:-1}"
 export CARLA_SENSOR_NOISE_SEED="${sensor_noise_seed}"
 export GPU_RANK="${gpu_rank}"
 export SUSTAINED_COLLISION_FRAMES="${SUSTAINED_COLLISION_FRAMES:-1}"
