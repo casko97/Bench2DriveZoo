@@ -276,6 +276,9 @@ bash scripts/submit_closedloop_vad_batches.sh
 
 The script creates a Slurm array with one task for each consecutive group of five routes in the source XML, with at most one task running at a time. For the default 220-route v0.0.4 suite this produces batches 0–43.
 
+To create batches by town, and run batches in paralell:
+`MAX_CONCURRENT=2 bash scripts/submit_closedloop_vad_by_town.sh`
+
 To rerun batch 3 from the same unchanged source XML and batch size, submit a fresh one-task array: `sbatch --array=3 scripts/closedloop_vad_batch.sbatch`
 
 
