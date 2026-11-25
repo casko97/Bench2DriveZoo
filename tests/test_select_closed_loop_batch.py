@@ -31,6 +31,16 @@ class BatchSelectionTests(unittest.TestCase):
             invalid = subprocess.run([sys.executable, str(SCRIPT), str(source), '--index', '3', '--output', str(folder / 'invalid.xml')], capture_output=True)
             self.assertNotEqual(invalid.returncode, 0)
 
+    def test_grouped_batches_cover_all_routes_without_mixing_towns(self):
+        from scripts.select_closed_loop_batch import make_batches
+        routes = [ET.Element('route', id=str(i), town=town) for i, town in
+                  enumerate(['A', 'B', 'A', 'C', 'B', 'A', 'A', 'A', 'A'])]
+        batches = make_batches(routes, 5, True)
+        self.assertTrue(all(len(batch) <= 5 and len({r.get('town') for r in batch}) == 1 for batch in batches))
+        self.assertEqual(sorted(r.get('id') for batch in batches for r in batch), sorted(r.get('id') for r in routes))
+        self.assertEqual([[r.get('id') for r in batch] for batch in batches],
+                         [['0', '2', '5', '6', '7'], ['8'], ['1', '4'], ['3']])
+
     def test_rejects_duplicate_ids_and_bad_batch_size(self):
         with tempfile.TemporaryDirectory() as temp:
             source = Path(temp) / 'routes.xml'

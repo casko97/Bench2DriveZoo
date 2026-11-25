@@ -6,7 +6,7 @@ Submit from the Bench2DriveZoo repository root:
 bash scripts/submit_closedloop_vad_batches.sh
 ```
 
-The script creates a Slurm array with one task for each consecutive group of five routes in the source XML, with at most one task running at a time. For the default 220-route v0.0.4 suite this produces batches 0–43. Each task starts its own CARLA server, evaluates its routes in order, and requests two GPUs, 8 CPUs, 32 GB RAM and four hours. These are starting estimates; use `--time=...` as an argument to the submission script if needed. CARLA GPU selection, Conda activation, image saving and GIF creation use the existing cluster launcher.
+The script creates a Slurm array with one task for each consecutive group of five routes in the source XML, with at most one task running at a time. For the default 220-route v0.0.4 suite this produces batches 0–43. Each task starts its own CARLA server, reloads the world before every route, evaluates its routes in order, and requests two GPUs, 8 CPUs, 32 GB RAM and four hours. These are starting estimates; use `--time=...` as an argument to the submission script if needed. CARLA GPU selection, Conda activation, image saving and GIF creation use the existing cluster launcher.
 
 Inspect the array with `squeue -u "$USER"` and its task states with `sacct -j ARRAY_JOB_ID --format=JobID,JobName,State,ExitCode,Elapsed`. The submission command prints the new queue directory; Slurm logs are `slurm-ARRAY_JOB_ID_TASK_ID.out` and `.err` inside that directory. The task output lists the selected route IDs. Individual scenario failures are benchmark outcomes and may not make a Slurm task fail; inspect each checkpoint and `run.log` for route-level results. A task can also fail during simulator setup or hit its time limit.
 
