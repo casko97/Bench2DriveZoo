@@ -230,6 +230,7 @@ if CUDA_VISIBLE_DEVICES="${model_cuda_device}" python -u "${zoo_root}/scripts/su
     --repetitions="${REPETITIONS}" \
     --track="${CHALLENGE_TRACK_CODENAME}" \
     --checkpoint="${checkpoint_endpoint}" \
+    --debug-checkpoint="${save_path}/live_results.txt" \
     --agent="${team_agent}" \
     --agent-config="${team_config}" \
     --debug="${DEBUG_CHALLENGE}" \

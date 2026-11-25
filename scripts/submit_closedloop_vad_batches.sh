@@ -7,8 +7,8 @@ bench_root=${BENCH2DRIVE_ROOT:-$HOME/Bench2Drive}
 source_routes=${BATCH_ROUTES:-$bench_root/leaderboard/data/bench2drive_0.0.4_val.xml}
 [[ "$source_routes" = /* ]] || source_routes="$bench_root/$source_routes"
 batch_size=${BATCH_SIZE:-5}
-max_concurrent=${MAX_CONCURRENT:-1}
-[[ "$max_concurrent" =~ ^[1-9][0-9]*$ ]] || { echo 'MAX_CONCURRENT must be a positive integer' >&2; exit 2; }
+max_concurrent=${MAX_CONCURRENT:-0}
+[[ "$max_concurrent" =~ ^(0|[1-9][0-9]*)$ ]] || { echo 'MAX_CONCURRENT must be 0 (unlimited) or a positive integer' >&2; exit 2; }
 selector_args=()
 case "${BATCH_GROUP_BY_TOWN:-0}" in
     0) ;;
@@ -21,7 +21,13 @@ mkdir -p "$queue_root"
 queue_dir=$(mktemp -d "$queue_root/batch_queue_$(date +%Y%m%d_%H%M%S)_XXXXXX")
 export BATCH_ROUTES="$source_routes" BATCH_SIZE="$batch_size" BATCH_QUEUE_DIR="$queue_dir"
 printf 'Queue artifacts: %s\n' "$queue_dir"
-printf 'Submitting %s batches of up to %s routes, at most %s at a time.\n' "$batch_count" "$batch_size" "$max_concurrent"
-sbatch --array="0-$((batch_count - 1))%${max_concurrent}" \
+array_spec="0-$((batch_count - 1))"
+if ((max_concurrent > 0)); then
+    array_spec+="%${max_concurrent}"
+    printf 'Submitting %s batches of up to %s routes, at most %s at a time.\n' "$batch_count" "$batch_size" "$max_concurrent"
+else
+    printf 'Submitting %s batches of up to %s routes; Slurm controls parallelism.\n' "$batch_count" "$batch_size"
+fi
+sbatch --array="$array_spec" \
     --output="$queue_dir/slurm-%A_%a.out" --error="$queue_dir/slurm-%A_%a.err" \
     "$@" scripts/closedloop_vad_batch.sbatch

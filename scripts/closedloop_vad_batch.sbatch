@@ -38,5 +38,7 @@ unset CHECKPOINT_ENDPOINT CARLA_VULKAN_ADAPTER
 export OUTPUT_ROOT="$SAVE_PATH"
 export ROUTES="$selected_routes"
 export CLOSED_LOOP_SCENARIOS=all
+# Hold a cooperative node-local lock until this task and its launcher exit.
+source "$repo_dir/scripts/reserve_batch_ports.sh"
 printf 'Array job %s, batch %s: %s\n' "${SLURM_ARRAY_JOB_ID:-unknown}" "$batch_index" "$source_routes"
 bash "$repo_dir/scripts/closedloop_vad_one_scenario.sbatch"
