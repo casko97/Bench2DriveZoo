@@ -17,7 +17,7 @@ zoo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 bench2drive_root="${BENCH2DRIVE_ROOT:-"${zoo_root}/../Bench2Drive"}"
 venv_dir="${B2D_ZOO_VENV:-"${zoo_root}/b2d_zoo.venv"}"
 carla_root="${CARLA_ROOT:-"${zoo_root}/../Carla"}"
-output_root="${zoo_root}/outputs/closed_loop"
+output_root="${OUTPUT_ROOT:-${zoo_root}/outputs/closed_loop}"
 
 gpu_rank="${GPU_RANK:-0}"
 model_cuda_device="${MODEL_CUDA_DEVICE:-${gpu_rank}}"
