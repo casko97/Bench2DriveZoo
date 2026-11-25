@@ -265,27 +265,30 @@ unset ROUTES SAVE_PATH CARLA_VULKAN_ADAPTER
 
 sbatch scripts/closedloop_vad_all_scenarios.sbatch
 ```
-#### Run log:
-* The evaluator later reported 16 crash, [16/220]: `/outputs/closed_loop/eval_vad_v0.0.4_all_20261123_202451_528929705.json``
-* Resume run: `outputs/closed_loop/cluster_1253618_20261124_094900_400380452/run.log`
-* One more resume: `outputs/closed_loop/cluster_1253636_20261124_135552_200760513/run.log`
 
-#### Results and artifacts across resumed runs
+#### Batched closed-loop VAD evaluation
 
-The evaluation results are accumulated in the checkpoint JSON, while logs and
-visual artifacts are normally stored in a separate folder for each submitted
-job. For example, after three runs the layout is roughly:
+Submit from the Bench2DriveZoo repository root:
 
-```text
-outputs/closed_loop/
-├── eval_vad_v0.0.4_all_...json       # First run's progress and results
-├── resume_20261124_094801.json        # Copied from first run, then updated
-├── cluster_<first-job>_<timestamp>/   # First job's logs and scenario artifacts
-├── cluster_<second-job>_<timestamp>/  # Second job's logs and scenario artifacts
-└── cluster_1253636_<timestamp>/       # Third job's logs and scenario artifacts
+```bash
+bash scripts/submit_closedloop_vad_batches.sh
 ```
 
-The launcher creates a job-specific artifact folder unless `SAVE_PATH` is set.
-When resuming, copy the latest checkpoint to a new file and set
-`CHECKPOINT_ENDPOINT` to that copy before submitting the next job. The evaluator
-updates the copy; a repeated route can replace its previous result in the JSON.
+The script creates a Slurm array with one task for each consecutive group of five routes in the source XML, with at most one task running at a time. For the default 220-route v0.0.4 suite this produces batches 0–43.
+
+To rerun batch 3 from the same unchanged source XML and batch size, submit a fresh one-task array: `sbatch --array=3 scripts/closedloop_vad_batch.sbatch`
+
+
+Each batch queue gets its own directory under `outputs/closed_loop`:
+```
+outputs/closed_loop/batch_queue_20261125_085807_NSFKhE/
+├── slurm-<array>_<batch>.out
+├── slurm-<array>_<batch>.err
+├── batch_0/
+│   └── attempt_<job>_<timestamp>/
+│       ├── routes.xml
+│       ├── run.log
+│       └── ...
+└── batch_1/
+    └── attempt_<job>_<timestamp>/
+```
