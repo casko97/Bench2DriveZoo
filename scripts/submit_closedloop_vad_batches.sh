@@ -19,6 +19,7 @@ batch_count=$(python3 "$repo_dir/scripts/select_closed_loop_batch.py" "$source_r
 queue_root="$repo_dir/outputs/closed_loop"
 mkdir -p "$queue_root"
 queue_dir=$(mktemp -d "$queue_root/batch_queue_$(date +%Y%m%d_%H%M%S)_XXXXXX")
+export BENCH2DRIVE_ROOT="$bench_root"
 export BATCH_ROUTES="$source_routes" BATCH_SIZE="$batch_size" BATCH_QUEUE_DIR="$queue_dir"
 printf 'Queue artifacts: %s\n' "$queue_dir"
 array_spec="0-$((batch_count - 1))"
@@ -28,6 +29,16 @@ if ((max_concurrent > 0)); then
 else
     printf 'Submitting %s batches of up to %s routes; Slurm controls parallelism.\n' "$batch_count" "$batch_size"
 fi
-sbatch --array="$array_spec" \
+array_submit_output=$(sbatch --array="$array_spec" \
     --output="$queue_dir/slurm-%A_%a.out" --error="$queue_dir/slurm-%A_%a.err" \
-    "$@" scripts/closedloop_vad_batch.sbatch
+    "$@" scripts/closedloop_vad_batch.sbatch)
+printf '%s\n' "$array_submit_output"
+array_job_id=${array_submit_output##* }
+if [[ "${ENABLE_BATCH_AGGREGATION:-1}" == 1 && "$array_job_id" =~ ^[0-9]+$ ]]; then
+    aggregate_submit_output=$(sbatch --dependency="afterany:${array_job_id}" \
+        --export="ALL,BATCH_QUEUE_DIR=${queue_dir}" \
+        scripts/aggregate_closedloop_batches.sbatch)
+    printf 'Aggregation job (runs after array %s): %s\n' "$array_job_id" "$aggregate_submit_output"
+elif [[ "${ENABLE_BATCH_AGGREGATION:-1}" != 0 ]]; then
+    printf 'Could not parse array job ID; submit aggregation manually for %s.\n' "$queue_dir" >&2
+fi
