@@ -73,7 +73,7 @@ The log reports inference-speed-only mode. Per-route metadata and annotations we
 
 ### Our Closed-loop Results
 
-Note that our closed-loop run used `leaderboard/data/bench2drive_0.0.4_val.xml`instead of `leaderboard/data/bench2drive220.xml` which the official closed loop results are based on. Results are not directly comparable.
+Note that our closed-loop run used `leaderboard/data/bench2drive_0.0.4_val.xml` instead of `leaderboard/data/bench2drive220.xml` which the official closed loop results are based on. Results are not directly comparable.
 
 **Run details.** 
 * Queue: `/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop batch_queue_20261125_102006_HY6SiU`
@@ -90,3 +90,12 @@ Note that our closed-loop run used `leaderboard/data/bench2drive_0.0.4_val.xml`i
 | ---: | ---: | ---: | ---: | ---: | ---: |
 | 17.39% | 15.62% | 42.11% | 16.67% | 29.07% | 24.17% |
 
+New run with `leaderboard/data/bench2drive220.xml`:
+```
+casko@moria:~/Bench2DriveZoo$ BATCH_ROUTES="/Midgard/home/casko/Bench2Drive/leaderboard/data/bench2drive220.xml" MAX_CONCURRENT=3 bash scripts/submit_closedloop_vad_batches.sh
+Using route XML: /Midgard/home/casko/Bench2Drive/leaderboard/data/bench2drive220.xml
+Queue artifacts: /Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261127_123144_0CNqBA
+Submitting 44 batches of up to 5 routes, at most 3 at a time.
+Submitted batch job 1253945
+Aggregation job (runs after array 1253945): Submitted batch job 1253946
+```
