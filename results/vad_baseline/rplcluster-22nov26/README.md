@@ -79,8 +79,7 @@ The log reports inference-speed-only mode. Per-route metadata and annotations we
 * Routes with records: 220/220, Complete: True
 * Successful route records: 57. Failed/non-final route records: 163.
 
-Global metrics:
-* Avg. driving score: 43.26114
-* Avg. route completion: 50.393818
-* Avg. infraction penalty: 0.84518
+| Model | Driving Score | Success Rate | Efficiency | Comfort |
+| --- | ---: | ---: | ---: | ---: |
+| VAD | 43.2611 | 22.73% | - | - |
 

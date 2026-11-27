@@ -26,7 +26,7 @@ Past two months usage:
 Accounting for GPU count, Isengard has the lowest total runtime per GPU: about 1,486 hours per GPU, versus 1,393 for Arwen and 1,467 for Belegost.
 
 **Useful commands:**
-* Allocate gpu: `salloc --gres=gpu:1 --mem=5GB --cpus-per-task=4 --constrain=isengard`
+* Allocate gpu: `salloc --gres=gpu:1 --mem=5GB --cpus-per-task=4 --constrain=arwen`
 * `/local_storage/users/casko` Personal storage on the node you’re working on
 
 ## Carla setup
@@ -250,7 +250,7 @@ Request one node with two GPUs, 8 CPUs, 32 GiB system RAM, and two hours as a st
 **Submit job.**
 Run: `sbatch scripts/closedloop_vad_one_scenario.sbatch`
 
-Resume run:
+**Resume run:**
 ```
 # Use the checkpoint from the failed full-suite run.
 original="$PWD/outputs/closed_loop/eval_vad_v0.0.4_all_20261123_202451_528929705.json"
@@ -301,4 +301,17 @@ Aggregate results from a batched run with:
 python scripts/aggregate_closedloop_batches.py \
   outputs/closed_loop/batch_queue_20261125_102006_HY6SiU \
   --bench2drive-root "$BENCH2DRIVE_ROOT"
+```
+
+### Process Eval Results
+Merge eval json and get driving score and success rate
+```python
+# This script will assume the total number of routes with results is 220. If there is not enough, the missed ones will be treated as 0 score.
+python tools/merge_route_json.py -f your_json_folder/
+
+# Get multi-ability results
+python tools/ability_benchmark.py -r merge.json
+
+# Get driving efficiency and driving smoothness results
+python tools/efficiency_smoothness_benchmark.py -f merge.json -m your_metric_folder/
 ```
