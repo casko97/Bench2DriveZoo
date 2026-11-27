@@ -1,6 +1,14 @@
 # VAD baseline results on Bench2Drive
 
-## Open-loop v0.0.4 validation split
+## Open-loop 
+
+### Official Repo Open-loop Results
+
+| Source / code version | Dataset and split | Model | Metric | Result |
+| --- | --- | --- | --- | ---: |
+| [Bench2DriveZoo `uniad/vad`](https://github.com/Thinklab-SJTU/Bench2DriveZoo/tree/uniad/vad), 2024 result table | Original Bench2Drive Base `v1` (1,000 clips), `b2d_infos_val.pkl` held-out validation split | VAD | L2 error at 2 s | 0.91 m |
+
+### Our Results on v0.0.4 Validation Split
 
 | Item | Value |
 | --- | --- |
@@ -46,9 +54,33 @@ The log reports inference-speed-only mode. Per-route metadata and annotations we
 | Object collision rate | 0.0000 | 0.0000 | 0.0000 |
 | Object box collision rate | 0.0072 | 0.0096 | 0.0117 |
 
-## Official Open-loop Results
+## Closed-loop
 
-| Source / code version | Dataset and split | Model | Metric | Result |
-| --- | --- | --- | --- | ---: |
-| [Bench2DriveZoo `uniad/vad`](https://github.com/Thinklab-SJTU/Bench2DriveZoo/tree/uniad/vad), 2024 result table | Original Bench2Drive Base `v1` (1,000 clips), `b2d_infos_val.pkl` held-out validation split | VAD | L2 error at 2 s | 0.91 m |
+### Official Repo Closed-loop Results
+
+#### Driving Score
+
+| Source / benchmark version | Dataset / evaluation set | Model | Driving Score | Success Rate | Efficiency | Comfort |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| [Bench2Drive v0.0.4](https://github.com/Thinklab-SJTU/Bench2Drive/tree/0.0.4) | Bench2Drive v0.0.4 closed-loop benchmark (220-route evaluation set) | VAD | 38.65 | 17.27% | 163.74 | 67.34 |
+
+
+#### Closed-loop multi-ability (Bench2Drive v0.0.4, 220-route evaluation set)
+
+| Overtaking | Merging | Emergency brake | Give way | Traffic signs | Mean |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 13.04% | 17.19% | 29.82% | 16.67% | 19.77% | 19.30% |
+
+### Our Closed-loop Results
+
+**Run details.** 
+* Queue: `/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop batch_queue_20261125_102006_HY6SiU`
+* Batch checkpoints: 50
+* Routes with records: 220/220, Complete: True
+* Successful route records: 57. Failed/non-final route records: 163.
+
+Global metrics:
+* Avg. driving score: 43.26114
+* Avg. route completion: 50.393818
+* Avg. infraction penalty: 0.84518
 

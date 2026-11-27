@@ -1,0 +1,292 @@
+Closed-loop batch aggregation
+============================
+Queue: /Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU
+Batch checkpoints: 50
+Routes with records: 220/220
+Complete: True
+Successful route records: 57
+Failed/non-final route records: 163
+
+Global metrics
+-------------
+Avg. driving score: 43.26114
+Avg. route completion: 50.393818
+Avg. infraction penalty: 0.84518
+Entry status: Finished
+
+Selected checkpoints
+--------------------
+batch_0	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_0/attempt_1253697_20261125_102006_467553006/eval_vad_v0.0.4_all_20261125_102019_667568245.json	5/5 records
+batch_1	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_1/attempt_1253698_20261125_102006_467181076/eval_vad_v0.0.4_all_20261125_102019_716261429.json	5/5 records
+batch_10	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_10/attempt_1253725_20261125_151725_063681368/eval_vad_v0.0.4_all_20261125_151731_613735496.json	5/5 records
+batch_11	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_11/attempt_1253726_20261125_155242_542855316/eval_vad_v0.0.4_all_20261125_155249_126585541.json	5/5 records
+batch_12	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_12/attempt_1253727_20261125_161503_380934443/eval_vad_v0.0.4_all_20261125_161509_539270167.json	5/5 records
+batch_13	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_13/attempt_1253728_20261125_163813_783931046/eval_vad_v0.0.4_all_20261125_163819_452307289.json	5/5 records
+batch_14	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_14/attempt_1253729_20261125_170657_249149455/eval_vad_v0.0.4_all_20261125_170702_139881541.json	5/5 records
+batch_15	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_15/attempt_1253730_20261125_171038_277770224/eval_vad_v0.0.4_all_20261125_171042_046328751.json	5/5 records
+batch_16	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_16/attempt_1253731_20261125_174624_955685332/eval_vad_v0.0.4_all_20261125_174633_401371406.json	5/5 records
+batch_17	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_17/attempt_1253732_20261125_181207_487228249/eval_vad_v0.0.4_all_20261125_181214_760496393.json	5/5 records
+batch_18	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_18/attempt_1253733_20261125_181701_936410811/eval_vad_v0.0.4_all_20261125_181705_129244051.json	5/5 records
+batch_19	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_19/attempt_1253738_20261125_183809_766914304/eval_vad_v0.0.4_all_20261125_183814_610923517.json	5/5 records
+batch_2	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_2/attempt_1253699_20261125_102006_467552286/eval_vad_v0.0.4_all_20261125_102019_611109673.json	5/5 records
+batch_20	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_20/attempt_1253744_20261125_191751_859685785/eval_vad_v0.0.4_all_20261125_191758_002824758.json	5/5 records
+batch_21	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_21/attempt_1253749_20261125_195258_433979714/eval_vad_v0.0.4_all_20261125_195303_768137207.json	5/5 records
+batch_22	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_22/attempt_1253757_20261125_202158_320288775/eval_vad_v0.0.4_all_20261125_202202_941970911.json	5/5 records
+batch_23	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_23/attempt_1253758_20261125_211400_785932411/eval_vad_v0.0.4_all_20261125_211403_722974403.json	5/5 records
+batch_24	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_24/attempt_1253759_20261125_215354_083265398/eval_vad_v0.0.4_all_20261125_215400_220491834.json	5/5 records
+batch_25	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_25/attempt_1253760_20261125_220344_225105443/eval_vad_v0.0.4_all_20261125_220348_719428718.json	5/5 records
+batch_26	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_26/attempt_1253761_20261125_221437_637319813/eval_vad_v0.0.4_all_20261125_221443_048836921.json	5/5 records
+batch_27	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_27/attempt_1253762_20261125_230322_379241842/eval_vad_v0.0.4_all_20261125_230325_371097501.json	5/5 records
+batch_28	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_28/attempt_1253763_20261125_234455_831183778/eval_vad_v0.0.4_all_20261125_234459_073922942.json	5/5 records
+batch_29	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_29/attempt_1253764_20261125_235403_839509546/eval_vad_v0.0.4_all_20261125_235406_921270922.json	5/5 records
+batch_3	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_3/attempt_1253701_20261125_111848_979098892/eval_vad_v0.0.4_all_20261125_111852_116700479.json	5/5 records
+batch_30	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_30/attempt_1253765_20261126_001710_306475663/eval_vad_v0.0.4_all_20261126_001713_907892277.json	5/5 records
+batch_31	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_31/attempt_1253766_20261126_004416_574162810/eval_vad_v0.0.4_all_20261126_004419_927742024.json	5/5 records
+batch_32	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_32/attempt_1253767_20261126_013159_855375125/eval_vad_v0.0.4_all_20261126_013205_563050709.json	5/5 records
+batch_33	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_33/attempt_1253768_20261126_013550_303981595/eval_vad_v0.0.4_all_20261126_013555_752640595.json	5/5 records
+batch_34	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_34/attempt_1253769_20261126_023630_680078287/eval_vad_v0.0.4_all_20261126_023633_386724325.json	5/5 records
+batch_35	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_35/attempt_1253770_20261126_025244_756799747/eval_vad_v0.0.4_all_20261126_025249_562188032.json	5/5 records
+batch_36	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_36/attempt_1253771_20261126_041149_417686910/eval_vad_v0.0.4_all_20261126_041152_463682682.json	1/1 records
+batch_37	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_37/attempt_1253772_20261126_044129_327715930/eval_vad_v0.0.4_all_20261126_044132_593937373.json	5/5 records
+batch_38	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_38/attempt_1253773_20261126_044458_744318444/eval_vad_v0.0.4_all_20261126_044501_692246851.json	5/5 records
+batch_39	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_39/attempt_1253774_20261126_045412_920724211/eval_vad_v0.0.4_all_20261126_045415_985019497.json	5/5 records
+batch_4	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_4/attempt_1253710_20261125_121155_463493945/eval_vad_v0.0.4_all_20261125_121203_713726758.json	5/5 records
+batch_40	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_40/attempt_1253775_20261126_055838_803405808/eval_vad_v0.0.4_all_20261126_055842_102905563.json	1/1 records
+batch_41	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_41/attempt_1253776_20261126_061353_572973523/eval_vad_v0.0.4_all_20261126_061359_607499140.json	5/5 records
+batch_42	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_42/attempt_1253777_20261126_061545_748869319/eval_vad_v0.0.4_all_20261126_061556_369822916.json	1/1 records
+batch_43	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_43/attempt_1253778_20261126_063252_419283250/eval_vad_v0.0.4_all_20261126_063257_666302790.json	2/2 records
+batch_44	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_44/attempt_1253785_20261126_064515_101075426/eval_vad_v0.0.4_all_20261126_064518_810443007.json	1/1 records
+batch_45	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_45/attempt_1253786_20261126_064737_306872581/eval_vad_v0.0.4_all_20261126_064740_091062854.json	5/5 records
+batch_46	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_46/attempt_1253787_20261126_065150_258078529/eval_vad_v0.0.4_all_20261126_065153_316771068.json	1/1 records
+batch_47	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_47/attempt_1253788_20261126_065420_193432451/eval_vad_v0.0.4_all_20261126_065423_918541632.json	3/3 records
+batch_48	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_48/attempt_1253789_20261126_070547_173309658/eval_vad_v0.0.4_all_20261126_070551_570475893.json	3/3 records
+batch_49	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_49/attempt_1253696_20261126_070941_388640983/eval_vad_v0.0.4_all_20261126_070944_342666190.json	2/2 records
+batch_5	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_5/attempt_1253711_20261125_122015_033584439/eval_vad_v0.0.4_all_20261125_122021_307714581.json	5/5 records
+batch_6	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_6/attempt_1253712_20261125_123827_584010382/eval_vad_v0.0.4_all_20261125_123830_805363603.json	5/5 records
+batch_7	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_7/attempt_1253722_20261125_131924_296336984/eval_vad_v0.0.4_all_20261125_131928_001500388.json	5/5 records
+batch_8	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_8/attempt_1253723_20261125_132939_027784018/eval_vad_v0.0.4_all_20261125_132943_166733543.json	5/5 records
+batch_9	/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_9/attempt_1253724_20261125_141813_316551969/eval_vad_v0.0.4_all_20261125_141819_215040438.json	5/5 records
+
+Route outcomes
+==============
+route_id	outcome	status	score_route	score_penalty	score_composed	duration_system_s
+RouteScenario_10089_rep0	FAILURE	Failed	55.78	0.6	33.468	267.103
+RouteScenario_10220_rep0	SUCCESS	Completed	100	1.0	100.0	695.621
+RouteScenario_10255_rep0	FAILURE	Failed - Agent got blocked	39.9	1.0	39.9	811.877
+RouteScenario_10364_rep0	FAILURE	Failed	72.84	0.48	34.9632	223.216
+RouteScenario_10552_rep0	FAILURE	Failed - Agent got blocked	53.11	1.0	53.11	1309.273
+RouteScenario_10791_rep0	FAILURE	Failed	59.18	0.36	21.3048	433.407
+RouteScenario_10793_rep0	FAILURE	Failed - Agent got blocked	20.8	1.0	20.8	810.851
+RouteScenario_11010_rep0	SUCCESS	Completed	100	1.0	100.0	384.351
+RouteScenario_11177_rep0	SUCCESS	Completed	100	0.91717	91.716974	779.275
+RouteScenario_11215_rep0	FAILURE	Failed	54.11	0.4225	22.861475	680.672
+RouteScenario_11333_rep0	FAILURE	Failed	54.14	0.25	13.535	294.284
+RouteScenario_11658_rep0	FAILURE	Failed	47.67	0.42	20.0214	134.816
+RouteScenario_11738_rep0	FAILURE	Failed - TickRuntime	40.15	1.0	40.15	2607.432
+RouteScenario_12791_rep0	FAILURE	Failed - TickRuntime	24.49	1.0	24.49	2804.138
+RouteScenario_12933_rep0	FAILURE	Failed	58.61	0.42	24.6162	173.168
+RouteScenario_12_rep0	SUCCESS	Completed	100	1.0	100.0	165.171
+RouteScenario_13231_rep0	FAILURE	Failed - TickRuntime	26.28	1.0	26.28	2132.147
+RouteScenario_13674_rep0	FAILURE	Failed - Agent got blocked	18.53	1.0	18.53	798.181
+RouteScenario_14382_rep0	FAILURE	Failed	44.49	0.48	21.3552	190.2
+RouteScenario_14955_rep0	SUCCESS	Completed	100	1.0	100.0	135.127
+RouteScenario_15071_rep0	FAILURE	Failed - Agent got blocked	0.0	1.0	0.0	690.643
+RouteScenario_15102_rep0	SUCCESS	Completed	100	1.0	100.0	172.227
+RouteScenario_15483_rep0	FAILURE	Failed - Agent got blocked	0	1.0	0.0	770.842
+RouteScenario_15612_rep0	FAILURE	Failed - Agent got blocked	0	1.0	0.0	765.189
+RouteScenario_16390_rep0	FAILURE	Failed - Agent got blocked	0	1.0	0.0	632.574
+RouteScenario_16486_rep0	FAILURE	Failed - Agent got blocked	0	1.0	0.0	832.396
+RouteScenario_16502_rep0	FAILURE	Failed - Agent got blocked	0.0	1.0	0.0	656.673
+RouteScenario_16508_rep0	FAILURE	Failed - Agent got blocked	0	1.0	0.0	757.983
+RouteScenario_16522_rep0	FAILURE	Failed	62.58	0.388	24.281054	129.136
+RouteScenario_16529_rep0	FAILURE	Failed - Agent got blocked	0	1.0	0.0	811.427
+RouteScenario_16542_rep0	FAILURE	Failed - Agent got blocked	0	1.0	0.0	783.819
+RouteScenario_17280_rep0	FAILURE	Failed - Agent got blocked	0.0	1.0	0.0	668.648
+RouteScenario_17564_rep0	FAILURE	Failed	31.44	0.6	18.864	81.078
+RouteScenario_17615_rep0	FAILURE	Failed	56.23	0.621417	34.942283	116.134
+RouteScenario_17749_rep0	SUCCESS	Completed	100	1.0	100.0	249.927
+RouteScenario_17853_rep0	FAILURE	Failed	53.05	0.463105	24.567699	171.164
+RouteScenario_17892_rep0	SUCCESS	Completed	100	1.0	100.0	230.252
+RouteScenario_17921_rep0	SUCCESS	Completed	100	1.0	100.0	222.199
+RouteScenario_17965_rep0	SUCCESS	Completed	100	1.0	100.0	232.22
+RouteScenario_18027_rep0	SUCCESS	Completed	100	1.0	100.0	322.283
+RouteScenario_18073_rep0	SUCCESS	Completed	100	1.0	100.0	231.211
+RouteScenario_18160_rep0	SUCCESS	Completed	100	1.0	100.0	291.899
+RouteScenario_18174_rep0	SUCCESS	Completed	100	1.0	100.0	563.665
+RouteScenario_18344_rep0	FAILURE	Failed	36.39	0.6	21.834	107.331
+RouteScenario_18490_rep0	FAILURE	Failed	33.14	0.65	21.541	306.296
+RouteScenario_18512_rep0	FAILURE	Failed	34.64	0.65	22.516	1126.727
+RouteScenario_18543_rep0	FAILURE	Failed	35.4	0.65	23.01	201.2
+RouteScenario_18551_rep0	FAILURE	Failed	36.39	0.65	23.6535	1130.25
+RouteScenario_18647_rep0	FAILURE	Failed	33.11	0.65	21.5215	538.823
+RouteScenario_18777_rep0	FAILURE	Failed	35.38	0.65	22.997	743.789
+RouteScenario_18857_rep0	FAILURE	Failed - TickRuntime	28.9	1.0	28.9	2290.34
+RouteScenario_18868_rep0	FAILURE	Failed	33.63	0.65	21.8595	686.731
+RouteScenario_18907_rep0	FAILURE	Failed - TickRuntime	30.89	1.0	30.89	2252.236
+RouteScenario_19186_rep0	FAILURE	Failed - TickRuntime	27.14	1.0	27.14	2401.588
+RouteScenario_19207_rep0	FAILURE	Failed - TickRuntime	34.88	1.0	34.88	2577.426
+RouteScenario_19324_rep0	FAILURE	Failed - TickRuntime	30.33	1.0	30.33	2642.461
+RouteScenario_19359_rep0	FAILURE	Failed - TickRuntime	30.34	1.0	30.34	2489.502
+RouteScenario_19486_rep0	FAILURE	Failed - TickRuntime	30.86	1.0	30.86	2500.287
+RouteScenario_19681_rep0	FAILURE	Failed - TickRuntime	33.89	1.0	33.89	2535.599
+RouteScenario_19753_rep0	FAILURE	Failed	39.42	0.6	23.652	737.698
+RouteScenario_19832_rep0	FAILURE	Failed - TickRuntime	30.89	1.0	30.89	2342.3
+RouteScenario_20999_rep0	SUCCESS	Completed	100	1.0	100.0	615.178
+RouteScenario_21009_rep0	SUCCESS	Completed	100	1.0	100.0	454.761
+RouteScenario_21037_rep0	SUCCESS	Completed	100	1.0	100.0	420.488
+RouteScenario_21102_rep0	SUCCESS	Completed	100	1.0	100.0	415.442
+RouteScenario_21188_rep0	SUCCESS	Completed	100	1.0	100.0	432.49
+RouteScenario_21411_rep0	SUCCESS	Completed	100	1.0	100.0	1299.499
+RouteScenario_21496_rep0	FAILURE	Failed - TickRuntime	32.63	1.0	32.63	2280.404
+RouteScenario_21503_rep0	FAILURE	Failed - TickRuntime	32.39	1.0	32.39	2273.197
+RouteScenario_21546_rep0	FAILURE	Failed - TickRuntime	31.61	1.0	31.61	2413.838
+RouteScenario_21992_rep0	FAILURE	Failed - TickRuntime	40.94	1.0	40.94	2802.123
+RouteScenario_21994_rep0	FAILURE	Failed - TickRuntime	40.65	1.0	40.65	2620.574
+RouteScenario_22331_rep0	SUCCESS	Completed	100	1.0	100.0	395.757
+RouteScenario_22531_rep0	SUCCESS	Completed	100	1.0	100.0	896.134
+RouteScenario_22535_rep0	SUCCESS	Completed	100	1.0	100.0	257.272
+RouteScenario_22584_rep0	FAILURE	Failed	3.1	0.6	1.86	41.173
+RouteScenario_22590_rep0	FAILURE	Failed	3.06	0.6	1.836	62.067
+RouteScenario_22606_rep0	FAILURE	Failed	3.09	0.6	1.854	47.29
+RouteScenario_22622_rep0	FAILURE	Failed	3.05	0.6	1.83	62.063
+RouteScenario_22651_rep0	SUCCESS	Completed	100	1.0	100.0	700.938
+RouteScenario_22983_rep0	SUCCESS	Completed	100	1.0	100.0	408.168
+RouteScenario_2299_rep0	SUCCESS	Completed	100	1.0	100.0	203.216
+RouteScenario_23199_rep0	SUCCESS	Completed	100	1.0	100.0	247.242
+RouteScenario_23299_rep0	FAILURE	Failed	34.9	0.6	20.94	109.108
+RouteScenario_23469_rep0	FAILURE	Failed	39.6	0.486661	19.271768	136.541
+RouteScenario_23470_rep0	FAILURE	Failed	30.33	0.6	18.198	110.274
+RouteScenario_23604_rep0	FAILURE	Failed	28.86	0.6	17.316	103.182
+RouteScenario_23697_rep0	SUCCESS	Completed	100	1.0	100.0	174.164
+RouteScenario_23842_rep0	FAILURE	Failed - TickRuntime	68.72	1.0	68.72	2216.662
+RouteScenario_24099_rep0	SUCCESS	Completed	100	0.92564	92.564024	268.958
+RouteScenario_24151_rep0	FAILURE	Failed	22.74	0.65	14.781	63.054
+RouteScenario_24162_rep0	FAILURE	Failed	29.08	0.632727	18.399691	79.082
+RouteScenario_24207_rep0	FAILURE	Failed	40.94	0.6	24.564	80.077
+RouteScenario_24416_rep0	FAILURE	Failed	32.25	0.487646	15.726587	107.103
+RouteScenario_24497_rep0	FAILURE	Failed	31.89	0.65	20.7285	415.365
+RouteScenario_24519_rep0	SUCCESS	Completed	100	1.0	100.0	204.186
+RouteScenario_2460_rep0	SUCCESS	Completed	100	1.0	100.0	381.82
+RouteScenario_24622_rep0	FAILURE	Failed - TickRuntime	32.71	1.0	32.71	2095.184
+RouteScenario_24679_rep0	SUCCESS	Completed	100	1.0	100.0	241.215
+RouteScenario_24693_rep0	FAILURE	Failed	54.15	0.65	35.1975	168.152
+RouteScenario_24721_rep0	SUCCESS	Completed	100	1.0	100.0	327.306
+RouteScenario_24758_rep0	FAILURE	Failed	34.07	0.474899	16.179798	121.107
+RouteScenario_24906_rep0	FAILURE	Failed - TickRuntime	26.27	1.0	26.27	2037.875
+RouteScenario_24944_rep0	FAILURE	Failed	20.5	0.536031	10.988631	53.053
+RouteScenario_24948_rep0	SUCCESS	Completed	100	1.0	100.0	209.186
+RouteScenario_24955_rep0	FAILURE	Failed	34.65	0.65	22.5225	330.307
+RouteScenario_24_rep0	SUCCESS	Completed	100	1.0	100.0	169.167
+RouteScenario_25051_rep0	FAILURE	Failed	67.95	0.563221	38.270854	252.219
+RouteScenario_25134_rep0	FAILURE	Failed	79.4	0.556438	44.181186	565.506
+RouteScenario_25169_rep0	SUCCESS	Completed	100	1.0	100.0	457.425
+RouteScenario_2520_rep0	FAILURE	Failed	36.15	0.65	23.4975	413.38
+RouteScenario_25215_rep0	FAILURE	Failed - TickRuntime	32.14	1.0	32.14	2115.997
+RouteScenario_25538_rep0	SUCCESS	Completed	100	0.7	70.0	337.305
+RouteScenario_25612_rep0	SUCCESS	Completed	100	0.7	70.0	146.138
+RouteScenario_25613_rep0	SUCCESS	Completed	100	1.0	100.0	317.321
+RouteScenario_25727_rep0	FAILURE	Failed - TickRuntime	43.09	1.0	43.09	2007.894
+RouteScenario_25753_rep0	FAILURE	Failed - TickRuntime	34.58	1.0	34.58	1816.731
+RouteScenario_25774_rep0	FAILURE	Failed - TickRuntime	43.49	1.0	43.49	1898.822
+RouteScenario_25783_rep0	FAILURE	Failed - TickRuntime	39.66	1.0	39.66	1901.807
+RouteScenario_25986_rep0	FAILURE	Failed - TickRuntime	45.31	1.0	45.31	1968.789
+RouteScenario_26023_rep0	FAILURE	Failed	29.31	0.6	17.586	49.044
+RouteScenario_2608_rep0	FAILURE	Failed - TickRuntime	27.31	1.0	27.31	2512.693
+RouteScenario_2614_rep0	FAILURE	Failed - TickRuntime	36.7	1.0	36.7	2105.164
+RouteScenario_26153_rep0	FAILURE	Failed - TickRuntime	40.29	1.0	40.29	1766.585
+RouteScenario_26365_rep0	FAILURE	Failed	3.28	0.6	1.968	30.029
+RouteScenario_26370_rep0	FAILURE	Failed - TickRuntime	31.57	1.0	31.57	2035.885
+RouteScenario_26537_rep0	SUCCESS	Completed	100	1.0	100.0	197.2
+RouteScenario_2667_rep0	FAILURE	Failed - TickRuntime	36.77	1.0	36.77	2570.549
+RouteScenario_26723_rep0	FAILURE	Failed	9.73	0.280675	2.730968	48.047
+RouteScenario_26828_rep0	SUCCESS	Completed	100	1.0	100.0	231.222
+RouteScenario_26872_rep0	FAILURE	Failed	48.44	0.6	29.064	74.08
+RouteScenario_26990_rep0	FAILURE	Failed - TickRuntime	18.72	1.0	18.72	2008.873
+RouteScenario_27005_rep0	FAILURE	Failed - TickRuntime	18.72	1.0	18.72	1933.82
+RouteScenario_27043_rep0	FAILURE	Failed - TickRuntime	25.81	1.0	25.81	2034.911
+RouteScenario_2724_rep0	FAILURE	Failed	3.08	0.6	1.848	46.057
+RouteScenario_27297_rep0	FAILURE	Failed	62.51	0.245955	15.374627	248.238
+RouteScenario_27392_rep0	FAILURE	Failed - TickRuntime	37.77	1.0	37.77	1822.78
+RouteScenario_27787_rep0	FAILURE	Failed - Agent got blocked	0	1.0	0.0	642.66
+RouteScenario_27823_rep0	FAILURE	Failed	86.15	0.65	55.9975	380.332
+RouteScenario_27870_rep0	FAILURE	Failed	46.09	0.389966	17.973526	58.053
+RouteScenario_2787_rep0	FAILURE	Failed	65.7	0.6	39.42	120.106
+RouteScenario_27907_rep0	SUCCESS	Completed	100	1.0	100.0	192.188
+RouteScenario_27916_rep0	SUCCESS	Completed	100	0.7	70.0	107.092
+RouteScenario_2797_rep0	FAILURE	Failed	82.16	0.6	49.296	132.129
+RouteScenario_27994_rep0	FAILURE	Failed	98.49	0.461702	45.473058	328.339
+RouteScenario_28008_rep0	FAILURE	Failed	22.58	0.6	13.548	72.071
+RouteScenario_28147_rep0	FAILURE	Failed - TickRuntime	17.85	1.0	17.85	2225.635
+RouteScenario_28180_rep0	SUCCESS	Completed	100	0.717342	71.734215	374.345
+RouteScenario_28387_rep0	SUCCESS	Completed	100	1.0	100.0	1198.977
+RouteScenario_28_rep0	SUCCESS	Completed	100	1.0	100.0	171.176
+RouteScenario_29073_rep0	SUCCESS	Completed	100	1.0	100.0	771.755
+RouteScenario_29183_rep0	SUCCESS	Completed	100	1.0	100.0	904.749
+RouteScenario_29538_rep0	FAILURE	Failed - TickRuntime	29.39	1.0	29.39	2355.839
+RouteScenario_29629_rep0	FAILURE	Failed - TickRuntime	29.38	1.0	29.38	2266.677
+RouteScenario_29770_rep0	FAILURE	Failed - TickRuntime	25.83	1.0	25.83	2090.225
+RouteScenario_29856_rep0	FAILURE	Failed - TickRuntime	22.77	1.0	22.77	2345.858
+RouteScenario_29893_rep0	FAILURE	Failed - TickRuntime	26.38	1.0	26.38	2166.562
+RouteScenario_30008_rep0	FAILURE	Failed - TickRuntime	25.79	1.0	25.79	2222.277
+RouteScenario_30202_rep0	FAILURE	Failed	36.4	0.65	23.66	199.186
+RouteScenario_30283_rep0	FAILURE	Failed - TickRuntime	27.31	1.0	27.31	2117.042
+RouteScenario_30313_rep0	FAILURE	Failed - TickRuntime	21.87	1.0	21.87	2136.644
+RouteScenario_30596_rep0	FAILURE	Failed - TickRuntime	32.39	1.0	32.39	2144.178
+RouteScenario_30691_rep0	FAILURE	Failed - TickRuntime	30.33	1.0	30.33	2045.392
+RouteScenario_30939_rep0	FAILURE	Failed - TickRuntime	30.34	1.0	30.34	2174.325
+RouteScenario_31045_rep0	FAILURE	Failed	34.64	0.6	20.784	124.124
+RouteScenario_31100_rep0	FAILURE	Failed - TickRuntime	30.89	1.0	30.89	2038.02
+RouteScenario_31124_rep0	FAILURE	Failed - TickRuntime	28.82	1.0	28.82	2402.945
+RouteScenario_31654_rep0	FAILURE	Failed	37.91	0.6	22.746	228.218
+RouteScenario_31736_rep0	FAILURE	Failed	46.67	0.6	28.002	1382.906
+RouteScenario_31938_rep0	FAILURE	Failed	40.63	0.6	24.378	226.302
+RouteScenario_32221_rep0	SUCCESS	Completed	100	1.0	100.0	264.837
+RouteScenario_32517_rep0	SUCCESS	Completed	100	1.0	100.0	197.176
+RouteScenario_33202_rep0	SUCCESS	Completed	100	1.0	100.0	251.806
+RouteScenario_334_rep0	FAILURE	Failed - TickRuntime	24.15	1.0	24.15	1852.715
+RouteScenario_34183_rep0	FAILURE	Failed - TickRuntime	21.29	1.0	21.29	2311.862
+RouteScenario_34391_rep0	FAILURE	Failed - TickRuntime	19.8	1.0	19.8	2256.568
+RouteScenario_34436_rep0	FAILURE	Failed - TickRuntime	12.73	1.0	12.73	2337.087
+RouteScenario_3475_rep0	FAILURE	Failed	37.91	0.6	22.746	234.233
+RouteScenario_3483_rep0	SUCCESS	Completed	100	1.0	100.0	234.664
+RouteScenario_34867_rep0	FAILURE	Failed - TickRuntime	22.23	1.0	22.23	2306.096
+RouteScenario_3502_rep0	SUCCESS	Completed	100	1.0	100.0	226.86
+RouteScenario_35243_rep0	FAILURE	Failed - TickRuntime	21.85	1.0	21.85	2205.634
+RouteScenario_35330_rep0	FAILURE	Failed	62.13	0.6	37.278	198.288
+RouteScenario_35418_rep0	FAILURE	Failed	82.67	0.6	49.602	510.501
+RouteScenario_35623_rep0	FAILURE	Failed	56.46	0.634242	35.809276	690.775
+RouteScenario_35907_rep0	FAILURE	Failed	70.29	0.6	42.174	500.486
+RouteScenario_36360_rep0	FAILURE	Failed - Agent got blocked	85.62	0.874076	74.838385	936.943
+RouteScenario_36792_rep0	FAILURE	Failed	15.89	0.65	10.3285	77.07
+RouteScenario_37223_rep0	FAILURE	Failed	18.27	0.564632	10.315833	90.386
+RouteScenario_37391_rep0	FAILURE	Failed	61.08	0.509454	31.117466	133.864
+RouteScenario_3740_rep0	FAILURE	Failed	62.19	0.36	22.3884	409.403
+RouteScenario_37447_rep0	FAILURE	Failed	29.71	0.633598	18.824203	80.409
+RouteScenario_37969_rep0	FAILURE	Failed	18.36	0.63255	11.613622	63.626
+RouteScenario_3816_rep0	SUCCESS	Completed	100	1.0	100.0	250.297
+RouteScenario_4027_rep0	FAILURE	Failed - TickRuntime	18.76	1.0	18.76	2462.307
+RouteScenario_4104_rep0	FAILURE	Failed	44.53	0.6	26.718	136.134
+RouteScenario_4183_rep0	FAILURE	Failed	50.41	0.6	30.246	132.124
+RouteScenario_4582_rep0	FAILURE	Failed	47.12	0.6	28.272	165.293
+RouteScenario_4619_rep0	FAILURE	Failed - TickRuntime	19.24	1.0	19.24	2719.735
+RouteScenario_4621_rep0	FAILURE	Failed	42.21	0.6	25.326	142.14
+RouteScenario_469_rep0	SUCCESS	Completed	100	0.7	70.0	135.13
+RouteScenario_4721_rep0	FAILURE	Failed - TickRuntime	18.15	1.0	18.15	3003.465
+RouteScenario_4734_rep0	FAILURE	Failed - TickRuntime	24.01	1.0	24.01	2547.907
+RouteScenario_4_rep0	SUCCESS	Completed	100	1.0	100.0	186.179
+RouteScenario_5423_rep0	SUCCESS	Completed	100	1.0	100.0	209.394
+RouteScenario_6673_rep0	FAILURE	Failed - Agent got blocked	18.51	1.0	18.51	794.796
+RouteScenario_6951_rep0	FAILURE	Failed - TickRuntime	19.5	1.0	19.5	2115.171
+RouteScenario_6999_rep0	FAILURE	Failed - TickRuntime	23.56	1.0	23.56	2473.582
+RouteScenario_7157_rep0	FAILURE	Failed - TickRuntime	28.15	1.0	28.15	2810.141
+RouteScenario_7165_rep0	FAILURE	Failed - TickRuntime	18.21	1.0	18.21	2290.872
+RouteScenario_7230_rep0	FAILURE	Failed - TickRuntime	20.3	1.0	20.3	2118.143
+RouteScenario_7456_rep0	FAILURE	Failed - TickRuntime	18.67	1.0	18.67	2182.348
+RouteScenario_7616_rep0	FAILURE	Failed - TickRuntime	23.49	1.0	23.49	2360.322
+RouteScenario_7841_rep0	FAILURE	Failed - TickRuntime	24.5	1.0	24.5	2169.273
+RouteScenario_8859_rep0	FAILURE	Failed - Agent got blocked	18.59	1.0	18.59	681.682
+RouteScenario_9102_rep0	FAILURE	Failed - Agent got blocked	15.65	1.0	15.65	778.839
+RouteScenario_9196_rep0	FAILURE	Failed - Agent got blocked	19.11	1.0	19.11	1632.266
+RouteScenario_9218_rep0	FAILURE	Failed - Agent got blocked	22.78	1.0	22.78	716.752
+RouteScenario_9395_rep0	FAILURE	Failed - Agent got blocked	23.44	1.0	23.44	830.805
+RouteScenario_9646_rep0	FAILURE	Failed	55.4	0.6	33.24	635.004
