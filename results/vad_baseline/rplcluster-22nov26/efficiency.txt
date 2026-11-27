@@ -1,0 +1,54 @@
+(b2d_zoo.venv) casko@arwen:~/Bench2Drive$ python tools/efficiency_smoothness_benchmark_batched.py   -f /Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_H
+Y6SiU/merged.json   -m /Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU
+
+============================================================
+BENCH2DRIVE EFFICIENCY & SMOOTHNESS
+============================================================
+Evaluation records: 220
+
+========== METRIC DISCOVERY ==========
+Metric root:        /Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU
+Metric files found: 220
+Unique names:       220
+======================================
+
+========== METRIC MATCHING ==========
+Expected records:       220
+Metric files found:     220
+Matched records:        220
+Missing files:          0
+Ambiguous matches:      0
+Duplicate record names: 0
+Invalid save names:     0
+=====================================
+
+Processing route telemetry...
+Processed 25/220 routes
+Processed 50/220 routes
+Processed 75/220 routes
+Processed 100/220 routes
+Processed 125/220 routes
+Processed 150/220 routes
+Processed 175/220 routes
+Processed 200/220 routes
+Processed 220/220 routes
+
+============================================================
+FINAL BENCH2DRIVE RESULTS
+============================================================
+Total evaluation routes:  220
+Matched metric files:     220
+Smoothness routes scored: 220
+Telemetry errors:         0
+Efficiency observations:  203
+No efficiency percentage: 17
+
+Driving Efficiency: 152.9532
+Driving Smoothness: 0.4445
+
+Valid smoothness: True
+Valid efficiency: True
+============================================================
+
+Results saved to: /Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/merged_efficiency_smoothness.json
+Finished!

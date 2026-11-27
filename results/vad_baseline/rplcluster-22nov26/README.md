@@ -73,13 +73,20 @@ The log reports inference-speed-only mode. Per-route metadata and annotations we
 
 ### Our Closed-loop Results
 
+Note that our closed-loop run used `leaderboard/data/bench2drive_0.0.4_val.xml`instead of `leaderboard/data/bench2drive220.xml` which the official closed loop results are based on. Results are not directly comparable.
+
 **Run details.** 
 * Queue: `/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop batch_queue_20261125_102006_HY6SiU`
+* Routes: leaderboard/data/bench2drive_0.0.4_val.xml 
 * Batch checkpoints: 50
 * Routes with records: 220/220, Complete: True
 * Successful route records: 57. Failed/non-final route records: 163.
 
-| Model | Driving Score | Success Rate | Efficiency | Comfort |
+| Model | Driving Score | Success Rate | Efficiency | Smoothness |
 | --- | ---: | ---: | ---: | ---: |
-| VAD | 43.2611 | 22.73% | - | - |
+| VAD | 43.26 | 22.73% | 152.95 | 0.45 |
+
+| Overtaking | Merging | Emergency brake | Give way | Traffic signs | Mean |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 17.39% | 15.62% | 42.11% | 16.67% | 29.07% | 24.17% |
 

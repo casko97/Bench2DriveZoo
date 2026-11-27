@@ -1,0 +1,126 @@
+(b2d_zoo.venv) casko@arwen:~/Bench2Drive/tools$ python merge_batched_route_jsons.py -f ~/Bench2DriveZoo/outputs/closed_loop/batch_queu
+e_20261125_102006_HY6SiU
+
+Searching for evaluation JSON files in: /Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU
+Found 50 candidate JSON files.
+
+Processing: batch_0/attempt_1253697_20261125_102006_467553006/eval_vad_v0.0.4_all_20261125_102019_667568245.json
+  Routes found: 5
+Processing: batch_1/attempt_1253698_20261125_102006_467181076/eval_vad_v0.0.4_all_20261125_102019_716261429.json
+  Routes found: 5
+Processing: batch_10/attempt_1253725_20261125_151725_063681368/eval_vad_v0.0.4_all_20261125_151731_613735496.json
+  Routes found: 5
+Processing: batch_11/attempt_1253726_20261125_155242_542855316/eval_vad_v0.0.4_all_20261125_155249_126585541.json
+  Routes found: 5
+Processing: batch_12/attempt_1253727_20261125_161503_380934443/eval_vad_v0.0.4_all_20261125_161509_539270167.json
+  Routes found: 5
+Processing: batch_13/attempt_1253728_20261125_163813_783931046/eval_vad_v0.0.4_all_20261125_163819_452307289.json
+  Routes found: 5
+Processing: batch_14/attempt_1253729_20261125_170657_249149455/eval_vad_v0.0.4_all_20261125_170702_139881541.json
+  Routes found: 5
+Processing: batch_15/attempt_1253730_20261125_171038_277770224/eval_vad_v0.0.4_all_20261125_171042_046328751.json
+  Routes found: 5
+Processing: batch_16/attempt_1253731_20261125_174624_955685332/eval_vad_v0.0.4_all_20261125_174633_401371406.json
+  Routes found: 5
+Processing: batch_17/attempt_1253732_20261125_181207_487228249/eval_vad_v0.0.4_all_20261125_181214_760496393.json
+  Routes found: 5
+Processing: batch_18/attempt_1253733_20261125_181701_936410811/eval_vad_v0.0.4_all_20261125_181705_129244051.json
+  Routes found: 5
+Processing: batch_19/attempt_1253738_20261125_183809_766914304/eval_vad_v0.0.4_all_20261125_183814_610923517.json
+  Routes found: 5
+Processing: batch_2/attempt_1253699_20261125_102006_467552286/eval_vad_v0.0.4_all_20261125_102019_611109673.json
+  Routes found: 5
+Processing: batch_20/attempt_1253744_20261125_191751_859685785/eval_vad_v0.0.4_all_20261125_191758_002824758.json
+  Routes found: 5
+Processing: batch_21/attempt_1253749_20261125_195258_433979714/eval_vad_v0.0.4_all_20261125_195303_768137207.json
+  Routes found: 5
+Processing: batch_22/attempt_1253757_20261125_202158_320288775/eval_vad_v0.0.4_all_20261125_202202_941970911.json
+  Routes found: 5
+Processing: batch_23/attempt_1253758_20261125_211400_785932411/eval_vad_v0.0.4_all_20261125_211403_722974403.json
+  Routes found: 5
+Processing: batch_24/attempt_1253759_20261125_215354_083265398/eval_vad_v0.0.4_all_20261125_215400_220491834.json
+  Routes found: 5
+Processing: batch_25/attempt_1253760_20261125_220344_225105443/eval_vad_v0.0.4_all_20261125_220348_719428718.json
+  Routes found: 5
+Processing: batch_26/attempt_1253761_20261125_221437_637319813/eval_vad_v0.0.4_all_20261125_221443_048836921.json
+  Routes found: 5
+Processing: batch_27/attempt_1253762_20261125_230322_379241842/eval_vad_v0.0.4_all_20261125_230325_371097501.json
+  Routes found: 5
+Processing: batch_28/attempt_1253763_20261125_234455_831183778/eval_vad_v0.0.4_all_20261125_234459_073922942.json
+  Routes found: 5
+Processing: batch_29/attempt_1253764_20261125_235403_839509546/eval_vad_v0.0.4_all_20261125_235406_921270922.json
+  Routes found: 5
+Processing: batch_3/attempt_1253701_20261125_111848_979098892/eval_vad_v0.0.4_all_20261125_111852_116700479.json
+  Routes found: 5
+Processing: batch_30/attempt_1253765_20261126_001710_306475663/eval_vad_v0.0.4_all_20261126_001713_907892277.json
+  Routes found: 5
+Processing: batch_31/attempt_1253766_20261126_004416_574162810/eval_vad_v0.0.4_all_20261126_004419_927742024.json
+  Routes found: 5
+Processing: batch_32/attempt_1253767_20261126_013159_855375125/eval_vad_v0.0.4_all_20261126_013205_563050709.json
+  Routes found: 5
+Processing: batch_33/attempt_1253768_20261126_013550_303981595/eval_vad_v0.0.4_all_20261126_013555_752640595.json
+  Routes found: 5
+Processing: batch_34/attempt_1253769_20261126_023630_680078287/eval_vad_v0.0.4_all_20261126_023633_386724325.json
+  Routes found: 5
+Processing: batch_35/attempt_1253770_20261126_025244_756799747/eval_vad_v0.0.4_all_20261126_025249_562188032.json
+  Routes found: 5
+Processing: batch_36/attempt_1253771_20261126_041149_417686910/eval_vad_v0.0.4_all_20261126_041152_463682682.json
+  Routes found: 1
+Processing: batch_37/attempt_1253772_20261126_044129_327715930/eval_vad_v0.0.4_all_20261126_044132_593937373.json
+  Routes found: 5
+Processing: batch_38/attempt_1253773_20261126_044458_744318444/eval_vad_v0.0.4_all_20261126_044501_692246851.json
+  Routes found: 5
+Processing: batch_39/attempt_1253774_20261126_045412_920724211/eval_vad_v0.0.4_all_20261126_045415_985019497.json
+  Routes found: 5
+Processing: batch_4/attempt_1253710_20261125_121155_463493945/eval_vad_v0.0.4_all_20261125_121203_713726758.json
+  Routes found: 5
+Processing: batch_40/attempt_1253775_20261126_055838_803405808/eval_vad_v0.0.4_all_20261126_055842_102905563.json
+  Routes found: 1
+Processing: batch_41/attempt_1253776_20261126_061353_572973523/eval_vad_v0.0.4_all_20261126_061359_607499140.json
+  Routes found: 5
+Processing: batch_42/attempt_1253777_20261126_061545_748869319/eval_vad_v0.0.4_all_20261126_061556_369822916.json
+  Routes found: 1
+Processing: batch_43/attempt_1253778_20261126_063252_419283250/eval_vad_v0.0.4_all_20261126_063257_666302790.json
+  Routes found: 2
+Processing: batch_44/attempt_1253785_20261126_064515_101075426/eval_vad_v0.0.4_all_20261126_064518_810443007.json
+  Routes found: 1
+Processing: batch_45/attempt_1253786_20261126_064737_306872581/eval_vad_v0.0.4_all_20261126_064740_091062854.json
+  Routes found: 5
+Processing: batch_46/attempt_1253787_20261126_065150_258078529/eval_vad_v0.0.4_all_20261126_065153_316771068.json
+  Routes found: 1
+Processing: batch_47/attempt_1253788_20261126_065420_193432451/eval_vad_v0.0.4_all_20261126_065423_918541632.json
+  Routes found: 3
+Processing: batch_48/attempt_1253789_20261126_070547_173309658/eval_vad_v0.0.4_all_20261126_070551_570475893.json
+  Routes found: 3
+Processing: batch_49/attempt_1253696_20261126_070941_388640983/eval_vad_v0.0.4_all_20261126_070944_342666190.json
+  Routes found: 2
+Processing: batch_5/attempt_1253711_20261125_122015_033584439/eval_vad_v0.0.4_all_20261125_122021_307714581.json
+  Routes found: 5
+Processing: batch_6/attempt_1253712_20261125_123827_584010382/eval_vad_v0.0.4_all_20261125_123830_805363603.json
+  Routes found: 5
+Processing: batch_7/attempt_1253722_20261125_131924_296336984/eval_vad_v0.0.4_all_20261125_131928_001500388.json
+  Routes found: 5
+Processing: batch_8/attempt_1253723_20261125_132939_027784018/eval_vad_v0.0.4_all_20261125_132943_166733543.json
+  Routes found: 5
+Processing: batch_9/attempt_1253724_20261125_141813_316551969/eval_vad_v0.0.4_all_20261125_141819_215040438.json
+  Routes found: 5
+
+============================================================
+BENCH2DRIVE EVALUATION SUMMARY
+============================================================
+Evaluation JSON files processed: 50
+Total route records found:      220
+Unique route IDs found:         220
+Expected routes:                220
+Successful routes:              50
+
+------------------------------------------------------------
+METRICS
+------------------------------------------------------------
+Driving Score: 43.2611
+Success Rate:  0.2273
+Success Rate:  22.73%
+
+============================================================
+Merged JSON saved to: /Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/merged.json
+============================================================

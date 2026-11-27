@@ -1,0 +1,260 @@
+{
+    "route_configuration": "leaderboard/data/bench2drive_0.0.4_val.xml",
+    "expected_routes": 220,
+    "matched_routes": 220,
+    "successful_routes": 50,
+    "complete_route_matching": true,
+    "valid_ability_metrics": true,
+    "driving_score": 43.261140468181786,
+    "observed_driving_score": 43.261140468181786,
+    "success_rate": 0.22727272727272727,
+    "ability": {
+        "Overtaking": 0.17391304347826086,
+        "Merging": 0.15625,
+        "Emergency_Brake": 0.42105263157894735,
+        "Give_Way": 0.16666666666666666,
+        "Traffic_Signs": 0.29069767441860467
+    },
+    "mean_ability": 0.2417160032284959,
+    "ability_statistics": {
+        "Overtaking": {
+            "success_count": 12,
+            "evaluated_count": 69,
+            "expected_count": 69
+        },
+        "Merging": {
+            "success_count": 10,
+            "evaluated_count": 64,
+            "expected_count": 64
+        },
+        "Emergency_Brake": {
+            "success_count": 24,
+            "evaluated_count": 57,
+            "expected_count": 57
+        },
+        "Give_Way": {
+            "success_count": 1,
+            "evaluated_count": 6,
+            "expected_count": 6
+        },
+        "Traffic_Signs": {
+            "success_count": 25,
+            "evaluated_count": 86,
+            "expected_count": 86
+        }
+    },
+    "scenario_statistics": {
+        "HardBreakRoute": {
+            "success_count": 3,
+            "evaluated_count": 3,
+            "expected_count": 3
+        },
+        "T_Junction": {
+            "success_count": 1,
+            "evaluated_count": 8,
+            "expected_count": 8
+        },
+        "ParkingCutIn": {
+            "success_count": 1,
+            "evaluated_count": 3,
+            "expected_count": 3
+        },
+        "NonSignalizedJunctionLeftTurn": {
+            "success_count": 0,
+            "evaluated_count": 10,
+            "expected_count": 10
+        },
+        "ParkingExit": {
+            "success_count": 1,
+            "evaluated_count": 7,
+            "expected_count": 7
+        },
+        "Accident": {
+            "success_count": 1,
+            "evaluated_count": 8,
+            "expected_count": 8
+        },
+        "AccidentTwoWays": {
+            "success_count": 0,
+            "evaluated_count": 8,
+            "expected_count": 8
+        },
+        "YieldToEmergencyVehicle": {
+            "success_count": 0,
+            "evaluated_count": 3,
+            "expected_count": 3
+        },
+        "VanillaNonSignalizedTurn": {
+            "success_count": 0,
+            "evaluated_count": 8,
+            "expected_count": 8
+        },
+        "ConstructionObstacle": {
+            "success_count": 0,
+            "evaluated_count": 12,
+            "expected_count": 12
+        },
+        "ParkedObstacleTwoWays": {
+            "success_count": 0,
+            "evaluated_count": 8,
+            "expected_count": 8
+        },
+        "ParkingCrossingPedestrian": {
+            "success_count": 1,
+            "evaluated_count": 2,
+            "expected_count": 2
+        },
+        "MergerIntoSlowTraffic": {
+            "success_count": 0,
+            "evaluated_count": 2,
+            "expected_count": 2
+        },
+        "SequentialLaneChange": {
+            "success_count": 0,
+            "evaluated_count": 3,
+            "expected_count": 3
+        },
+        "SignalizedJunctionLeftTurn": {
+            "success_count": 0,
+            "evaluated_count": 9,
+            "expected_count": 9
+        },
+        "SignalizedJunctionRightTurn": {
+            "success_count": 2,
+            "evaluated_count": 3,
+            "expected_count": 3
+        },
+        "ControlLoss": {
+            "success_count": 3,
+            "evaluated_count": 9,
+            "expected_count": 9
+        },
+        "SignalizedJunctionLeftTurnEnterFlow": {
+            "success_count": 0,
+            "evaluated_count": 6,
+            "expected_count": 6
+        },
+        "EnterActorFlow": {
+            "success_count": 0,
+            "evaluated_count": 3,
+            "expected_count": 3
+        },
+        "HazardAtSideLaneTwoWays": {
+            "success_count": 7,
+            "evaluated_count": 7,
+            "expected_count": 7
+        },
+        "VanillaSignalizedTurnEncounterRedLight": {
+            "success_count": 0,
+            "evaluated_count": 4,
+            "expected_count": 4
+        },
+        "VehicleTurningRoutePedestrian": {
+            "success_count": 1,
+            "evaluated_count": 9,
+            "expected_count": 9
+        },
+        "StaticCutIn": {
+            "success_count": 5,
+            "evaluated_count": 5,
+            "expected_count": 5
+        },
+        "ParkedObstacle": {
+            "success_count": 0,
+            "evaluated_count": 4,
+            "expected_count": 4
+        },
+        "VehicleOpensDoorTwoWays": {
+            "success_count": 1,
+            "evaluated_count": 8,
+            "expected_count": 8
+        },
+        "DynamicObjectCrossing": {
+            "success_count": 9,
+            "evaluated_count": 10,
+            "expected_count": 10
+        },
+        "VehicleTurningRoute": {
+            "success_count": 1,
+            "evaluated_count": 5,
+            "expected_count": 5
+        },
+        "ConstructionObstacleTwoWays": {
+            "success_count": 0,
+            "evaluated_count": 11,
+            "expected_count": 11
+        },
+        "PedestrianCrossing": {
+            "success_count": 0,
+            "evaluated_count": 2,
+            "expected_count": 2
+        },
+        "CrossingBicycleFlow": {
+            "success_count": 0,
+            "evaluated_count": 4,
+            "expected_count": 4
+        },
+        "InvadingTurn": {
+            "success_count": 1,
+            "evaluated_count": 3,
+            "expected_count": 3
+        },
+        "OppositeVehicleTakingPriority": {
+            "success_count": 0,
+            "evaluated_count": 5,
+            "expected_count": 5
+        },
+        "HighwayCutIn": {
+            "success_count": 3,
+            "evaluated_count": 4,
+            "expected_count": 4
+        },
+        "BlockedIntersection": {
+            "success_count": 0,
+            "evaluated_count": 3,
+            "expected_count": 3
+        },
+        "NonSignalizedJunctionRightTurn": {
+            "success_count": 0,
+            "evaluated_count": 1,
+            "expected_count": 1
+        },
+        "VanillaSignalizedTurnEncounterGreenLight": {
+            "success_count": 2,
+            "evaluated_count": 3,
+            "expected_count": 3
+        },
+        "OppositeVehicleRunningRedLight": {
+            "success_count": 0,
+            "evaluated_count": 1,
+            "expected_count": 1
+        },
+        "MergerIntoSlowTrafficV2": {
+            "success_count": 0,
+            "evaluated_count": 7,
+            "expected_count": 7
+        },
+        "VanillaNonSignalizedTurnEncounterStopsign": {
+            "success_count": 0,
+            "evaluated_count": 1,
+            "expected_count": 1
+        },
+        "InterurbanActorFlow": {
+            "success_count": 4,
+            "evaluated_count": 4,
+            "expected_count": 4
+        },
+        "NonSignalizedJunctionLeftTurnEnterFlow": {
+            "success_count": 0,
+            "evaluated_count": 1,
+            "expected_count": 1
+        },
+        "HazardAtSideLane": {
+            "success_count": 3,
+            "evaluated_count": 3,
+            "expected_count": 3
+        }
+    },
+    "missing_routes": [],
+    "traffic_sign_errors": []
+}

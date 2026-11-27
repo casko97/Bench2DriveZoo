@@ -1,0 +1,52 @@
+(b2d_zoo.venv) casko@arwen:~/Bench2Drive$ python tools/ability-benchmark-zoo.py   -f leaderboard/data/bench2drive_0.0.4_val.xml   -r /Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop
+/batch_queue_20261125_102006_HY6SiU/merged.json
+[debug] map_root = /Midgard/home/casko/carla/CarlaUE4/Content/Carla/Maps
+
+========== ROUTE VALIDATION ==========
+Routes in XML:        220
+Records in JSON:      220
+Unique XML IDs:       220
+Unique JSON IDs:      220
+Matching IDs:         220
+Missing XML routes:   0
+Extra JSON routes:    0
+Duplicate XML IDs:    0
+Duplicate JSON IDs:   0
+Invalid JSON IDs:     0
+
+Complete evaluation: True
+======================================
+
+
+========== EXPECTED ABILITY ROUTES ==========
+Overtaking          : 69
+Merging             : 64
+Emergency_Brake     : 57
+Give_Way            : 6
+Traffic_Signs       : 86
+============================================
+
+
+========== ABILITY STATISTICS ==========
+Overtaking           success= 12 evaluated= 69 expected= 69 score=17.39%
+Merging              success= 10 evaluated= 64 expected= 64 score=15.62%
+Emergency_Brake      success= 24 evaluated= 57 expected= 57 score=42.11%
+Give_Way             success=  1 evaluated=  6 expected=  6 score=16.67%
+Traffic_Signs        success= 25 evaluated= 86 expected= 86 score=29.07%
+========================================
+
+
+========== FINAL RESULTS ==========
+Expected routes:    220
+Matched routes:     220
+Successful routes:  50
+Driving Score:      43.2611
+Success Rate:       22.73%
+Observed-route DS:  43.2611
+Mean Ability:       24.17%
+Complete routes:    True
+Valid ability:      True
+Traffic sign errors:0
+===================================
+
+Results saved to: /Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/merged_ability_zoo.json

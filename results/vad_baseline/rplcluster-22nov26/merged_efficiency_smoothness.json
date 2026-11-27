@@ -1,0 +1,1579 @@
+{
+    "evaluation_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/merged.json",
+    "metric_root": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU",
+    "total_routes": 220,
+    "metric_files_found": 220,
+    "matched_metric_files": 220,
+    "smoothness_routes_scored": 220,
+    "efficiency_observations": 203,
+    "driving_efficiency": 152.95316702395286,
+    "driving_smoothness": 0.44454487703019785,
+    "valid_smoothness": true,
+    "valid_efficiency": true,
+    "missing_metric_files": [],
+    "ambiguous_metric_files": [],
+    "duplicate_record_names": {},
+    "invalid_save_names": [],
+    "telemetry_errors": [],
+    "routes_without_efficiency": [
+        "RouteScenario_27787_rep0",
+        "RouteScenario_2724_rep0",
+        "RouteScenario_26365_rep0",
+        "RouteScenario_22622_rep0",
+        "RouteScenario_22606_rep0",
+        "RouteScenario_22590_rep0",
+        "RouteScenario_22584_rep0",
+        "RouteScenario_17280_rep0",
+        "RouteScenario_16542_rep0",
+        "RouteScenario_16529_rep0",
+        "RouteScenario_16508_rep0",
+        "RouteScenario_16502_rep0",
+        "RouteScenario_16486_rep0",
+        "RouteScenario_16390_rep0",
+        "RouteScenario_15612_rep0",
+        "RouteScenario_15483_rep0",
+        "RouteScenario_15071_rep0"
+    ],
+    "route_smoothness": [
+        {
+            "route_id": "RouteScenario_9646_rep0",
+            "save_name": "RouteScenario_9646_rep0_Town12_VehicleTurningRoute_1_None_11_25_16_50_10",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_13/attempt_1253728_20261125_163813_783931046/routes_RouteScenario_9646_rep0_Town12_VehicleTurningRoute_1_None_11_25_16_50_10/metric_info.json",
+            "smoothness": 0.6153846153846154,
+            "samples": 1042
+        },
+        {
+            "route_id": "RouteScenario_9395_rep0",
+            "save_name": "RouteScenario_9395_rep0_Town12_OppositeVehicleTakingPriority_1_None_11_25_23_39_11",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_25/attempt_1253760_20261125_220344_225105443/routes_RouteScenario_9395_rep0_Town12_OppositeVehicleTakingPriority_1_None_11_25_23_39_11/metric_info.json",
+            "smoothness": 0.855072463768116,
+            "samples": 1385
+        },
+        {
+            "route_id": "RouteScenario_9218_rep0",
+            "save_name": "RouteScenario_9218_rep0_Town12_OppositeVehicleTakingPriority_1_None_11_25_19_01_20",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_19/attempt_1253738_20261125_183809_766914304/routes_RouteScenario_9218_rep0_Town12_OppositeVehicleTakingPriority_1_None_11_25_19_01_20/metric_info.json",
+            "smoothness": 0.855072463768116,
+            "samples": 1389
+        },
+        {
+            "route_id": "RouteScenario_9196_rep0",
+            "save_name": "RouteScenario_9196_rep0_Town12_OppositeVehicleTakingPriority_1_None_11_25_13_20_58",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_7/attempt_1253722_20261125_131924_296336984/routes_RouteScenario_9196_rep0_Town12_OppositeVehicleTakingPriority_1_None_11_25_13_20_58/metric_info.json",
+            "smoothness": 0.9206349206349206,
+            "samples": 2533
+        },
+        {
+            "route_id": "RouteScenario_9102_rep0",
+            "save_name": "RouteScenario_9102_rep0_Town12_OppositeVehicleTakingPriority_1_None_11_25_17_48_02",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_16/attempt_1253731_20261125_174624_955685332/routes_RouteScenario_9102_rep0_Town12_OppositeVehicleTakingPriority_1_None_11_25_17_48_02/metric_info.json",
+            "smoothness": 0.921875,
+            "samples": 1297
+        },
+        {
+            "route_id": "RouteScenario_8859_rep0",
+            "save_name": "RouteScenario_8859_rep0_Town12_OppositeVehicleTakingPriority_1_3_11_25_16_02_41",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_10/attempt_1253725_20261125_151725_063681368/routes_RouteScenario_8859_rep0_Town12_OppositeVehicleTakingPriority_1_3_11_25_16_02_41/metric_info.json",
+            "smoothness": 0.8939393939393939,
+            "samples": 1336
+        },
+        {
+            "route_id": "RouteScenario_7841_rep0",
+            "save_name": "RouteScenario_7841_rep0_Town12_NonSignalizedJunctionRightTurn_1_None_11_25_15_00_50",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_9/attempt_1253724_20261125_141813_316551969/routes_RouteScenario_7841_rep0_Town12_NonSignalizedJunctionRightTurn_1_None_11_25_15_00_50/metric_info.json",
+            "smoothness": 0.97,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_7616_rep0",
+            "save_name": "RouteScenario_7616_rep0_Town12_NonSignalizedJunctionLeftTurn_1_3_11_25_12_40_48",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_4/attempt_1253710_20261125_121155_463493945/routes_RouteScenario_7616_rep0_Town12_NonSignalizedJunctionLeftTurn_1_3_11_25_12_40_48/metric_info.json",
+            "smoothness": 0.96,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_7456_rep0",
+            "save_name": "RouteScenario_7456_rep0_Town12_NonSignalizedJunctionLeftTurn_1_None_11_25_22_05_06",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_25/attempt_1253760_20261125_220344_225105443/routes_RouteScenario_7456_rep0_Town12_NonSignalizedJunctionLeftTurn_1_None_11_25_22_05_06/metric_info.json",
+            "smoothness": 0.95,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_7230_rep0",
+            "save_name": "RouteScenario_7230_rep0_Town12_NonSignalizedJunctionLeftTurn_1_None_11_25_22_17_21",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_24/attempt_1253759_20261125_215354_083265398/routes_RouteScenario_7230_rep0_Town12_NonSignalizedJunctionLeftTurn_1_None_11_25_22_17_21/metric_info.json",
+            "smoothness": 0.965,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_7165_rep0",
+            "save_name": "RouteScenario_7165_rep0_Town12_NonSignalizedJunctionLeftTurn_1_None_11_25_20_42_29",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_22/attempt_1253757_20261125_202158_320288775/routes_RouteScenario_7165_rep0_Town12_NonSignalizedJunctionLeftTurn_1_None_11_25_20_42_29/metric_info.json",
+            "smoothness": 0.965,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_7157_rep0",
+            "save_name": "RouteScenario_7157_rep0_Town12_NonSignalizedJunctionLeftTurn_1_None_11_25_16_22_32",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_11/attempt_1253726_20261125_155242_542855316/routes_RouteScenario_7157_rep0_Town12_NonSignalizedJunctionLeftTurn_1_None_11_25_16_22_32/metric_info.json",
+            "smoothness": 0.95,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_6999_rep0",
+            "save_name": "RouteScenario_6999_rep0_Town12_NonSignalizedJunctionLeftTurn_1_7_11_25_13_30_45",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_8/attempt_1253723_20261125_132939_027784018/routes_RouteScenario_6999_rep0_Town12_NonSignalizedJunctionLeftTurn_1_7_11_25_13_30_45/metric_info.json",
+            "smoothness": 0.96,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_6951_rep0",
+            "save_name": "RouteScenario_6951_rep0_Town12_NonSignalizedJunctionLeftTurn_1_None_11_25_19_53_26",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_20/attempt_1253744_20261125_191751_859685785/routes_RouteScenario_6951_rep0_Town12_NonSignalizedJunctionLeftTurn_1_None_11_25_19_53_26/metric_info.json",
+            "smoothness": 0.955,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_6673_rep0",
+            "save_name": "RouteScenario_6673_rep0_Town12_OppositeVehicleRunningRedLight_1_None_11_25_17_08_03",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_14/attempt_1253729_20261125_170657_249149455/routes_RouteScenario_6673_rep0_Town12_OppositeVehicleRunningRedLight_1_None_11_25_17_08_03/metric_info.json",
+            "smoothness": 0.8805970149253731,
+            "samples": 1346
+        },
+        {
+            "route_id": "RouteScenario_5423_rep0",
+            "save_name": "RouteScenario_5423_rep0_Town12_SignalizedJunctionRightTurn_1_None_11_25_13_21_53",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_5/attempt_1253711_20261125_122015_033584439/routes_RouteScenario_5423_rep0_Town12_SignalizedJunctionRightTurn_1_None_11_25_13_21_53/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 303
+        },
+        {
+            "route_id": "RouteScenario_4_rep0",
+            "save_name": "RouteScenario_4_rep0_Town12_InterurbanActorFlow_1_26_11_25_18_26_40",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_17/attempt_1253732_20261125_181207_487228249/routes_RouteScenario_4_rep0_Town12_InterurbanActorFlow_1_26_11_25_18_26_40/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 329
+        },
+        {
+            "route_id": "RouteScenario_4734_rep0",
+            "save_name": "RouteScenario_4734_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_19_08_45",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_18/attempt_1253733_20261125_181701_936410811/routes_RouteScenario_4734_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_19_08_45/metric_info.json",
+            "smoothness": 0.95,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_4721_rep0",
+            "save_name": "RouteScenario_4721_rep0_Town12_SignalizedJunctionLeftTurn_1_25_11_25_13_26_59",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_5/attempt_1253711_20261125_122015_033584439/routes_RouteScenario_4721_rep0_Town12_SignalizedJunctionLeftTurn_1_25_11_25_13_26_59/metric_info.json",
+            "smoothness": 0.965,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_469_rep0",
+            "save_name": "RouteScenario_469_rep0_Town15_YieldToEmergencyVehicle_1_None_11_25_10_39_25",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_0/attempt_1253697_20261125_102006_467553006/routes_RouteScenario_469_rep0_Town15_YieldToEmergencyVehicle_1_None_11_25_10_39_25/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 292
+        },
+        {
+            "route_id": "RouteScenario_4621_rep0",
+            "save_name": "RouteScenario_4621_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_23_27_07",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_26/attempt_1253761_20261125_221437_637319813/routes_RouteScenario_4621_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_23_27_07/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 233
+        },
+        {
+            "route_id": "RouteScenario_4619_rep0",
+            "save_name": "RouteScenario_4619_rep0_Town12_SignalizedJunctionLeftTurn_1_22_11_25_23_08_01",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_27/attempt_1253762_20261125_230322_379241842/routes_RouteScenario_4619_rep0_Town12_SignalizedJunctionLeftTurn_1_22_11_25_23_08_01/metric_info.json",
+            "smoothness": 0.95,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_4582_rep0",
+            "save_name": "RouteScenario_4582_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_21_55_19",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_24/attempt_1253759_20261125_215354_083265398/routes_RouteScenario_4582_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_21_55_19/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 253
+        },
+        {
+            "route_id": "RouteScenario_4183_rep0",
+            "save_name": "RouteScenario_4183_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_17_01_54",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_13/attempt_1253728_20261125_163813_783931046/routes_RouteScenario_4183_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_17_01_54/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 219
+        },
+        {
+            "route_id": "RouteScenario_4104_rep0",
+            "save_name": "RouteScenario_4104_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_13_15_55",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_6/attempt_1253712_20261125_123827_584010382/routes_RouteScenario_4104_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_13_15_55/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 253
+        },
+        {
+            "route_id": "RouteScenario_4027_rep0",
+            "save_name": "RouteScenario_4027_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_21_21_39",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_22/attempt_1253757_20261125_202158_320288775/routes_RouteScenario_4027_rep0_Town12_SignalizedJunctionLeftTurn_1_None_11_25_21_21_39/metric_info.json",
+            "smoothness": 0.955,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_3816_rep0",
+            "save_name": "RouteScenario_3816_rep0_Town13_HighwayCutIn_1_None_11_26_00_18_50",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_30/attempt_1253765_20261126_001710_306475663/routes_RouteScenario_3816_rep0_Town13_HighwayCutIn_1_None_11_26_00_18_50/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 386
+        },
+        {
+            "route_id": "RouteScenario_37969_rep0",
+            "save_name": "RouteScenario_37969_rep0_Town13_MergerIntoSlowTrafficV2_1_None_11_26_00_30_50",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_28/attempt_1253763_20261125_234455_831183778/routes_RouteScenario_37969_rep0_Town13_MergerIntoSlowTrafficV2_1_None_11_26_00_30_50/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 116
+        },
+        {
+            "route_id": "RouteScenario_37447_rep0",
+            "save_name": "RouteScenario_37447_rep0_Town12_MergerIntoSlowTrafficV2_1_None_11_25_21_33_28",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_23/attempt_1253758_20261125_211400_785932411/routes_RouteScenario_37447_rep0_Town12_MergerIntoSlowTrafficV2_1_None_11_25_21_33_28/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 123
+        },
+        {
+            "route_id": "RouteScenario_3740_rep0",
+            "save_name": "RouteScenario_3740_rep0_Town13_VehicleTurningRoutePedestrian_1_7_11_26_02_09_26",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_31/attempt_1253766_20261126_004416_574162810/routes_RouteScenario_3740_rep0_Town13_VehicleTurningRoutePedestrian_1_7_11_26_02_09_26/metric_info.json",
+            "smoothness": 0.5135135135135135,
+            "samples": 744
+        },
+        {
+            "route_id": "RouteScenario_37391_rep0",
+            "save_name": "RouteScenario_37391_rep0_Town13_MergerIntoSlowTrafficV2_1_22_11_26_04_12_15",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_35/attempt_1253770_20261126_025244_756799747/routes_RouteScenario_37391_rep0_Town13_MergerIntoSlowTrafficV2_1_22_11_26_04_12_15/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 254
+        },
+        {
+            "route_id": "RouteScenario_37223_rep0",
+            "save_name": "RouteScenario_37223_rep0_Town13_MergerIntoSlowTrafficV2_1_None_11_26_03_17_03",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_34/attempt_1253769_20261126_023630_680078287/routes_RouteScenario_37223_rep0_Town13_MergerIntoSlowTrafficV2_1_None_11_26_03_17_03/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 165
+        },
+        {
+            "route_id": "RouteScenario_36792_rep0",
+            "save_name": "RouteScenario_36792_rep0_Town13_MergerIntoSlowTrafficV2_1_None_11_26_00_56_52",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_29/attempt_1253764_20261125_235403_839509546/routes_RouteScenario_36792_rep0_Town13_MergerIntoSlowTrafficV2_1_None_11_26_00_56_52/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 109
+        },
+        {
+            "route_id": "RouteScenario_36360_rep0",
+            "save_name": "RouteScenario_36360_rep0_Town12_CrossingBicycleFlow_1_7_11_25_12_53_43",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_6/attempt_1253712_20261125_123827_584010382/routes_RouteScenario_36360_rep0_Town12_CrossingBicycleFlow_1_7_11_25_12_53_43/metric_info.json",
+            "smoothness": 0.7564102564102564,
+            "samples": 1565
+        },
+        {
+            "route_id": "RouteScenario_35907_rep0",
+            "save_name": "RouteScenario_35907_rep0_Town12_CrossingBicycleFlow_1_None_11_25_22_53_57",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_24/attempt_1253759_20261125_215354_083265398/routes_RouteScenario_35907_rep0_Town12_CrossingBicycleFlow_1_None_11_25_22_53_57/metric_info.json",
+            "smoothness": 0.5365853658536586,
+            "samples": 820
+        },
+        {
+            "route_id": "RouteScenario_35623_rep0",
+            "save_name": "RouteScenario_35623_rep0_Town12_CrossingBicycleFlow_1_None_11_25_23_14_43",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_26/attempt_1253761_20261125_221437_637319813/routes_RouteScenario_35623_rep0_Town12_CrossingBicycleFlow_1_None_11_25_23_14_43/metric_info.json",
+            "smoothness": 0.7090909090909091,
+            "samples": 1103
+        },
+        {
+            "route_id": "RouteScenario_35418_rep0",
+            "save_name": "RouteScenario_35418_rep0_Town12_CrossingBicycleFlow_1_None_11_25_15_52_43",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_10/attempt_1253725_20261125_151725_063681368/routes_RouteScenario_35418_rep0_Town12_CrossingBicycleFlow_1_None_11_25_15_52_43/metric_info.json",
+            "smoothness": 0.5,
+            "samples": 851
+        },
+        {
+            "route_id": "RouteScenario_35330_rep0",
+            "save_name": "RouteScenario_35330_rep0_Town13_SignalizedJunctionLeftTurnEnterFlow_1_None_11_26_01_33_31",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_32/attempt_1253767_20261126_013159_855375125/routes_RouteScenario_35330_rep0_Town13_SignalizedJunctionLeftTurnEnterFlow_1_None_11_26_01_33_31/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 315
+        },
+        {
+            "route_id": "RouteScenario_35243_rep0",
+            "save_name": "RouteScenario_35243_rep0_Town13_SignalizedJunctionLeftTurnEnterFlow_1_None_11_26_01_25_55",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_31/attempt_1253766_20261126_004416_574162810/routes_RouteScenario_35243_rep0_Town13_SignalizedJunctionLeftTurnEnterFlow_1_None_11_26_01_25_55/metric_info.json",
+            "smoothness": 0.955,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_3502_rep0",
+            "save_name": "RouteScenario_3502_rep0_Town13_StaticCutIn_1_None_11_26_02_17_40",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_33/attempt_1253768_20261126_013550_303981595/routes_RouteScenario_3502_rep0_Town13_StaticCutIn_1_None_11_26_02_17_40/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 430
+        },
+        {
+            "route_id": "RouteScenario_34867_rep0",
+            "save_name": "RouteScenario_34867_rep0_Town13_SignalizedJunctionLeftTurnEnterFlow_1_None_11_26_02_37_24",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_34/attempt_1253769_20261126_023630_680078287/routes_RouteScenario_34867_rep0_Town13_SignalizedJunctionLeftTurnEnterFlow_1_None_11_26_02_37_24/metric_info.json",
+            "smoothness": 0.96,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_3483_rep0",
+            "save_name": "RouteScenario_3483_rep0_Town13_StaticCutIn_1_None_11_26_00_25_42",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_28/attempt_1253763_20261125_234455_831183778/routes_RouteScenario_3483_rep0_Town13_StaticCutIn_1_None_11_26_00_25_42/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 386
+        },
+        {
+            "route_id": "RouteScenario_3475_rep0",
+            "save_name": "RouteScenario_3475_rep0_Town13_VehicleOpensDoorTwoWays_1_None_11_26_00_33_09",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_28/attempt_1253763_20261125_234455_831183778/routes_RouteScenario_3475_rep0_Town13_VehicleOpensDoorTwoWays_1_None_11_26_00_33_09/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 408
+        },
+        {
+            "route_id": "RouteScenario_34436_rep0",
+            "save_name": "RouteScenario_34436_rep0_Town13_SignalizedJunctionLeftTurnEnterFlow_1_22_11_26_01_37_21",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_33/attempt_1253768_20261126_013550_303981595/routes_RouteScenario_34436_rep0_Town13_SignalizedJunctionLeftTurnEnterFlow_1_22_11_26_01_37_21/metric_info.json",
+            "smoothness": 0.965,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_34391_rep0",
+            "save_name": "RouteScenario_34391_rep0_Town13_SignalizedJunctionLeftTurnEnterFlow_1_22_11_26_00_25_50",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_30/attempt_1253765_20261126_001710_306475663/routes_RouteScenario_34391_rep0_Town13_SignalizedJunctionLeftTurnEnterFlow_1_22_11_26_00_25_50/metric_info.json",
+            "smoothness": 0.965,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_34183_rep0",
+            "save_name": "RouteScenario_34183_rep0_Town13_NonSignalizedJunctionLeftTurnEnterFlow_1_3_11_25_23_45_53",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_28/attempt_1253763_20261125_234455_831183778/routes_RouteScenario_34183_rep0_Town13_NonSignalizedJunctionLeftTurnEnterFlow_1_3_11_25_23_45_53/metric_info.json",
+            "smoothness": 0.96,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_334_rep0",
+            "save_name": "RouteScenario_334_rep0_Town07_SignalizedJunctionLeftTurn_1_None_11_26_07_06_50",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_48/attempt_1253789_20261126_070547_173309658/routes_RouteScenario_334_rep0_Town07_SignalizedJunctionLeftTurn_1_None_11_26_07_06_50/metric_info.json",
+            "smoothness": 0.935,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_33202_rep0",
+            "save_name": "RouteScenario_33202_rep0_Town13_ControlLoss_1_None_11_26_01_21_23",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_30/attempt_1253765_20261126_001710_306475663/routes_RouteScenario_33202_rep0_Town13_ControlLoss_1_None_11_26_01_21_23/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 470
+        },
+        {
+            "route_id": "RouteScenario_32517_rep0",
+            "save_name": "RouteScenario_32517_rep0_Town13_ControlLoss_1_None_11_26_02_15_38",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_32/attempt_1253767_20261126_013159_855375125/routes_RouteScenario_32517_rep0_Town13_ControlLoss_1_None_11_26_02_15_38/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 396
+        },
+        {
+            "route_id": "RouteScenario_32221_rep0",
+            "save_name": "RouteScenario_32221_rep0_Town13_VehicleOpensDoorTwoWays_1_2_11_26_00_38_28",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_28/attempt_1253763_20261125_234455_831183778/routes_RouteScenario_32221_rep0_Town13_VehicleOpensDoorTwoWays_1_2_11_26_00_38_28/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 512
+        },
+        {
+            "route_id": "RouteScenario_31938_rep0",
+            "save_name": "RouteScenario_31938_rep0_Town13_VehicleOpensDoorTwoWays_1_None_11_26_02_04_17",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_31/attempt_1253766_20261126_004416_574162810/routes_RouteScenario_31938_rep0_Town13_VehicleOpensDoorTwoWays_1_None_11_26_02_04_17/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 396
+        },
+        {
+            "route_id": "RouteScenario_31736_rep0",
+            "save_name": "RouteScenario_31736_rep0_Town13_VehicleOpensDoorTwoWays_1_None_11_26_04_15_38",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_35/attempt_1253770_20261126_025244_756799747/routes_RouteScenario_31736_rep0_Town13_VehicleOpensDoorTwoWays_1_None_11_26_04_15_38/metric_info.json",
+            "smoothness": 0.7803030303030303,
+            "samples": 2651
+        },
+        {
+            "route_id": "RouteScenario_31654_rep0",
+            "save_name": "RouteScenario_31654_rep0_Town13_VehicleOpensDoorTwoWays_1_None_11_26_04_39_54",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_35/attempt_1253770_20261126_025244_756799747/routes_RouteScenario_31654_rep0_Town13_VehicleOpensDoorTwoWays_1_None_11_26_04_39_54/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 449
+        },
+        {
+            "route_id": "RouteScenario_31124_rep0",
+            "save_name": "RouteScenario_31124_rep0_Town13_AccidentTwoWays_1_23_11_26_04_12_44",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_36/attempt_1253771_20261126_041149_417686910/routes_RouteScenario_31124_rep0_Town13_AccidentTwoWays_1_23_11_26_04_12_44/metric_info.json",
+            "smoothness": 0.95,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_31100_rep0",
+            "save_name": "RouteScenario_31100_rep0_Town13_AccidentTwoWays_1_None_11_26_02_17_27",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_31/attempt_1253766_20261126_004416_574162810/routes_RouteScenario_31100_rep0_Town13_AccidentTwoWays_1_None_11_26_02_17_27/metric_info.json",
+            "smoothness": 0.92,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_31045_rep0",
+            "save_name": "RouteScenario_31045_rep0_Town13_AccidentTwoWays_1_2_11_26_00_53_37",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_29/attempt_1253764_20261125_235403_839509546/routes_RouteScenario_31045_rep0_Town13_AccidentTwoWays_1_2_11_26_00_53_37/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 237
+        },
+        {
+            "route_id": "RouteScenario_30939_rep0",
+            "save_name": "RouteScenario_30939_rep0_Town13_AccidentTwoWays_1_None_11_26_01_38_14",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_32/attempt_1253767_20261126_013159_855375125/routes_RouteScenario_30939_rep0_Town13_AccidentTwoWays_1_None_11_26_01_38_14/metric_info.json",
+            "smoothness": 0.935,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_30691_rep0",
+            "save_name": "RouteScenario_30691_rep0_Town13_AccidentTwoWays_1_None_11_26_02_22_34",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_33/attempt_1253768_20261126_013550_303981595/routes_RouteScenario_30691_rep0_Town13_AccidentTwoWays_1_None_11_26_02_22_34/metric_info.json",
+            "smoothness": 0.915,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_30596_rep0",
+            "save_name": "RouteScenario_30596_rep0_Town13_AccidentTwoWays_1_8_11_26_02_57_53",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_33/attempt_1253768_20261126_013550_303981595/routes_RouteScenario_30596_rep0_Town13_AccidentTwoWays_1_8_11_26_02_57_53/metric_info.json",
+            "smoothness": 0.935,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_30313_rep0",
+            "save_name": "RouteScenario_30313_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_03_34_51",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_33/attempt_1253768_20261126_013550_303981595/routes_RouteScenario_30313_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_03_34_51/metric_info.json",
+            "smoothness": 0.96,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_30283_rep0",
+            "save_name": "RouteScenario_30283_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_04_04_45",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_34/attempt_1253769_20261126_023630_680078287/routes_RouteScenario_30283_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_04_04_45/metric_info.json",
+            "smoothness": 0.955,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_30202_rep0",
+            "save_name": "RouteScenario_30202_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_01_27_01",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_30/attempt_1253765_20261126_001710_306475663/routes_RouteScenario_30202_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_01_27_01/metric_info.json",
+            "smoothness": 0.21052631578947367,
+            "samples": 392
+        },
+        {
+            "route_id": "RouteScenario_30008_rep0",
+            "save_name": "RouteScenario_30008_rep0_Town13_ConstructionObstacleTwoWays_1_1_11_26_03_34_03",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_35/attempt_1253770_20261126_025244_756799747/routes_RouteScenario_30008_rep0_Town13_ConstructionObstacleTwoWays_1_1_11_26_03_34_03/metric_info.json",
+            "smoothness": 0.95,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_29893_rep0",
+            "save_name": "RouteScenario_29893_rep0_Town13_ConstructionObstacleTwoWays_1_1_11_25_23_54_59",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_29/attempt_1253764_20261125_235403_839509546/routes_RouteScenario_29893_rep0_Town13_ConstructionObstacleTwoWays_1_1_11_25_23_54_59/metric_info.json",
+            "smoothness": 0.895,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_29856_rep0",
+            "save_name": "RouteScenario_29856_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_02_53_46",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_35/attempt_1253770_20261126_025244_756799747/routes_RouteScenario_29856_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_02_53_46/metric_info.json",
+            "smoothness": 0.93,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_29770_rep0",
+            "save_name": "RouteScenario_29770_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_00_59_38",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_29/attempt_1253764_20261125_235403_839509546/routes_RouteScenario_29770_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_00_59_38/metric_info.json",
+            "smoothness": 0.945,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_29629_rep0",
+            "save_name": "RouteScenario_29629_rep0_Town13_ConstructionObstacleTwoWays_1_25_11_26_03_19_45",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_34/attempt_1253769_20261126_023630_680078287/routes_RouteScenario_29629_rep0_Town13_ConstructionObstacleTwoWays_1_25_11_26_03_19_45/metric_info.json",
+            "smoothness": 0.945,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_29538_rep0",
+            "save_name": "RouteScenario_29538_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_00_45_19",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_31/attempt_1253766_20261126_004416_574162810/routes_RouteScenario_29538_rep0_Town13_ConstructionObstacleTwoWays_1_None_11_26_00_45_19/metric_info.json",
+            "smoothness": 0.94,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_29183_rep0",
+            "save_name": "RouteScenario_29183_rep0_Town13_HazardAtSideLane_1_None_11_26_01_05_07",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_30/attempt_1253765_20261126_001710_306475663/routes_RouteScenario_29183_rep0_Town13_HazardAtSideLane_1_None_11_26_01_05_07/metric_info.json",
+            "smoothness": 0.38461538461538464,
+            "samples": 1561
+        },
+        {
+            "route_id": "RouteScenario_29073_rep0",
+            "save_name": "RouteScenario_29073_rep0_Town13_HazardAtSideLane_1_None_11_26_02_20_08",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_32/attempt_1253767_20261126_013159_855375125/routes_RouteScenario_29073_rep0_Town13_HazardAtSideLane_1_None_11_26_02_20_08/metric_info.json",
+            "smoothness": 0.0821917808219178,
+            "samples": 1461
+        },
+        {
+            "route_id": "RouteScenario_28_rep0",
+            "save_name": "RouteScenario_28_rep0_Town12_InterurbanActorFlow_1_26_11_25_18_18_15",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_18/attempt_1253733_20261125_181701_936410811/routes_RouteScenario_28_rep0_Town12_InterurbanActorFlow_1_26_11_25_18_18_15/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 321
+        },
+        {
+            "route_id": "RouteScenario_28387_rep0",
+            "save_name": "RouteScenario_28387_rep0_Town13_HazardAtSideLane_1_None_11_26_00_32_19",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_29/attempt_1253764_20261125_235403_839509546/routes_RouteScenario_28387_rep0_Town13_HazardAtSideLane_1_None_11_26_00_32_19/metric_info.json",
+            "smoothness": 0.7168141592920354,
+            "samples": 2267
+        },
+        {
+            "route_id": "RouteScenario_28180_rep0",
+            "save_name": "RouteScenario_28180_rep0_Town11_T_Junction_1_3_11_26_05_20_55",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_37/attempt_1253772_20261126_044129_327715930/routes_RouteScenario_28180_rep0_Town11_T_Junction_1_3_11_26_05_20_55/metric_info.json",
+            "smoothness": 0.3170731707317073,
+            "samples": 839
+        },
+        {
+            "route_id": "RouteScenario_28147_rep0",
+            "save_name": "RouteScenario_28147_rep0_Town10HD_SignalizedJunctionLeftTurnEnterFlow_1_None_11_26_07_10_37",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_49/attempt_1253696_20261126_070941_388640983/routes_RouteScenario_28147_rep0_Town10HD_SignalizedJunctionLeftTurnEnterFlow_1_None_11_26_07_10_37/metric_info.json",
+            "smoothness": 0.95,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_28008_rep0",
+            "save_name": "RouteScenario_28008_rep0_Town05_T_Junction_1_None_11_26_06_52_46",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_46/attempt_1253787_20261126_065150_258078529/routes_RouteScenario_28008_rep0_Town05_T_Junction_1_None_11_26_06_52_46/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 140
+        },
+        {
+            "route_id": "RouteScenario_27994_rep0",
+            "save_name": "RouteScenario_27994_rep0_Town11_T_Junction_1_None_11_26_06_04_49",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_38/attempt_1253773_20261126_044458_744318444/routes_RouteScenario_27994_rep0_Town11_T_Junction_1_None_11_26_06_04_49/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 685
+        },
+        {
+            "route_id": "RouteScenario_2797_rep0",
+            "save_name": "RouteScenario_2797_rep0_Town12_InvadingTurn_1_None_11_25_13_10_19",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_6/attempt_1253712_20261125_123827_584010382/routes_RouteScenario_2797_rep0_Town12_InvadingTurn_1_None_11_25_13_10_19/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 278
+        },
+        {
+            "route_id": "RouteScenario_27916_rep0",
+            "save_name": "RouteScenario_27916_rep0_Town05_VanillaNonSignalizedTurn_1_None_11_26_07_07_31",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_45/attempt_1253786_20261126_064737_306872581/routes_RouteScenario_27916_rep0_Town05_VanillaNonSignalizedTurn_1_None_11_26_07_07_31/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 210
+        },
+        {
+            "route_id": "RouteScenario_27907_rep0",
+            "save_name": "RouteScenario_27907_rep0_Town03_T_Junction_1_None_11_26_06_50_45",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_41/attempt_1253776_20261126_061353_572973523/routes_RouteScenario_27907_rep0_Town03_T_Junction_1_None_11_26_06_50_45/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 394
+        },
+        {
+            "route_id": "RouteScenario_2787_rep0",
+            "save_name": "RouteScenario_2787_rep0_Town12_InvadingTurn_1_2_11_25_15_58_25",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_11/attempt_1253726_20261125_155242_542855316/routes_RouteScenario_2787_rep0_Town12_InvadingTurn_1_2_11_25_15_58_25/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 208
+        },
+        {
+            "route_id": "RouteScenario_27870_rep0",
+            "save_name": "RouteScenario_27870_rep0_Town04_VanillaNonSignalizedTurn_1_None_11_26_05_32_58",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_39/attempt_1253774_20261126_045412_920724211/routes_RouteScenario_27870_rep0_Town04_VanillaNonSignalizedTurn_1_None_11_26_05_32_58/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 126
+        },
+        {
+            "route_id": "RouteScenario_27823_rep0",
+            "save_name": "RouteScenario_27823_rep0_Town15_T_Junction_1_7_11_25_11_05_56",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_1/attempt_1253698_20261125_102006_467181076/routes_RouteScenario_27823_rep0_Town15_T_Junction_1_7_11_25_11_05_56/metric_info.json",
+            "smoothness": 0.30952380952380953,
+            "samples": 844
+        },
+        {
+            "route_id": "RouteScenario_27787_rep0",
+            "save_name": "RouteScenario_27787_rep0_Town11_VanillaSignalizedTurnEncounterRedLight_1_None_11_26_05_53_34",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_38/attempt_1253773_20261126_044458_744318444/routes_RouteScenario_27787_rep0_Town11_VanillaSignalizedTurnEncounterRedLight_1_None_11_26_05_53_34/metric_info.json",
+            "smoothness": 1.0,
+            "samples": 1201
+        },
+        {
+            "route_id": "RouteScenario_27392_rep0",
+            "save_name": "RouteScenario_27392_rep0_Town11_EnterActorFlow_1_2_11_26_04_44_12",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_37/attempt_1253772_20261126_044129_327715930/routes_RouteScenario_27392_rep0_Town11_EnterActorFlow_1_2_11_26_04_44_12/metric_info.json",
+            "smoothness": 0.9,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_27297_rep0",
+            "save_name": "RouteScenario_27297_rep0_Town11_VehicleTurningRoutePedestrian_1_None_11_26_06_10_54",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_38/attempt_1253773_20261126_044458_744318444/routes_RouteScenario_27297_rep0_Town11_VehicleTurningRoutePedestrian_1_None_11_26_06_10_54/metric_info.json",
+            "smoothness": 0.44,
+            "samples": 506
+        },
+        {
+            "route_id": "RouteScenario_2724_rep0",
+            "save_name": "RouteScenario_2724_rep0_Town12_ParkingExit_1_None_11_25_16_48_14",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_13/attempt_1253728_20261125_163813_783931046/routes_RouteScenario_2724_rep0_Town12_ParkingExit_1_None_11_25_16_48_14/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 76
+        },
+        {
+            "route_id": "RouteScenario_27043_rep0",
+            "save_name": "RouteScenario_27043_rep0_Town15_SignalizedJunctionRightTurn_1_None_11_25_10_31_35",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_1/attempt_1253698_20261125_102006_467181076/routes_RouteScenario_27043_rep0_Town15_SignalizedJunctionRightTurn_1_None_11_25_10_31_35/metric_info.json",
+            "smoothness": 0.965,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_27005_rep0",
+            "save_name": "RouteScenario_27005_rep0_Town03_NonSignalizedJunctionLeftTurn_1_None_11_26_06_17_58",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_41/attempt_1253776_20261126_061353_572973523/routes_RouteScenario_27005_rep0_Town03_NonSignalizedJunctionLeftTurn_1_None_11_26_06_17_58/metric_info.json",
+            "smoothness": 0.955,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_26990_rep0",
+            "save_name": "RouteScenario_26990_rep0_Town03_NonSignalizedJunctionLeftTurn_1_None_11_26_06_54_59",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_41/attempt_1253776_20261126_061353_572973523/routes_RouteScenario_26990_rep0_Town03_NonSignalizedJunctionLeftTurn_1_None_11_26_06_54_59/metric_info.json",
+            "smoothness": 0.935,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_26872_rep0",
+            "save_name": "RouteScenario_26872_rep0_Town11_NonSignalizedJunctionLeftTurn_1_None_11_26_04_42_25",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_37/attempt_1253772_20261126_044129_327715930/routes_RouteScenario_26872_rep0_Town11_NonSignalizedJunctionLeftTurn_1_None_11_26_04_42_25/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 138
+        },
+        {
+            "route_id": "RouteScenario_26828_rep0",
+            "save_name": "RouteScenario_26828_rep0_Town15_InvadingTurn_1_23_11_25_10_35_16",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_0/attempt_1253697_20261125_102006_467553006/routes_RouteScenario_26828_rep0_Town15_InvadingTurn_1_23_11_25_10_35_16/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 461
+        },
+        {
+            "route_id": "RouteScenario_26723_rep0",
+            "save_name": "RouteScenario_26723_rep0_Town15_ControlLoss_1_1_11_25_11_17_36",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_0/attempt_1253697_20261125_102006_467553006/routes_RouteScenario_26723_rep0_Town15_ControlLoss_1_1_11_25_11_17_36/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 106
+        },
+        {
+            "route_id": "RouteScenario_2667_rep0",
+            "save_name": "RouteScenario_2667_rep0_Town12_ParkedObstacleTwoWays_1_8_11_25_10_36_48",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_2/attempt_1253699_20261125_102006_467552286/routes_RouteScenario_2667_rep0_Town12_ParkedObstacleTwoWays_1_8_11_25_10_36_48/metric_info.json",
+            "smoothness": 0.925,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_26537_rep0",
+            "save_name": "RouteScenario_26537_rep0_Town15_ParkingExit_1_None_11_25_10_31_35",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_0/attempt_1253697_20261125_102006_467553006/routes_RouteScenario_26537_rep0_Town15_ParkingExit_1_None_11_25_10_31_35/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 403
+        },
+        {
+            "route_id": "RouteScenario_26370_rep0",
+            "save_name": "RouteScenario_26370_rep0_Town15_VehicleOpensDoorTwoWays_1_None_11_25_11_12_37",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_1/attempt_1253698_20261125_102006_467181076/routes_RouteScenario_26370_rep0_Town15_VehicleOpensDoorTwoWays_1_None_11_25_11_12_37/metric_info.json",
+            "smoothness": 0.95,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_26365_rep0",
+            "save_name": "RouteScenario_26365_rep0_Town03_ParkingExit_1_None_11_26_06_54_13",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_41/attempt_1253776_20261126_061353_572973523/routes_RouteScenario_26365_rep0_Town03_ParkingExit_1_None_11_26_06_54_13/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 63
+        },
+        {
+            "route_id": "RouteScenario_26153_rep0",
+            "save_name": "RouteScenario_26153_rep0_Town15_ParkedObstacleTwoWays_1_None_11_25_11_46_51",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_1/attempt_1253698_20261125_102006_467181076/routes_RouteScenario_26153_rep0_Town15_ParkedObstacleTwoWays_1_None_11_25_11_46_51/metric_info.json",
+            "smoothness": 0.94,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_2614_rep0",
+            "save_name": "RouteScenario_2614_rep0_Town12_ConstructionObstacleTwoWays_1_7_11_25_18_22_05",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_18/attempt_1253733_20261125_181701_936410811/routes_RouteScenario_2614_rep0_Town12_ConstructionObstacleTwoWays_1_7_11_25_18_22_05/metric_info.json",
+            "smoothness": 0.94,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_2608_rep0",
+            "save_name": "RouteScenario_2608_rep0_Town12_ConstructionObstacleTwoWays_1_None_11_25_12_24_40",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_5/attempt_1253711_20261125_122015_033584439/routes_RouteScenario_2608_rep0_Town12_ConstructionObstacleTwoWays_1_None_11_25_12_24_40/metric_info.json",
+            "smoothness": 0.95,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_26023_rep0",
+            "save_name": "RouteScenario_26023_rep0_Town06_MergerIntoSlowTraffic_1_None_11_26_07_03_00",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_47/attempt_1253788_20261126_065420_193432451/routes_RouteScenario_26023_rep0_Town06_MergerIntoSlowTraffic_1_None_11_26_07_03_00/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 110
+        },
+        {
+            "route_id": "RouteScenario_25986_rep0",
+            "save_name": "RouteScenario_25986_rep0_Town04_ParkedObstacleTwoWays_1_None_11_26_05_59_38",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_40/attempt_1253775_20261126_055838_803405808/routes_RouteScenario_25986_rep0_Town04_ParkedObstacleTwoWays_1_None_11_26_05_59_38/metric_info.json",
+            "smoothness": 0.915,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_25783_rep0",
+            "save_name": "RouteScenario_25783_rep0_Town04_AccidentTwoWays_1_None_11_26_04_55_06",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_39/attempt_1253774_20261126_045412_920724211/routes_RouteScenario_25783_rep0_Town04_AccidentTwoWays_1_None_11_26_04_55_06/metric_info.json",
+            "smoothness": 0.945,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_25774_rep0",
+            "save_name": "RouteScenario_25774_rep0_Town11_ParkedObstacleTwoWays_1_None_11_26_05_21_25",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_38/attempt_1253773_20261126_044458_744318444/routes_RouteScenario_25774_rep0_Town11_ParkedObstacleTwoWays_1_None_11_26_05_21_25/metric_info.json",
+            "smoothness": 0.945,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_25753_rep0",
+            "save_name": "RouteScenario_25753_rep0_Town11_ParkedObstacleTwoWays_1_None_11_26_05_27_42",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_37/attempt_1253772_20261126_044129_327715930/routes_RouteScenario_25753_rep0_Town11_ParkedObstacleTwoWays_1_None_11_26_05_27_42/metric_info.json",
+            "smoothness": 0.84,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_25727_rep0",
+            "save_name": "RouteScenario_25727_rep0_Town04_AccidentTwoWays_1_25_11_26_05_34_12",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_39/attempt_1253774_20261126_045412_920724211/routes_RouteScenario_25727_rep0_Town04_AccidentTwoWays_1_25_11_26_05_34_12/metric_info.json",
+            "smoothness": 0.795,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_25613_rep0",
+            "save_name": "RouteScenario_25613_rep0_Town11_HazardAtSideLaneTwoWays_1_None_11_26_05_15_08",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_37/attempt_1253772_20261126_044129_327715930/routes_RouteScenario_25613_rep0_Town11_HazardAtSideLaneTwoWays_1_None_11_26_05_15_08/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 700
+        },
+        {
+            "route_id": "RouteScenario_25612_rep0",
+            "save_name": "RouteScenario_25612_rep0_Town05_YieldToEmergencyVehicle_1_None_11_26_06_48_32",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_45/attempt_1253786_20261126_064737_306872581/routes_RouteScenario_25612_rep0_Town05_YieldToEmergencyVehicle_1_None_11_26_06_48_32/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 293
+        },
+        {
+            "route_id": "RouteScenario_25538_rep0",
+            "save_name": "RouteScenario_25538_rep0_Town04_YieldToEmergencyVehicle_1_8_11_26_05_27_07",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_39/attempt_1253774_20261126_045412_920724211/routes_RouteScenario_25538_rep0_Town04_YieldToEmergencyVehicle_1_8_11_26_05_27_07/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 664
+        },
+        {
+            "route_id": "RouteScenario_25215_rep0",
+            "save_name": "RouteScenario_25215_rep0_Town15_Accident_1_3_11_25_10_42_00",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_0/attempt_1253697_20261125_102006_467553006/routes_RouteScenario_25215_rep0_Town15_Accident_1_3_11_25_10_42_00/metric_info.json",
+            "smoothness": 0.72,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_2520_rep0",
+            "save_name": "RouteScenario_2520_rep0_Town12_ConstructionObstacle_1_None_11_25_13_21_09",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_4/attempt_1253710_20261125_121155_463493945/routes_RouteScenario_2520_rep0_Town12_ConstructionObstacle_1_None_11_25_13_21_09/metric_info.json",
+            "smoothness": 0.02702702702702703,
+            "samples": 753
+        },
+        {
+            "route_id": "RouteScenario_25169_rep0",
+            "save_name": "RouteScenario_25169_rep0_Town05_Accident_1_None_11_26_06_51_35",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_45/attempt_1253786_20261126_064737_306872581/routes_RouteScenario_25169_rep0_Town05_Accident_1_None_11_26_06_51_35/metric_info.json",
+            "smoothness": 0.22916666666666666,
+            "samples": 972
+        },
+        {
+            "route_id": "RouteScenario_25134_rep0",
+            "save_name": "RouteScenario_25134_rep0_Town10HD_T_Junction_1_3_11_26_07_48_22",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_49/attempt_1253696_20261126_070941_388640983/routes_RouteScenario_25134_rep0_Town10HD_T_Junction_1_3_11_26_07_48_22/metric_info.json",
+            "smoothness": 0.4166666666666667,
+            "samples": 1202
+        },
+        {
+            "route_id": "RouteScenario_25051_rep0",
+            "save_name": "RouteScenario_25051_rep0_Town01_T_Junction_1_25_11_26_06_40_27",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_43/attempt_1253778_20261126_063252_419283250/routes_RouteScenario_25051_rep0_Town01_T_Junction_1_25_11_26_06_40_27/metric_info.json",
+            "smoothness": 0.4,
+            "samples": 513
+        },
+        {
+            "route_id": "RouteScenario_24_rep0",
+            "save_name": "RouteScenario_24_rep0_Town12_InterurbanActorFlow_1_26_11_25_18_34_10",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_17/attempt_1253732_20261125_181207_487228249/routes_RouteScenario_24_rep0_Town12_InterurbanActorFlow_1_26_11_25_18_34_10/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 329
+        },
+        {
+            "route_id": "RouteScenario_24955_rep0",
+            "save_name": "RouteScenario_24955_rep0_Town04_ConstructionObstacle_1_None_11_26_06_07_56",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_39/attempt_1253774_20261126_045412_920724211/routes_RouteScenario_24955_rep0_Town04_ConstructionObstacle_1_None_11_26_06_07_56/metric_info.json",
+            "smoothness": 0.1875,
+            "samples": 642
+        },
+        {
+            "route_id": "RouteScenario_24948_rep0",
+            "save_name": "RouteScenario_24948_rep0_Town07_SignalizedJunctionRightTurn_1_None_11_26_07_38_00",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_48/attempt_1253789_20261126_070547_173309658/routes_RouteScenario_24948_rep0_Town07_SignalizedJunctionRightTurn_1_None_11_26_07_38_00/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 474
+        },
+        {
+            "route_id": "RouteScenario_24944_rep0",
+            "save_name": "RouteScenario_24944_rep0_Town02_T_Junction_1_None_11_26_06_46_16",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_44/attempt_1253785_20261126_064515_101075426/routes_RouteScenario_24944_rep0_Town02_T_Junction_1_None_11_26_06_46_16/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 108
+        },
+        {
+            "route_id": "RouteScenario_24906_rep0",
+            "save_name": "RouteScenario_24906_rep0_Town03_Accident_1_1_11_26_06_17_17",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_42/attempt_1253777_20261126_061545_748869319/routes_RouteScenario_24906_rep0_Town03_Accident_1_1_11_26_06_17_17/metric_info.json",
+            "smoothness": 0.915,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_24758_rep0",
+            "save_name": "RouteScenario_24758_rep0_Town07_ControlLoss_1_None_11_26_07_41_56",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_48/attempt_1253789_20261126_070547_173309658/routes_RouteScenario_24758_rep0_Town07_ControlLoss_1_None_11_26_07_41_56/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 277
+        },
+        {
+            "route_id": "RouteScenario_24721_rep0",
+            "save_name": "RouteScenario_24721_rep0_Town01_HardBreakRoute_1_None_11_26_06_34_21",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_43/attempt_1253778_20261126_063252_419283250/routes_RouteScenario_24721_rep0_Town01_HardBreakRoute_1_None_11_26_06_34_21/metric_info.json",
+            "smoothness": 0.23529411764705882,
+            "samples": 681
+        },
+        {
+            "route_id": "RouteScenario_24693_rep0",
+            "save_name": "RouteScenario_24693_rep0_Town15_ParkingCrossingPedestrian_1_None_11_25_12_16_41",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_1/attempt_1253698_20261125_102006_467181076/routes_RouteScenario_24693_rep0_Town15_ParkingCrossingPedestrian_1_None_11_25_12_16_41/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 351
+        },
+        {
+            "route_id": "RouteScenario_24679_rep0",
+            "save_name": "RouteScenario_24679_rep0_Town05_ParkingCutIn_1_None_11_26_07_03_11",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_45/attempt_1253786_20261126_064737_306872581/routes_RouteScenario_24679_rep0_Town05_ParkingCutIn_1_None_11_26_07_03_11/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 527
+        },
+        {
+            "route_id": "RouteScenario_24622_rep0",
+            "save_name": "RouteScenario_24622_rep0_Town11_ConstructionObstacle_1_22_11_26_04_45_53",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_38/attempt_1253773_20261126_044458_744318444/routes_RouteScenario_24622_rep0_Town11_ConstructionObstacle_1_22_11_26_04_45_53/metric_info.json",
+            "smoothness": 0.925,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_2460_rep0",
+            "save_name": "RouteScenario_2460_rep0_Town12_DynamicObjectCrossing_1_None_11_25_22_42_34",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_25/attempt_1253760_20261125_220344_225105443/routes_RouteScenario_2460_rep0_Town12_DynamicObjectCrossing_1_None_11_25_22_42_34/metric_info.json",
+            "smoothness": 0.034482758620689655,
+            "samples": 594
+        },
+        {
+            "route_id": "RouteScenario_24519_rep0",
+            "save_name": "RouteScenario_24519_rep0_Town05_ParkingCrossingPedestrian_1_None_11_26_06_59_30",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_45/attempt_1253786_20261126_064737_306872581/routes_RouteScenario_24519_rep0_Town05_ParkingCrossingPedestrian_1_None_11_26_06_59_30/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 438
+        },
+        {
+            "route_id": "RouteScenario_24497_rep0",
+            "save_name": "RouteScenario_24497_rep0_Town06_ConstructionObstacle_1_8_11_26_06_55_19",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_47/attempt_1253788_20261126_065420_193432451/routes_RouteScenario_24497_rep0_Town06_ConstructionObstacle_1_8_11_26_06_55_19/metric_info.json",
+            "smoothness": 0.1,
+            "samples": 813
+        },
+        {
+            "route_id": "RouteScenario_24416_rep0",
+            "save_name": "RouteScenario_24416_rep0_Town03_ParkingCutIn_1_None_11_26_06_15_22",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_41/attempt_1253776_20261126_061353_572973523/routes_RouteScenario_24416_rep0_Town03_ParkingCutIn_1_None_11_26_06_15_22/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 204
+        },
+        {
+            "route_id": "RouteScenario_24207_rep0",
+            "save_name": "RouteScenario_24207_rep0_Town06_SequentialLaneChange_1_None_11_26_07_04_05",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_47/attempt_1253788_20261126_065420_193432451/routes_RouteScenario_24207_rep0_Town06_SequentialLaneChange_1_None_11_26_07_04_05/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 174
+        },
+        {
+            "route_id": "RouteScenario_24162_rep0",
+            "save_name": "RouteScenario_24162_rep0_Town12_MergerIntoSlowTrafficV2_1_None_11_25_17_43_51",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_15/attempt_1253730_20261125_171038_277770224/routes_RouteScenario_24162_rep0_Town12_MergerIntoSlowTrafficV2_1_None_11_25_17_43_51/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 119
+        },
+        {
+            "route_id": "RouteScenario_24151_rep0",
+            "save_name": "RouteScenario_24151_rep0_Town13_MergerIntoSlowTraffic_1_None_11_26_02_34_11",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_32/attempt_1253767_20261126_013159_855375125/routes_RouteScenario_24151_rep0_Town13_MergerIntoSlowTraffic_1_None_11_26_02_34_11/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 117
+        },
+        {
+            "route_id": "RouteScenario_24099_rep0",
+            "save_name": "RouteScenario_24099_rep0_Town13_MergerIntoSlowTrafficV2_1_None_11_26_03_58_57",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_34/attempt_1253769_20261126_023630_680078287/routes_RouteScenario_24099_rep0_Town13_MergerIntoSlowTrafficV2_1_None_11_26_03_58_57/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 408
+        },
+        {
+            "route_id": "RouteScenario_23842_rep0",
+            "save_name": "RouteScenario_23842_rep0_Town12_HighwayCutIn_1_3_11_25_14_26_28",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_8/attempt_1253723_20261125_132939_027784018/routes_RouteScenario_23842_rep0_Town12_HighwayCutIn_1_3_11_25_14_26_28/metric_info.json",
+            "smoothness": 0.535,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_23697_rep0",
+            "save_name": "RouteScenario_23697_rep0_Town12_HighwayCutIn_1_7_11_25_17_22_13",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_14/attempt_1253729_20261125_170657_249149455/routes_RouteScenario_23697_rep0_Town12_HighwayCutIn_1_7_11_25_17_22_13/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 290
+        },
+        {
+            "route_id": "RouteScenario_23604_rep0",
+            "save_name": "RouteScenario_23604_rep0_Town12_ControlLoss_1_25_11_25_23_54_23",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_27/attempt_1253762_20261125_230322_379241842/routes_RouteScenario_23604_rep0_Town12_ControlLoss_1_25_11_25_23_54_23/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 156
+        },
+        {
+            "route_id": "RouteScenario_23470_rep0",
+            "save_name": "RouteScenario_23470_rep0_Town12_ControlLoss_1_22_11_25_12_08_26",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_2/attempt_1253699_20261125_102006_467552286/routes_RouteScenario_23470_rep0_Town12_ControlLoss_1_22_11_25_12_08_26/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 201
+        },
+        {
+            "route_id": "RouteScenario_23469_rep0",
+            "save_name": "RouteScenario_23469_rep0_Town12_ControlLoss_1_25_11_25_21_30_13",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_23/attempt_1253758_20261125_211400_785932411/routes_RouteScenario_23469_rep0_Town12_ControlLoss_1_25_11_25_21_30_13/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 201
+        },
+        {
+            "route_id": "RouteScenario_23299_rep0",
+            "save_name": "RouteScenario_23299_rep0_Town12_ControlLoss_1_None_11_25_17_28_31",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_15/attempt_1253730_20261125_171038_277770224/routes_RouteScenario_23299_rep0_Town12_ControlLoss_1_None_11_25_17_28_31/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 186
+        },
+        {
+            "route_id": "RouteScenario_23199_rep0",
+            "save_name": "RouteScenario_23199_rep0_Town12_ControlLoss_1_8_11_25_20_23_09",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_22/attempt_1253757_20261125_202158_320288775/routes_RouteScenario_23199_rep0_Town12_ControlLoss_1_8_11_25_20_23_09/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 458
+        },
+        {
+            "route_id": "RouteScenario_2299_rep0",
+            "save_name": "RouteScenario_2299_rep0_Town12_HighwayCutIn_1_None_11_25_15_48_14",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_10/attempt_1253725_20261125_151725_063681368/routes_RouteScenario_2299_rep0_Town12_HighwayCutIn_1_None_11_25_15_48_14/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 314
+        },
+        {
+            "route_id": "RouteScenario_22983_rep0",
+            "save_name": "RouteScenario_22983_rep0_Town12_HardBreakRoute_1_None_11_25_12_00_27",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_2/attempt_1253699_20261125_102006_467552286/routes_RouteScenario_22983_rep0_Town12_HardBreakRoute_1_None_11_25_12_00_27/metric_info.json",
+            "smoothness": 0.1875,
+            "samples": 657
+        },
+        {
+            "route_id": "RouteScenario_22651_rep0",
+            "save_name": "RouteScenario_22651_rep0_Town12_HardBreakRoute_1_23_11_25_15_04_05",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_7/attempt_1253722_20261125_131924_296336984/routes_RouteScenario_22651_rep0_Town12_HardBreakRoute_1_23_11_25_15_04_05/metric_info.json",
+            "smoothness": 0.27450980392156865,
+            "samples": 1033
+        },
+        {
+            "route_id": "RouteScenario_22622_rep0",
+            "save_name": "RouteScenario_22622_rep0_Town12_ParkingExit_1_None_11_25_19_06_36",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_18/attempt_1253733_20261125_181701_936410811/routes_RouteScenario_22622_rep0_Town12_ParkingExit_1_None_11_25_19_06_36/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 113
+        },
+        {
+            "route_id": "RouteScenario_22606_rep0",
+            "save_name": "RouteScenario_22606_rep0_Town12_ParkingExit_1_22_11_25_17_05_03",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_13/attempt_1253728_20261125_163813_783931046/routes_RouteScenario_22606_rep0_Town12_ParkingExit_1_22_11_25_17_05_03/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 70
+        },
+        {
+            "route_id": "RouteScenario_22590_rep0",
+            "save_name": "RouteScenario_22590_rep0_Town12_ParkingExit_1_None_11_25_18_10_00",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_12/attempt_1253727_20261125_161503_380934443/routes_RouteScenario_22590_rep0_Town12_ParkingExit_1_None_11_25_18_10_00/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 111
+        },
+        {
+            "route_id": "RouteScenario_22584_rep0",
+            "save_name": "RouteScenario_22584_rep0_Town12_ParkingExit_1_23_11_25_21_28_37",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_23/attempt_1253758_20261125_211400_785932411/routes_RouteScenario_22584_rep0_Town12_ParkingExit_1_23_11_25_21_28_37/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 67
+        },
+        {
+            "route_id": "RouteScenario_22535_rep0",
+            "save_name": "RouteScenario_22535_rep0_Town12_StaticCutIn_1_None_11_25_10_31_35",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_2/attempt_1253699_20261125_102006_467552286/routes_RouteScenario_22535_rep0_Town12_StaticCutIn_1_None_11_25_10_31_35/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 459
+        },
+        {
+            "route_id": "RouteScenario_22531_rep0",
+            "save_name": "RouteScenario_22531_rep0_Town12_StaticCutIn_1_3_11_25_15_18_47",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_10/attempt_1253725_20261125_151725_063681368/routes_RouteScenario_22531_rep0_Town12_StaticCutIn_1_3_11_25_15_18_47/metric_info.json",
+            "smoothness": 0.6363636363636364,
+            "samples": 1544
+        },
+        {
+            "route_id": "RouteScenario_22331_rep0",
+            "save_name": "RouteScenario_22331_rep0_Town12_StaticCutIn_1_8_11_25_19_09_42",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_16/attempt_1253731_20261125_174624_955685332/routes_RouteScenario_22331_rep0_Town12_StaticCutIn_1_8_11_25_19_09_42/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 518
+        },
+        {
+            "route_id": "RouteScenario_21994_rep0",
+            "save_name": "RouteScenario_21994_rep0_Town12_VehicleOpensDoorTwoWays_1_23_11_25_19_37_03",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_19/attempt_1253738_20261125_183809_766914304/routes_RouteScenario_21994_rep0_Town12_VehicleOpensDoorTwoWays_1_23_11_25_19_37_03/metric_info.json",
+            "smoothness": 0.945,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_21992_rep0",
+            "save_name": "RouteScenario_21992_rep0_Town12_VehicleOpensDoorTwoWays_1_None_11_25_11_19_51",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_3/attempt_1253701_20261125_111848_979098892/routes_RouteScenario_21992_rep0_Town12_VehicleOpensDoorTwoWays_1_None_11_25_11_19_51/metric_info.json",
+            "smoothness": 0.94,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_21546_rep0",
+            "save_name": "RouteScenario_21546_rep0_Town12_ParkedObstacleTwoWays_1_8_11_25_17_35_41",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_14/attempt_1253729_20261125_170657_249149455/routes_RouteScenario_21546_rep0_Town12_ParkedObstacleTwoWays_1_8_11_25_17_35_41/metric_info.json",
+            "smoothness": 0.87,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_21503_rep0",
+            "save_name": "RouteScenario_21503_rep0_Town12_ParkedObstacleTwoWays_1_None_11_25_21_35_46",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_23/attempt_1253758_20261125_211400_785932411/routes_RouteScenario_21503_rep0_Town12_ParkedObstacleTwoWays_1_None_11_25_21_35_46/metric_info.json",
+            "smoothness": 0.875,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_21496_rep0",
+            "save_name": "RouteScenario_21496_rep0_Town12_ParkedObstacleTwoWays_1_None_11_25_20_29_57",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_20/attempt_1253744_20261125_191751_859685785/routes_RouteScenario_21496_rep0_Town12_ParkedObstacleTwoWays_1_None_11_25_20_29_57/metric_info.json",
+            "smoothness": 0.94,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_21411_rep0",
+            "save_name": "RouteScenario_21411_rep0_Town12_HazardAtSideLaneTwoWays_1_None_11_25_21_31_14",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_21/attempt_1253749_20261125_195258_433979714/routes_RouteScenario_21411_rep0_Town12_HazardAtSideLaneTwoWays_1_None_11_25_21_31_14/metric_info.json",
+            "smoothness": 0.42857142857142855,
+            "samples": 2252
+        },
+        {
+            "route_id": "RouteScenario_21188_rep0",
+            "save_name": "RouteScenario_21188_rep0_Town12_HazardAtSideLaneTwoWays_1_None_11_25_16_39_54",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_13/attempt_1253728_20261125_163813_783931046/routes_RouteScenario_21188_rep0_Town12_HazardAtSideLaneTwoWays_1_None_11_25_16_39_54/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 796
+        },
+        {
+            "route_id": "RouteScenario_21102_rep0",
+            "save_name": "RouteScenario_21102_rep0_Town12_HazardAtSideLaneTwoWays_1_None_11_25_20_28_03",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_22/attempt_1253757_20261125_202158_320288775/routes_RouteScenario_21102_rep0_Town12_HazardAtSideLaneTwoWays_1_None_11_25_20_28_03/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 824
+        },
+        {
+            "route_id": "RouteScenario_21037_rep0",
+            "save_name": "RouteScenario_21037_rep0_Town12_HazardAtSideLaneTwoWays_1_None_11_25_12_16_37",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_4/attempt_1253710_20261125_121155_463493945/routes_RouteScenario_21037_rep0_Town12_HazardAtSideLaneTwoWays_1_None_11_25_12_16_37/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 772
+        },
+        {
+            "route_id": "RouteScenario_21009_rep0",
+            "save_name": "RouteScenario_21009_rep0_Town12_HazardAtSideLaneTwoWays_1_1_11_25_18_17_56",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_17/attempt_1253732_20261125_181207_487228249/routes_RouteScenario_21009_rep0_Town12_HazardAtSideLaneTwoWays_1_1_11_25_18_17_56/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 740
+        },
+        {
+            "route_id": "RouteScenario_20999_rep0",
+            "save_name": "RouteScenario_20999_rep0_Town12_HazardAtSideLaneTwoWays_1_8_11_25_21_59_19",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_24/attempt_1253759_20261125_215354_083265398/routes_RouteScenario_20999_rep0_Town12_HazardAtSideLaneTwoWays_1_8_11_25_21_59_19/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 847
+        },
+        {
+            "route_id": "RouteScenario_19832_rep0",
+            "save_name": "RouteScenario_19832_rep0_Town12_ParkedObstacle_1_2_11_25_11_20_29",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_2/attempt_1253699_20261125_102006_467552286/routes_RouteScenario_19832_rep0_Town12_ParkedObstacle_1_2_11_25_11_20_29/metric_info.json",
+            "smoothness": 0.875,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_19753_rep0",
+            "save_name": "RouteScenario_19753_rep0_Town12_ParkedObstacle_1_None_11_25_12_19_48",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_3/attempt_1253701_20261125_111848_979098892/routes_RouteScenario_19753_rep0_Town12_ParkedObstacle_1_None_11_25_12_19_48/metric_info.json",
+            "smoothness": 0.4714285714285714,
+            "samples": 1417
+        },
+        {
+            "route_id": "RouteScenario_19681_rep0",
+            "save_name": "RouteScenario_19681_rep0_Town12_ParkedObstacle_1_None_11_25_15_42_04",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_9/attempt_1253724_20261125_141813_316551969/routes_RouteScenario_19681_rep0_Town12_ParkedObstacle_1_None_11_25_15_42_04/metric_info.json",
+            "smoothness": 0.925,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_19486_rep0",
+            "save_name": "RouteScenario_19486_rep0_Town12_ParkedObstacle_1_None_11_25_18_02_00",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_16/attempt_1253731_20261125_174624_955685332/routes_RouteScenario_19486_rep0_Town12_ParkedObstacle_1_None_11_25_18_02_00/metric_info.json",
+            "smoothness": 0.895,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_19359_rep0",
+            "save_name": "RouteScenario_19359_rep0_Town12_Accident_1_2_11_25_17_27_23",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_12/attempt_1253727_20261125_161503_380934443/routes_RouteScenario_19359_rep0_Town12_Accident_1_2_11_25_17_27_23/metric_info.json",
+            "smoothness": 0.945,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_19324_rep0",
+            "save_name": "RouteScenario_19324_rep0_Town12_Accident_1_None_11_25_14_04_15",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_7/attempt_1253722_20261125_131924_296336984/routes_RouteScenario_19324_rep0_Town12_Accident_1_None_11_25_14_04_15/metric_info.json",
+            "smoothness": 0.88,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_19207_rep0",
+            "save_name": "RouteScenario_19207_rep0_Town12_Accident_1_None_11_25_22_55_17",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_25/attempt_1253760_20261125_220344_225105443/routes_RouteScenario_19207_rep0_Town12_Accident_1_None_11_25_22_55_17/metric_info.json",
+            "smoothness": 0.905,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_19186_rep0",
+            "save_name": "RouteScenario_19186_rep0_Town12_Accident_1_None_11_25_14_19_40",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_9/attempt_1253724_20261125_141813_316551969/routes_RouteScenario_19186_rep0_Town12_Accident_1_None_11_25_14_19_40/metric_info.json",
+            "smoothness": 0.855,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_18907_rep0",
+            "save_name": "RouteScenario_18907_rep0_Town12_Accident_1_None_11_25_20_13_40",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_21/attempt_1253749_20261125_195258_433979714/routes_RouteScenario_18907_rep0_Town12_Accident_1_None_11_25_20_13_40/metric_info.json",
+            "smoothness": 0.835,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_18868_rep0",
+            "save_name": "RouteScenario_18868_rep0_Town12_ConstructionObstacle_1_None_11_25_16_25_30",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_9/attempt_1253724_20261125_141813_316551969/routes_RouteScenario_18868_rep0_Town12_ConstructionObstacle_1_None_11_25_16_25_30/metric_info.json",
+            "smoothness": 0.03278688524590164,
+            "samples": 1232
+        },
+        {
+            "route_id": "RouteScenario_18857_rep0",
+            "save_name": "RouteScenario_18857_rep0_Town12_ConstructionObstacle_1_None_11_25_20_52_07",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_21/attempt_1253749_20261125_195258_433979714/routes_RouteScenario_18857_rep0_Town12_ConstructionObstacle_1_None_11_25_20_52_07/metric_info.json",
+            "smoothness": 0.785,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_18777_rep0",
+            "save_name": "RouteScenario_18777_rep0_Town12_ConstructionObstacle_1_2_11_25_17_11_38",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_15/attempt_1253730_20261125_171038_277770224/routes_RouteScenario_18777_rep0_Town12_ConstructionObstacle_1_2_11_25_17_11_38/metric_info.json",
+            "smoothness": 0.373134328358209,
+            "samples": 1352
+        },
+        {
+            "route_id": "RouteScenario_18647_rep0",
+            "save_name": "RouteScenario_18647_rep0_Town12_ConstructionObstacle_1_2_11_25_18_39_25",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_19/attempt_1253738_20261125_183809_766914304/routes_RouteScenario_18647_rep0_Town12_ConstructionObstacle_1_2_11_25_18_39_25/metric_info.json",
+            "smoothness": 0.021739130434782608,
+            "samples": 936
+        },
+        {
+            "route_id": "RouteScenario_18551_rep0",
+            "save_name": "RouteScenario_18551_rep0_Town12_ConstructionObstacle_1_None_11_25_19_29_05",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_20/attempt_1253744_20261125_191751_859685785/routes_RouteScenario_18551_rep0_Town12_ConstructionObstacle_1_None_11_25_19_29_05/metric_info.json",
+            "smoothness": 0.42528735632183906,
+            "samples": 1755
+        },
+        {
+            "route_id": "RouteScenario_18543_rep0",
+            "save_name": "RouteScenario_18543_rep0_Town12_ConstructionObstacle_1_7_11_25_19_48_52",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_20/attempt_1253744_20261125_191751_859685785/routes_RouteScenario_18543_rep0_Town12_ConstructionObstacle_1_7_11_25_19_48_52/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 361
+        },
+        {
+            "route_id": "RouteScenario_18512_rep0",
+            "save_name": "RouteScenario_18512_rep0_Town12_ConstructionObstacle_1_None_11_25_16_30_44",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_12/attempt_1253727_20261125_161503_380934443/routes_RouteScenario_18512_rep0_Town12_ConstructionObstacle_1_None_11_25_16_30_44/metric_info.json",
+            "smoothness": 0.4807692307692308,
+            "samples": 2087
+        },
+        {
+            "route_id": "RouteScenario_18490_rep0",
+            "save_name": "RouteScenario_18490_rep0_Town12_ConstructionObstacle_1_None_11_25_20_36_09",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_22/attempt_1253757_20261125_202158_320288775/routes_RouteScenario_18490_rep0_Town12_ConstructionObstacle_1_None_11_25_20_36_09/metric_info.json",
+            "smoothness": 0.04,
+            "samples": 503
+        },
+        {
+            "route_id": "RouteScenario_18344_rep0",
+            "save_name": "RouteScenario_18344_rep0_Town12_ParkingCutIn_1_None_11_25_12_21_56",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_5/attempt_1253711_20261125_122015_033584439/routes_RouteScenario_18344_rep0_Town12_ParkingCutIn_1_None_11_25_12_21_56/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 174
+        },
+        {
+            "route_id": "RouteScenario_18174_rep0",
+            "save_name": "RouteScenario_18174_rep0_Town12_DynamicObjectCrossing_1_None_11_25_14_13_05",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_8/attempt_1253723_20261125_132939_027784018/routes_RouteScenario_18174_rep0_Town12_DynamicObjectCrossing_1_None_11_25_14_13_05/metric_info.json",
+            "smoothness": 0.40816326530612246,
+            "samples": 997
+        },
+        {
+            "route_id": "RouteScenario_18160_rep0",
+            "save_name": "RouteScenario_18160_rep0_Town12_DynamicObjectCrossing_1_23_11_25_20_04_23",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_21/attempt_1253749_20261125_195258_433979714/routes_RouteScenario_18160_rep0_Town12_DynamicObjectCrossing_1_23_11_25_20_04_23/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 431
+        },
+        {
+            "route_id": "RouteScenario_18073_rep0",
+            "save_name": "RouteScenario_18073_rep0_Town12_DynamicObjectCrossing_1_3_11_25_12_33_27",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_3/attempt_1253701_20261125_111848_979098892/routes_RouteScenario_18073_rep0_Town12_DynamicObjectCrossing_1_3_11_25_12_33_27/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 407
+        },
+        {
+            "route_id": "RouteScenario_18027_rep0",
+            "save_name": "RouteScenario_18027_rep0_Town12_DynamicObjectCrossing_1_None_11_25_22_10_47",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_24/attempt_1253759_20261125_215354_083265398/routes_RouteScenario_18027_rep0_Town12_DynamicObjectCrossing_1_None_11_25_22_10_47/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 506
+        },
+        {
+            "route_id": "RouteScenario_17965_rep0",
+            "save_name": "RouteScenario_17965_rep0_Town12_DynamicObjectCrossing_1_3_11_25_21_09_09",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_20/attempt_1253744_20261125_191751_859685785/routes_RouteScenario_17965_rep0_Town12_DynamicObjectCrossing_1_3_11_25_21_09_09/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 405
+        },
+        {
+            "route_id": "RouteScenario_17921_rep0",
+            "save_name": "RouteScenario_17921_rep0_Town12_DynamicObjectCrossing_1_None_11_25_17_26_03",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_14/attempt_1253729_20261125_170657_249149455/routes_RouteScenario_17921_rep0_Town12_DynamicObjectCrossing_1_None_11_25_17_26_03/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 400
+        },
+        {
+            "route_id": "RouteScenario_17892_rep0",
+            "save_name": "RouteScenario_17892_rep0_Town12_DynamicObjectCrossing_1_3_11_25_17_30_52",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_14/attempt_1253729_20261125_170657_249149455/routes_RouteScenario_17892_rep0_Town12_DynamicObjectCrossing_1_3_11_25_17_30_52/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 411
+        },
+        {
+            "route_id": "RouteScenario_17853_rep0",
+            "save_name": "RouteScenario_17853_rep0_Town12_DynamicObjectCrossing_1_None_11_25_23_04_17",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_27/attempt_1253762_20261125_230322_379241842/routes_RouteScenario_17853_rep0_Town12_DynamicObjectCrossing_1_None_11_25_23_04_17/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 278
+        },
+        {
+            "route_id": "RouteScenario_17749_rep0",
+            "save_name": "RouteScenario_17749_rep0_Town12_DynamicObjectCrossing_1_None_11_25_12_11_09",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_3/attempt_1253701_20261125_111848_979098892/routes_RouteScenario_17749_rep0_Town12_DynamicObjectCrossing_1_None_11_25_12_11_09/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 403
+        },
+        {
+            "route_id": "RouteScenario_17615_rep0",
+            "save_name": "RouteScenario_17615_rep0_Town12_SequentialLaneChange_1_None_11_25_14_23_30",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_8/attempt_1253723_20261125_132939_027784018/routes_RouteScenario_17615_rep0_Town12_SequentialLaneChange_1_None_11_25_14_23_30/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 222
+        },
+        {
+            "route_id": "RouteScenario_17564_rep0",
+            "save_name": "RouteScenario_17564_rep0_Town12_SequentialLaneChange_1_None_11_25_13_13_31",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_6/attempt_1253712_20261125_123827_584010382/routes_RouteScenario_17564_rep0_Town12_SequentialLaneChange_1_None_11_25_13_13_31/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 149
+        },
+        {
+            "route_id": "RouteScenario_17280_rep0",
+            "save_name": "RouteScenario_17280_rep0_Town12_VanillaNonSignalizedTurnEncounterStopsign_1_3_11_25_18_57_22",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_16/attempt_1253731_20261125_174624_955685332/routes_RouteScenario_17280_rep0_Town12_VanillaNonSignalizedTurnEncounterStopsign_1_3_11_25_18_57_22/metric_info.json",
+            "smoothness": 1.0,
+            "samples": 1201
+        },
+        {
+            "route_id": "RouteScenario_16542_rep0",
+            "save_name": "RouteScenario_16542_rep0_Town12_VanillaNonSignalizedTurn_1_None_11_25_23_00_34",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_26/attempt_1253761_20261125_221437_637319813/routes_RouteScenario_16542_rep0_Town12_VanillaNonSignalizedTurn_1_None_11_25_23_00_34/metric_info.json",
+            "smoothness": 1.0,
+            "samples": 1201
+        },
+        {
+            "route_id": "RouteScenario_16529_rep0",
+            "save_name": "RouteScenario_16529_rep0_Town12_VanillaNonSignalizedTurn_1_None_11_25_14_49_18",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_7/attempt_1253722_20261125_131924_296336984/routes_RouteScenario_16529_rep0_Town12_VanillaNonSignalizedTurn_1_None_11_25_14_49_18/metric_info.json",
+            "smoothness": 1.0,
+            "samples": 1201
+        },
+        {
+            "route_id": "RouteScenario_16522_rep0",
+            "save_name": "RouteScenario_16522_rep0_Town12_VanillaNonSignalizedTurn_1_25_11_25_20_10_36",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_21/attempt_1253749_20261125_195258_433979714/routes_RouteScenario_16522_rep0_Town12_VanillaNonSignalizedTurn_1_25_11_25_20_10_36/metric_info.json",
+            "smoothness": 0.1,
+            "samples": 204
+        },
+        {
+            "route_id": "RouteScenario_16508_rep0",
+            "save_name": "RouteScenario_16508_rep0_Town12_VanillaNonSignalizedTurn_1_8_11_25_15_34_39",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_10/attempt_1253725_20261125_151725_063681368/routes_RouteScenario_16508_rep0_Town12_VanillaNonSignalizedTurn_1_8_11_25_15_34_39/metric_info.json",
+            "smoothness": 1.0,
+            "samples": 1201
+        },
+        {
+            "route_id": "RouteScenario_16502_rep0",
+            "save_name": "RouteScenario_16502_rep0_Town12_VanillaNonSignalizedTurn_1_None_11_25_18_49_20",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_19/attempt_1253738_20261125_183809_766914304/routes_RouteScenario_16502_rep0_Town12_VanillaNonSignalizedTurn_1_None_11_25_18_49_20/metric_info.json",
+            "smoothness": 1.0,
+            "samples": 1201
+        },
+        {
+            "route_id": "RouteScenario_16486_rep0",
+            "save_name": "RouteScenario_16486_rep0_Town12_VanillaNonSignalizedTurn_1_None_11_25_16_07_26",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_11/attempt_1253726_20261125_155242_542855316/routes_RouteScenario_16486_rep0_Town12_VanillaNonSignalizedTurn_1_None_11_25_16_07_26/metric_info.json",
+            "smoothness": 1.0,
+            "samples": 1201
+        },
+        {
+            "route_id": "RouteScenario_16390_rep0",
+            "save_name": "RouteScenario_16390_rep0_Town12_VanillaSignalizedTurnEncounterRedLight_1_None_11_25_12_29_20",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_4/attempt_1253710_20261125_121155_463493945/routes_RouteScenario_16390_rep0_Town12_VanillaSignalizedTurnEncounterRedLight_1_None_11_25_12_29_20/metric_info.json",
+            "smoothness": 1.0,
+            "samples": 1201
+        },
+        {
+            "route_id": "RouteScenario_15612_rep0",
+            "save_name": "RouteScenario_15612_rep0_Town12_VanillaSignalizedTurnEncounterRedLight_1_23_11_25_16_16_48",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_12/attempt_1253727_20261125_161503_380934443/routes_RouteScenario_15612_rep0_Town12_VanillaSignalizedTurnEncounterRedLight_1_23_11_25_16_16_48/metric_info.json",
+            "smoothness": 1.0,
+            "samples": 1201
+        },
+        {
+            "route_id": "RouteScenario_15483_rep0",
+            "save_name": "RouteScenario_15483_rep0_Town12_VanillaSignalizedTurnEncounterRedLight_1_None_11_25_21_14_55",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_23/attempt_1253758_20261125_211400_785932411/routes_RouteScenario_15483_rep0_Town12_VanillaSignalizedTurnEncounterRedLight_1_None_11_25_21_14_55/metric_info.json",
+            "smoothness": 1.0,
+            "samples": 1201
+        },
+        {
+            "route_id": "RouteScenario_15102_rep0",
+            "save_name": "RouteScenario_15102_rep0_Town12_VanillaSignalizedTurnEncounterGreenLight_1_8_11_25_15_54_26",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_11/attempt_1253726_20261125_155242_542855316/routes_RouteScenario_15102_rep0_Town12_VanillaSignalizedTurnEncounterGreenLight_1_8_11_25_15_54_26/metric_info.json",
+            "smoothness": 0.08333333333333333,
+            "samples": 254
+        },
+        {
+            "route_id": "RouteScenario_15071_rep0",
+            "save_name": "RouteScenario_15071_rep0_Town12_VanillaSignalizedTurnEncounterGreenLight_1_7_11_25_18_44_44",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_16/attempt_1253731_20261125_174624_955685332/routes_RouteScenario_15071_rep0_Town12_VanillaSignalizedTurnEncounterGreenLight_1_7_11_25_18_44_44/metric_info.json",
+            "smoothness": 1.0,
+            "samples": 1201
+        },
+        {
+            "route_id": "RouteScenario_14955_rep0",
+            "save_name": "RouteScenario_14955_rep0_Town12_VanillaSignalizedTurnEncounterGreenLight_1_1_11_25_17_24_51",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_15/attempt_1253730_20261125_171038_277770224/routes_RouteScenario_14955_rep0_Town12_VanillaSignalizedTurnEncounterGreenLight_1_1_11_25_17_24_51/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 203
+        },
+        {
+            "route_id": "RouteScenario_14382_rep0",
+            "save_name": "RouteScenario_14382_rep0_Town12_PedestrianCrossing_1_2_11_25_18_13_37",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_17/attempt_1253732_20261125_181207_487228249/routes_RouteScenario_14382_rep0_Town12_PedestrianCrossing_1_2_11_25_18_13_37/metric_info.json",
+            "smoothness": 0.2857142857142857,
+            "samples": 292
+        },
+        {
+            "route_id": "RouteScenario_13674_rep0",
+            "save_name": "RouteScenario_13674_rep0_Town12_PedestrianCrossing_1_None_11_25_12_39_31",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_6/attempt_1253712_20261125_123827_584010382/routes_RouteScenario_13674_rep0_Town12_PedestrianCrossing_1_None_11_25_12_39_31/metric_info.json",
+            "smoothness": 0.8805970149253731,
+            "samples": 1348
+        },
+        {
+            "route_id": "RouteScenario_13231_rep0",
+            "save_name": "RouteScenario_13231_rep0_Town12_BlockedIntersection_1_7_11_25_16_50_39",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_12/attempt_1253727_20261125_161503_380934443/routes_RouteScenario_13231_rep0_Town12_BlockedIntersection_1_7_11_25_16_50_39/metric_info.json",
+            "smoothness": 0.965,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_12_rep0",
+            "save_name": "RouteScenario_12_rep0_Town12_InterurbanActorFlow_1_26_11_25_18_30_36",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_17/attempt_1253732_20261125_181207_487228249/routes_RouteScenario_12_rep0_Town12_InterurbanActorFlow_1_26_11_25_18_30_36/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 323
+        },
+        {
+            "route_id": "RouteScenario_12933_rep0",
+            "save_name": "RouteScenario_12933_rep0_Town12_BlockedIntersection_1_None_11_25_15_38_11",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_9/attempt_1253724_20261125_141813_316551969/routes_RouteScenario_12933_rep0_Town12_BlockedIntersection_1_None_11_25_15_38_11/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 273
+        },
+        {
+            "route_id": "RouteScenario_12791_rep0",
+            "save_name": "RouteScenario_12791_rep0_Town12_BlockedIntersection_1_8_11_25_15_04_22",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_8/attempt_1253723_20261125_132939_027784018/routes_RouteScenario_12791_rep0_Town12_BlockedIntersection_1_8_11_25_15_04_22/metric_info.json",
+            "smoothness": 0.945,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_11738_rep0",
+            "save_name": "RouteScenario_11738_rep0_Town12_EnterActorFlow_1_None_11_25_22_15_52",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_26/attempt_1253761_20261125_221437_637319813/routes_RouteScenario_11738_rep0_Town12_EnterActorFlow_1_None_11_25_22_15_52/metric_info.json",
+            "smoothness": 0.875,
+            "samples": 4000
+        },
+        {
+            "route_id": "RouteScenario_11658_rep0",
+            "save_name": "RouteScenario_11658_rep0_Town12_EnterActorFlow_1_None_11_25_12_07_39",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_3/attempt_1253701_20261125_111848_979098892/routes_RouteScenario_11658_rep0_Town12_EnterActorFlow_1_None_11_25_12_07_39/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 210
+        },
+        {
+            "route_id": "RouteScenario_11333_rep0",
+            "save_name": "RouteScenario_11333_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_16_01_34",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_11/attempt_1253726_20261125_155242_542855316/routes_RouteScenario_11333_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_16_01_34/metric_info.json",
+            "smoothness": 0.3333333333333333,
+            "samples": 487
+        },
+        {
+            "route_id": "RouteScenario_11215_rep0",
+            "save_name": "RouteScenario_11215_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_17_31_27",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_15/attempt_1253730_20261125_171038_277770224/routes_RouteScenario_11215_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_17_31_27/metric_info.json",
+            "smoothness": 0.6981132075471698,
+            "samples": 1074
+        },
+        {
+            "route_id": "RouteScenario_11177_rep0",
+            "save_name": "RouteScenario_11177_rep0_Town12_VehicleTurningRoutePedestrian_1_22_11_25_13_07_34",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_5/attempt_1253711_20261125_122015_033584439/routes_RouteScenario_11177_rep0_Town12_VehicleTurningRoutePedestrian_1_22_11_25_13_07_34/metric_info.json",
+            "smoothness": 0.5892857142857143,
+            "samples": 1121
+        },
+        {
+            "route_id": "RouteScenario_11010_rep0",
+            "save_name": "RouteScenario_11010_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_23_57_07",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_27/attempt_1253762_20261125_230322_379241842/routes_RouteScenario_11010_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_23_57_07/metric_info.json",
+            "smoothness": 0.3,
+            "samples": 607
+        },
+        {
+            "route_id": "RouteScenario_10793_rep0",
+            "save_name": "RouteScenario_10793_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_23_30_22",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_26/attempt_1253761_20261125_221437_637319813/routes_RouteScenario_10793_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_23_30_22/metric_info.json",
+            "smoothness": 0.8939393939393939,
+            "samples": 1331
+        },
+        {
+            "route_id": "RouteScenario_10791_rep0",
+            "save_name": "RouteScenario_10791_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_18_58_07",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_18/attempt_1253733_20261125_181701_936410811/routes_RouteScenario_10791_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_18_58_07/metric_info.json",
+            "smoothness": 0.6052631578947368,
+            "samples": 776
+        },
+        {
+            "route_id": "RouteScenario_10552_rep0",
+            "save_name": "RouteScenario_10552_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_19_14_14",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_19/attempt_1253738_20261125_183809_766914304/routes_RouteScenario_10552_rep0_Town12_VehicleTurningRoutePedestrian_1_None_11_25_19_14_14/metric_info.json",
+            "smoothness": 0.8584070796460177,
+            "samples": 2268
+        },
+        {
+            "route_id": "RouteScenario_10364_rep0",
+            "save_name": "RouteScenario_10364_rep0_Town12_VehicleTurningRoute_1_None_11_25_12_24_45",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_4/attempt_1253710_20261125_121155_463493945/routes_RouteScenario_10364_rep0_Town12_VehicleTurningRoute_1_None_11_25_12_24_45/metric_info.json",
+            "smoothness": 0.0,
+            "samples": 384
+        },
+        {
+            "route_id": "RouteScenario_10255_rep0",
+            "save_name": "RouteScenario_10255_rep0_Town12_VehicleTurningRoute_1_None_11_25_13_49_52",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_7/attempt_1253722_20261125_131924_296336984/routes_RouteScenario_10255_rep0_Town12_VehicleTurningRoute_1_None_11_25_13_49_52/metric_info.json",
+            "smoothness": 0.8695652173913043,
+            "samples": 1391
+        },
+        {
+            "route_id": "RouteScenario_10220_rep0",
+            "save_name": "RouteScenario_10220_rep0_Town12_VehicleTurningRoute_1_7_11_26_00_04_30",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_27/attempt_1253762_20261125_230322_379241842/routes_RouteScenario_10220_rep0_Town12_VehicleTurningRoute_1_7_11_26_00_04_30/metric_info.json",
+            "smoothness": 0.7017543859649122,
+            "samples": 1144
+        },
+        {
+            "route_id": "RouteScenario_10089_rep0",
+            "save_name": "RouteScenario_10089_rep0_Town12_VehicleTurningRoute_1_23_11_25_22_49_55",
+            "metric_file": "/Midgard/home/casko/Bench2DriveZoo/outputs/closed_loop/batch_queue_20261125_102006_HY6SiU/batch_25/attempt_1253760_20261125_220344_225105443/routes_RouteScenario_10089_rep0_Town12_VehicleTurningRoute_1_23_11_25_22_49_55/metric_info.json",
+            "smoothness": 0.38095238095238093,
+            "samples": 437
+        }
+    ]
+}
